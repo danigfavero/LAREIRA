@@ -42,7 +42,7 @@ void Ldestroi(Lista lista1){
 		//Limpa o atual
 		//Tem erro aqui **************************** free(): invalid pointer *************** :/
 		if(aux->val != NULL) printf("Estamos livrando o %s\n",aux->val->nome);
-		free(aux->val);
+		aux->val = NULL;
 		free(aux);
 	}
 	printf("livrou uma lista inteira\n");
@@ -90,6 +90,7 @@ Elemento* Lretira(Lista lista1, Elemento* val){
 		if(crawler->val == val){
 			//Apaga o antigo valor e anula o ponteiro
 			free(crawler->val->nome);
+			free(crawler->val);
 			crawler->val = NULL;
 			return val;
 		}

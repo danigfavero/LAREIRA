@@ -57,17 +57,18 @@ Elemento* Tbusca(TabSim t, char *n){
 int Tretira(TabSim t, char *n){
 	int hash_val = hash(n, t.size);
 	struct elo* crawler = t.listas[hash_val].cabec; //Elemento* out = NULL;
-	struct elo* last = crawler;
+	//struct elo* last = crawler;
 	while(crawler != NULL){
 		printf("Fazendo uma busca pelo %s para tentar elimina-lo\n", n);
 		if(crawler->val != NULL && stringsIguais(crawler->val->nome, n)){
 			printf("Achei o %s e to eliminando\n", n);
-			last->next = crawler->next;
-			free(crawler->val);
-			free(crawler);
+			crawler->val = NULL;
+			//free(crawler->val);
+			//free(crawler);
+			printf("eliminei");
 			return 1;
 		}
-		last = crawler;
+		//last = crawler;
 		crawler = crawler->next;
 	}
 	return 0;

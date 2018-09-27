@@ -39,7 +39,7 @@ int main(void){
     Tretira(hash, retirado);
     printf("Busca ai o q voce retirou\n");
     scanf("%s", retirado);
-    if(Tbusca(hash, retirado) == NULL) printf("Funfou\n");
+    if(Tbusca(hash, retirado) == NULL) printf("Funcionou!\n");
 
 
     Tdestroi(hash);
