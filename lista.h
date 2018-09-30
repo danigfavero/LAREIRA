@@ -18,7 +18,8 @@ Lista Lcria(void){
 	Lista s;
 	s.cabec = malloc(sizeof(Elo));
 	//Definindo o próximo elo vazio (fim da lista)
-	s.cabec->next = s.cabec->val = NULL;
+	s.cabec->next = NULL;
+	s.cabec->val = NULL;
 	return s;
 }
 
@@ -76,7 +77,7 @@ Elemento* Lbusca(Lista lista1, char* n){
 	struct elo* crawler = lista1.cabec;
 	while(crawler != NULL){
 		if(crawler->val != NULL && stringsIguais(crawler->val->nome, n)){
-			return crawler;
+			return crawler->val;
 		}
 		crawler = crawler->next;
 	}
