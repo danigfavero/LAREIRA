@@ -1,3 +1,9 @@
+/*GRUPO:
+Bento Pereira
+Daniela Favero
+Pedro Gigeck
+*/
+
 #include "hash.h"
 
 int main(void){

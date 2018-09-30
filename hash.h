@@ -9,10 +9,7 @@ typedef struct TabSim{
 } TabSim;
 
 int hash(char* s, int mod){
-	//A tabela de hash funcionará transformando a palavra em um número na base 257
-	//E depois tirando o modulo do tamanho da tabela
-
-	//Exemplo: P Ã O retornará (P * 257⁰ + Ã * 257¹ + O * 257²) mod(mod)
+	//Definindo como será o hash das palavras
 	long long int out = 0;
 	for(int i = 0; s[i] != '\0'; i++){
 		out = out*257 + (int) s[i];
