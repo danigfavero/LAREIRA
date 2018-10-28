@@ -18,7 +18,8 @@ Lista Lcria(void){
 	Lista s;
 	s.cabec = malloc(sizeof(Elo));
 	//Definindo o próximo elo vazio (fim da lista)
-	s.cabec->next = s.cabec->val = NULL;
+	s.cabec->next = NULL;
+	s.cabec->val = NULL;
 	return s;
 }
 
@@ -40,7 +41,6 @@ void Ldestroi(Lista lista1){
 		//Avança o crawler (para desalocar o próximo)
 		crawler = crawler->next;
 		//Limpa o atual
-		//Tem erro aqui **************************** free(): invalid pointer *************** :/
 		if(aux->val != NULL) printf("Estamos livrando o %s\n",aux->val->nome);
 		aux->val = NULL;
 		free(aux);
@@ -76,7 +76,7 @@ Elemento* Lbusca(Lista lista1, char* n){
 	struct elo* crawler = lista1.cabec;
 	while(crawler != NULL){
 		if(crawler->val != NULL && stringsIguais(crawler->val->nome, n)){
-			return crawler;
+			return crawler->val;
 		}
 		crawler = crawler->next;
 	}
