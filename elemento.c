@@ -1,17 +1,40 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//typedef char* string;
+typedef enum{
+	False, True
+}bool;
 
-/*typedef struct elemento{
-	string nome;
-	string* artigos;
-	string* longa;
-	string* curta;
-	elemento** contem;
+typedef char* string;
 
-}elemento;*/
+typedef union{
+	int val;
+	string quali;
+} atrib;
 
 typedef struct{
-	char nome[80];
-} Elemento;
+	atrib* lista;
+} Objeto;
+
+typedef struct{
+	void* saidas;
+} Lugar;
+
+typedef union{
+	Objeto objeto;
+	Lugar lugar;
+}detalhe;
+
+typedef struct Elemento{
+	string nome;
+	string* artigos;
+	string longa;
+	string curta;
+	bool ativo;
+	bool visivel;
+	bool conhecido;
+	Elemento* contem;
+	int* (*acoes)(*Elemento, *Elemento);
+	void* animacao;
+	detalhe def;
+}Elemento;

@@ -24,10 +24,10 @@ O módulo retorna:<br/>
 Há um módulo *entrada.txt* com uma entrada que testa bem os módulos.<br/>
 <br/>
 ## Detalhes da implementação <br/>
-###Elemento <br/>
+### Elemento <br/>
 Por enquanto a struct só contém o nome, mas já temos uma prévia comentada de
 como será. <br/>
-###Lista <br/>
+### Lista <br/>
 Listas ligadas implementadas com structs de elos que apontam para o próximo elo
  e guardam o ponteiro para um elemento. A estrutura lista em si é só um
  ponteiro para um elo chamado cabec (topo), que inicia nulo e representa o
@@ -35,7 +35,7 @@ Listas ligadas implementadas com structs de elos que apontam para o próximo elo
 comentadas no código mais detalhadamente, mas em sua maioria giram em torno
  do fato da lista ligada ter o último ponteiro que aponta para elos sendo
  sempre nulo. <br/>
-###Hash <br/>
+### Hash <br/>
 A tabela de hash funciona transformando a palavra em um número na base 257 e
 tirando o seu módulo pelo tamanho da tabela e o colocando numa lista ligada
 correspondente ao valor encontrado.
