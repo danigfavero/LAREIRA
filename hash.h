@@ -1,5 +1,6 @@
-#include <stdio.h>
 #include "lista.h"
+
+
 
 
 typedef struct TabSim{
@@ -7,26 +8,22 @@ typedef struct TabSim{
 	Lista* listas;
 } TabSim;
 
-int hash(char* s, int mod){
+int hash(char*, int);
 	//Definindo como será o hash das palavras
-}
 
-TabSim Tcria(int tam){
+
+TabSim Tcria(int);
 	//Criando uma tabela com tam listas
-}
 
-void Tdestroi(TabSim t){
+
+void Tdestroi(TabSim);
 	//Percorre a tabela destruindo as listas dela
-}
 
-int Tinsere(TabSim t, char *n, Elemento *val){
+int Tinsere(TabSim, char, Elemento);
 	//Calcula o hash do elemento, que é em qual lista ele será inserido
-}
 
-Elemento* Tbusca(TabSim t, char *n){
+Elemento* Tbusca(TabSim, char);
 	//Busca um elemento na tabela
-}
 
-int Tretira(TabSim t, char *n){
+int Tretira(TabSim, char);
 	//Busca um elemento na tabela para retirá-lo
-}
