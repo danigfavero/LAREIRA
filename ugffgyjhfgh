@@ -1,0 +1,45 @@
+Estrutura geral do jogo: listas quadriligadas circulares (também podemos implementar com uma matrizona, NÉ @BENTOPER), o mapa é um toroide (a la Mundo de Wumpus:disappointed_relieved:). Todas as salas têm 4 portas e alguns objetos, animais e personagens. No entanto, a interação com esses elementos não auxilia em nada para vencer o jogo (só pra deixar o jogador mais insano!!!! /*eike conceito*/). Na real, o único jeito de vencer o jogo é utilizando uma das armas disponíveis para SE MATAR (nuss gente escrevendo assim fica muito macabro, será se é uma boa ideia???? o monitor vai achar que a gente é deprê kkkk). Porém, esse suicídio não é real (É TUDO UMA FODENDO SIMULAÇÃO): depois da morte, o jogador acorda novamente na sala onde iniciou e /*ainda não decidido, depende da dificuldade de implementação*/ o jogo acaba aí OU o jogo chama outro jogo de novo, de modo a ser infinito.
+
+(9 salas tá bom?)
+S1 S2 S3
+S4 S5 S6
+S7 S8 S9
+
+LAREIRA EXPERIENCE:
+
+SALA1: início
+Você acorda em uma sala claustrofóbica e pouco iluminada. Tudo o que existem são quatro portas ao seu redor, uma em cada parede. "Alguma coisa escapa ao naufrágio das ilusões" está escrito em uma das paredes com letras trêmulas. Você não faz ideia de onde está. Você não sabe quem é. Não existem mais memórias, o ser agora é confusão e desespero. <dica legal> É preciso ir pra algum lugar.
+
+SALA2: Música
+A sala tem um gramofone tocando uma ópera em alto volume. Dá pra tirar o disco do gramofone, mas a música continua tocando. Tem um baú na sala. Dá pra abrir. Dentro dele tem um molho de chaves (com 24 chaves diferentes) dá pra guardar as chaves no bolso. Depois dá pra usar as chaves nas portas, com um random pra ver se abre/tranca ou não (ver se todas as portas do jogo vão começar abertas ou algumas trancadas, sei lá)
+
+SALA3: A Festa
+Uma mesa com bebida e um monte de gente (esse monte de gente pode ser um elemento só, a interação com eles sempre é coletiva). Todo mundo ta dançando (E NEM TEM MUSICA). Você tenta chamar as pessoas mas elas nunca te respondem. Dá pra beber. Dá pra brincar com a embriaguez escrevendo umas coisinhas meio embaralhadas no texto depois que vc bebe, sei lá.
+
+SALA4: Parece importante
+Essa sala tem um mapa. Mas é um mapa da guiné bissau (pelo menos é isso que tá escrito). Essa sala tem um canivete. Dá pra guardar, se mutilar, se matar (gente to achando pesado sério que coisa horrível). A sala também tem um livro: "Pizza do Faustão - Massimo Ferrari", aquele livro de receitas do faustão.
+
+SALA 5: Arma
+Na parece está escrito"..- -. .. -.-. .- / ... .- .. -.. .-", UNICA SAIDA em morse, mas deixa a pessoa descobrir. O chão tem uma pistola com só uma bala. (olha a partir daqui digo que a ideia de se matar foi do bento e eu to achando pesado de verdade, sei que é tudo ilusao mas porra o cara ta se matando que loucura)
+
+SALA6: Água
+O chão tem água que bate no joelho. Tem um peixe dourado. Tem uma garrafa de vidro com uma mensagem. A mensagem diz
+"A espantosa realidade das cousas
+É a minha descoberta de todos os dias.
+Cada cousa é o que é,
+E é difícil explicar a alguém quanto isso me alegra,
+E quanto isso me basta.
+
+Basta existir para se ser completo."
+Dá pra quebrar a garrafa, dá pra rasgar o papel, dá pra guardar o papel no bolso. Dá pra encher a garrafa com água, dá pra beber. Dá pra pegar o peixe na mão.
+
+SALA7: Insanidade
+O Medo (SER) na sala. O medo está desesperado. Dá pra falar com ele, mas ele só responde coisa nada a ver.
+Há a solidão também, no canto da sala, chorando. Ela não responde.
+A loucura também está lá. Mas ela só sabe responder "NADA É TANGÍVEL (em caps)".
+
+SALA8: Espelhos
+Tem 3 espelhos nessa sala. Dá pra quebrar eles. Sei lá minhas ideias estã acabando
+
+SALA9:
+Essa sala tem um pássaro. Dá pra fazer carinho, ele canta e tal, bonitinho (pra dar uma aliviada né ahsjshsuwhwh). Tem uma mala de dinheiro também. Dá ra pegar o dinheiro e tal.

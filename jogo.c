@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "hash.h"
 int main(){
-    printf("Bem-vindo à Lareira.\n");
+    printf("Bem-vindo à Lareira.\n"); //Introduz a história
     //Criar elementos
 
     Elemento sala1;
