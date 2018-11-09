@@ -17,7 +17,7 @@ typedef struct{
 } Objeto;
 
 typedef struct{
-	void* saidas;
+	Elemento* saidas;
 } Lugar;
 
 typedef union{
@@ -26,9 +26,11 @@ typedef union{
 }detalhe;
 
 typedef struct No{
-	void* elemento;
+	Elemento* elemento;
 	struct No* prox;
 }No;
+
+
 
 typedef struct Elemento{
 	string nome;
