@@ -1,6 +1,6 @@
 //Pedaco de codigo avulso, tem que contextualizar cada parte (acoes e elementos)
 //ainda nao debbuguei direito, provavelmente vai ter que mudar varias coisas
-//Preciso corrigir os acentos e cedilhas, dps faco isso 
+//Preciso corrigir os acentos e cedilhas, dps faco isso, sintam-se livres pra mudar os textos ou qqr outra coisa 
 
 
 Elemento personagem;
