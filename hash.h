@@ -2,11 +2,11 @@
 
 
 
-
+/*
 typedef struct TabSim{
 	int size;
 	Lista* listas;
-} TabSim;
+}TabSim;*/
 
 int hash(char*, int);
 	//Definindo como será o hash das palavras
@@ -19,11 +19,11 @@ TabSim Tcria(int);
 void Tdestroi(TabSim);
 	//Percorre a tabela destruindo as listas dela
 
-int Tinsere(TabSim, char, Elemento);
+int Tinsere(TabSim, char*, Elemento*);
 	//Calcula o hash do elemento, que é em qual lista ele será inserido
 
-Elemento* Tbusca(TabSim, char);
+Elemento* Tbusca(TabSim, char*);
 	//Busca um elemento na tabela
 
-int Tretira(TabSim, char);
+int Tretira(TabSim, char*);
 	//Busca um elemento na tabela para retirá-lo

@@ -17,7 +17,7 @@ typedef struct{
 } Objeto;
 
 typedef struct{
-	void* saidas[4];
+	void* saidas;
 } Lugar;
 
 typedef union{
@@ -26,13 +26,18 @@ typedef union{
 }detalhe;
 
 typedef struct elo{
-	struct elo * next ;
-	void* val ;
-}Elo;
+	void* val;
+	struct elo* next;
+} Elo;
 
-typedef struct{
+typedef struct {
 	Elo * cabec ;
-}Lista;
+} Lista ;
+
+typedef struct TabSim{
+	int size;
+	Lista* listas;
+} TabSim;
 
 typedef struct Elemento{
 	string nome;
@@ -42,8 +47,8 @@ typedef struct Elemento{
 	bool ativo;
 	bool visivel;
 	bool conhecido;
-	Lista conteudo;
-	int (**acoes)(struct Elemento*, struct Elemento*);
+	TabSim conteudo;
+	int (**acoes)(struct Elemento*,struct Elemento*);
 	void* animacao;
 	detalhe def;
 }Elemento;

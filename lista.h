@@ -1,8 +1,6 @@
 #include "elemento.h"
 
-
-
-
+void socorro(void);
 
 Lista Lcria(void);
 	//Instanciando uma lista e alocando o primeiro endereço (cabec)

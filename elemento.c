@@ -10,20 +10,34 @@ typedef char* string;
 typedef union{
 	int val;
 	string quali;
-} atrib;
+}atrib;
 
 typedef struct{
 	atrib* lista;
-} Objeto;
+}Objeto;
 
 typedef struct{
 	void* saidas;
-} Lugar;
+}Lugar;
 
 typedef union{
 	Objeto objeto;
 	Lugar lugar;
 }detalhe;
+
+typedef struct elo{
+	void* val;
+	struct elo* next;
+}Elo;
+
+typedef struct {
+	Elo * cabec ;
+}Lista;
+
+typedef struct TabSim{
+	int size;
+	Lista* listas;
+}TabSim;
 
 typedef struct Elemento{
 	string nome;
@@ -33,8 +47,8 @@ typedef struct Elemento{
 	bool ativo;
 	bool visivel;
 	bool conhecido;
-	Elemento* contem;
-	int* (*acoes)(*Elemento, *Elemento);
+	TabSim conteudo;
+	int (**acoes)(struct Elemento*,struct Elemento*);
 	void* animacao;
 	detalhe def;
 }Elemento;

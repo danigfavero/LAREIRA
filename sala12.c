@@ -1,3 +1,6 @@
+
+void sala12(){
+
 Elemento personagem;
 personagem.nome = "você";
 //quadro.artigos
@@ -115,7 +118,7 @@ sala2.def.lugar.saidas[0] = &sala5;
 sala2.def.lugar.saidas[1] = &sala5;
 sala2.def.lugar.saidas[2] = &sala3;
 sala2.def.lugar.saidas[3] = &sala1;
-
+}
 
 /*
 AÇÕES

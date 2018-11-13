@@ -1,18 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "elemento.h"
-
-//Implementação conforme a sugestão
-typedef struct elo {
-	struct elo * next ;
-	Elemento * val ;
-} Elo ;
-
-typedef struct {
-	Elo * cabec ;
-} Lista ;
-
-
+//int main(){printf("Lista funcionando \n");}
 Lista Lcria(void){
 	//Instanciando uma lista e alocando o primeiro endereço (cabec)
 	Lista s;
@@ -22,6 +11,8 @@ Lista Lcria(void){
 	s.cabec->val = NULL;
 	return s;
 }
+
+
 
 int stringsIguais(char* s1, char* s2)
 {
@@ -33,15 +24,15 @@ int stringsIguais(char* s1, char* s2)
 
 void Ldestroi(Lista lista1){
 	//Endereço de elo que percorrerá a lista
-	struct elo* crawler = lista1.cabec;
+	Elo* crawler = lista1.cabec;
 	//Enquanto não chegar no final da lista
 	while(crawler != NULL){
 		//Salva o endereço do atual
-		struct elo* aux = crawler;
+		Elo* aux = crawler;
 		//Avança o crawler (para desalocar o próximo)
 		crawler = crawler->next;
 		//Limpa o atual
-		if(aux->val != NULL) printf("Estamos livrando o %s\n",aux->val->nome);
+		//if(aux->val != NULL) printf("Estamos livrando o %s\n",aux->val->nome);
 		aux->val = NULL;
 		free(aux);
 	}
@@ -49,14 +40,19 @@ void Ldestroi(Lista lista1){
 	return;
 }
 
-struct elo* Linsere(Lista lista1, Elemento* val){
+void socorro(){printf("s\n");}
+
+Elo* Linsere(Lista lista1, Elemento* val){
 	//Percorre a lista até chegar no final (crawler == NULL) ou chegar em alguma posição vazia (crawler->val == NULL)
-	struct elo* crawler = lista1.cabec;
+	Elo* crawler = lista1.cabec;
+	int i = 0;
+	printf("aaaa\n");
 	while(crawler != NULL && crawler->val != NULL){
 		//Achando o último elemento da lista e inserindo mais um
 		if(crawler->next == NULL)
 		{
-			struct elo* proximo = malloc(sizeof(Elo));
+			printf("%d\n", i);
+			Elo* proximo = malloc(sizeof(Elo));
 			proximo->val = val;
 			proximo->next = NULL;
 			crawler->next = proximo;
@@ -64,18 +60,26 @@ struct elo* Linsere(Lista lista1, Elemento* val){
 
 		}
 		crawler = crawler->next;
+		i++;
+		printf("%d\n", i);
 	}
 
 	//Se achou uma posição sem valor, podemos apenas inserir
 	if(crawler != NULL) crawler->val = val;
+	printf("inserindo o elemento %s na posicao %d\n", val->nome, i - 1);
 	return crawler;
 }
 
 Elemento* Lbusca(Lista lista1, char* n){
 	//Mesma estrutura do insere, percorre a lista até achar ou chegar no final
-	struct elo* crawler = lista1.cabec;
+	printf("aloo\n");
+	Elo* crawler = lista1.cabec;
+	printf("segf aquii\n");
+	Elemento* e = (Elemento*) crawler->val;
+	printf("estamos buscando o %s e a caveca da lista e %s\n", n, e->nome);
 	while(crawler != NULL){
-		if(crawler->val != NULL && stringsIguais(crawler->val->nome, n)){
+		e = (Elemento*) crawler->val;
+		if(crawler->val != NULL && stringsIguais(e->nome, n)){
 			return crawler->val;
 		}
 		crawler = crawler->next;
@@ -85,11 +89,13 @@ Elemento* Lbusca(Lista lista1, char* n){
 
 Elemento* Lretira(Lista lista1, Elemento* val){
 	//Percorre a lista até encontrar o elemento
-	struct elo* crawler = lista1.cabec;
+	Elo* crawler = lista1.cabec;
+	Elemento* e;
 	while(crawler != NULL){
 		if(crawler->val == val){
+			e = (Elemento *) crawler->val;
 			//Apaga o antigo valor e anula o ponteiro
-			free(crawler->val->nome);
+			free(e->nome);
 			free(crawler->val);
 			crawler->val = NULL;
 			return val;
