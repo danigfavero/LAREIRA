@@ -39,15 +39,12 @@ int Tinsere(TabSim t, char* n, Elemento* val){
 	//Calcula o hash do elemento, que é em qual lista ele será inserido
 	int hash_val = hash(n, t.size);
 	printf("Hash do elemento: %d\n", hash_val);
-	printf("aaaaaaaaaaa\n");
-	socorro();
 	return Linsere(t.listas[hash_val], val)==NULL?0:1;
 }
 
 Elemento* Tbusca(TabSim t, char *n){
 	int hash_val = hash(n, t.size);
 	printf("Estamos buscando o elemento %s que tem hash %d\n", n, hash_val);
-	printf("aaa\n");
 	return Lbusca(t.listas[hash_val], n);
 }
 
@@ -63,7 +60,7 @@ int Tretira(TabSim t, char *n){
 			crawler->val = NULL;
 			//free(crawler->val);
 			//free(crawler);
-			printf("eliminei");
+			puts("eliminei\n");
 			return 1;
 		}
 		//last = crawler;

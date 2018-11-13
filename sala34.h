@@ -207,7 +207,6 @@ sala3.conhecido = False;
 
 //Criando os elementos da sala;
 //Mascara
-Elemento mascara;
 mascara.nome = "mascara";
 
 mascara.artigos = malloc(2*sizeof(string));
@@ -227,10 +226,9 @@ mascara.def.objeto.lista[1].quali = "atraente";
 mascara.def.objeto.lista[2].quali = "chamativa";
 
 //Grupo de pessoas
-Elemento pessoas;
 pessoas.nome = "grupo de pessoas";
 pessoas.longa = "Um grupo bem animado de pessoas, parecem estar se divertindo bastante\n";
-pessoas.curta = "Grupinho de pessoas, ";
+pessoas.curta = "Grupinho de pessoas";
 pessoas.ativo = False;
 pessoas.visivel = False;
 pessoas.conhecido = False;
@@ -248,6 +246,12 @@ mascara.acoes[1] = Tirar;
 pessoas.acoes = malloc(sizeof(fptr));
 pessoas.acoes[0] = Interagir;
 
+sala3.conteudo = Tcria(4);
+Tinsere((sala3.conteudo), "mascara", &mascara);
+
+printf("chegou \n");
+Tinsere((sala3.conteudo), "pessoas", &pessoas);
+
 }
 
 void sala56(){
@@ -258,7 +262,7 @@ void sala56(){
 	"No canto mais empoirado da sala, você vê uma arma. Sua forma já se mistura com o ambiente, mas você consegue perceber a silhueta suave. Ninguém há toca em uma eternidade, aparentemente\n"
 	"E, no outro extremo, uma figura raquítica e curva se senta ao chão, abraçando os joelhos e com os olhos baixos. A pele parece ter começado a se dissolver de tão velha, e os olhos não apresentam "
 	"mais brilho algum. A vida já saiu deste homem.\n";
-	puts(sala5.longa);
+	//puts(sala5.longa);
 	sala5.curta = "Um homem, uma arma e um espelho. Não há nada mais aqui";
 	sala5.ativo = True;
 	sala5.visivel = True;
@@ -308,7 +312,7 @@ void sala56(){
 	sala6.longa = "Cores vivas fazem as paredes brilharem aos seus olhos, padrões que se misturam o fazem sentir em um oceano de luz.\n"
 	"Um jardim dos mais diversos cogumelos cobre o chão da sala. Tamanhos, odores e cores. Nada parece fora do campo de possibilidades.\n";
 	"Uma garrafa simples mas atraente senta ao lado de uma cama grande, que exala leveza. Tudo cheira a natureza.\n";
-	puts(sala6.longa);
+	//puts(sala6.longa);
 	sala6.curta = "Uma imersão em natureza e sensações. Há muito para experimentar.\n";
 	sala6.ativo = True;
 	sala6.visivel = True;
@@ -319,6 +323,9 @@ void sala56(){
 	sala6.def.lugar.saidas[2] = &sala4;
 	sala6.def.lugar.saidas[3] = &sala5;*/
 	sala6.animacao = NULL;
+	Tinsere((sala5.conteudo), "homem", &homem);
+	Tinsere(sala5.conteudo, "espelho", &espelho);
+	Tinsere(sala5.conteudo, "arma", &arma);
 
 	garrafa.longa = "Sua mente não consegue achar palavras para descrever o sentimento evocado dor essa garrafa. Sua beleza é simples, quase angelical.\n O líquido interno está em constante mudança, "
 	"variando pelas mais diversas cores. Uma visão perturbadora e atraente.\n";
@@ -352,7 +359,15 @@ void sala56(){
 	cogumelos.acoes = NULL;
 	cogumelos.def.objeto.lista = NULL;
 	cama.animacao = NULL;
+	Tinsere(sala6.conteudo, "cama", &cama);
+	Tinsere(sala6.conteudo, "cogumelos", &cogumelos);
+	Tinsere(sala6.conteudo, "garrafa", &garrafa);
+
+
+
+	puts("acabou\n");
 }
+
 
 /*
 
