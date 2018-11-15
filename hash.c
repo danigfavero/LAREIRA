@@ -35,10 +35,10 @@ void Tdestroi(TabSim t){
 	return;
 }
 
-int Tinsere(TabSim t, char* n, Elemento* val){
+int Tinsere(TabSim t, Elemento* val){
 	//Calcula o hash do elemento, que é em qual lista ele será inserido
-	int hash_val = hash(n, t.size);
-	printf("Hash do elemento: %d\n", hash_val);
+	int hash_val = hash(val->nome, t.size);
+	printf("Hash do elemento %s: %d\n", val->nome, hash_val);
 	return Linsere(t.listas[hash_val], val)==NULL?0:1;
 }
 

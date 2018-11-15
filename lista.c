@@ -43,12 +43,10 @@ void Ldestroi(Lista lista1){
 Elo* Linsere(Lista lista1, Elemento* val){
 	//Percorre a lista até chegar no final (crawler == NULL) ou chegar em alguma posição vazia (crawler->val == NULL)
 	Elo* crawler = lista1.cabec;
-	int i = 0;
 	while(crawler != NULL && crawler->val != NULL){
 		//Achando o último elemento da lista e inserindo mais um
 		if(crawler->next == NULL)
 		{
-			printf("posicao %d\n", i);
 			Elo* proximo = malloc(sizeof(Elo));
 			proximo->val = val;
 			proximo->next = NULL;
@@ -57,13 +55,10 @@ Elo* Linsere(Lista lista1, Elemento* val){
 
 		}
 		crawler = crawler->next;
-		i++;
-		printf("%d\n", i);
 	}
 
 	//Se achou uma posição sem valor, podemos apenas inserir
 	if(crawler != NULL) crawler->val = val;
-	printf("inserindo o elemento %s na posicao %d\n", val->nome, i );
 	return crawler;
 }
 

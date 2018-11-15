@@ -1,6 +1,5 @@
 
-#include "sala34.h"
-
+#include "acoes.h"
 
 int main(){
     puts("Bem-vindo à Lareira.\n"); //Introduz a história
@@ -19,27 +18,28 @@ int main(){
     //Colocar objetos em suas posições de início (inclusive o aventureiro?)
     puts("Comecando sala 1 2 \n");
     sala12();
-    puts("Comecando sala 3 4 \n");
+    puts("\nComecando sala 3 4 \n");
     sala34();
-    puts("Comecando sala 5 6 \n");
+	sala_4();
+    puts("\nComecando sala 5 6 \n");
     sala56();
-    puts("Coisas que tem na sala 3:\n");
 
-
-    for(int i = 0; i < 4; i++)
-    {
-        printf("lista anda\n");
-        if(sala3.conteudo.listas[i].cabec != NULL){
-            Elo* andante = sala3.conteudo.listas[i].cabec;
-            Elemento * el;
-            puts("Vamos imprimir oq tem na sala 3\n");
-            while(andante!=NULL){
-                el = (Elemento*) andante->val;
-                puts(el->nome);
-        //puts("Tem alguma coisa!\n");
-                andante = andante->next;
-                if(andante == NULL) puts("acabou essa lista\n");
-            }
-        }
-    }
+	puts("\nConteudo sala1:");
+	imprimeConteudo(sala1, 4);
+	
+	puts("\nConteudo sala2:");
+	imprimeConteudo(sala2, 4);
+	
+	puts("\nConteudo sala3:");
+	imprimeConteudo(sala3, 4);
+	
+	puts("\nConteudo sala4:");
+	imprimeConteudo(sala4, 4);
+	
+	puts("\nConteudo sala5:");
+	imprimeConteudo(sala5, 4);
+	
+	puts("\nConteudo sala6:");
+	imprimeConteudo(sala6, 4);
+ 
 }

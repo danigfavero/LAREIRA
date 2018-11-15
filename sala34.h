@@ -4,7 +4,7 @@
 typedef int (*fptr)(Elemento*, Elemento*);
 
 Elemento sala1, sala2, sala3, sala4, sala5, sala6, atual, personagem, mascara, pessoas;
-Elemento quadro, gramo, disco, balao, arma, cogumelos, homem, garrafa, espelho, cama;
+Elemento quadro, gramo, disco, balao, arma, cogumelos, homem, garrafa, espelho, cama, envelope, carta, foto;
 
 //Examinar
 int Examinar(Elemento* e1, Elemento* e2){
@@ -13,34 +13,12 @@ int Examinar(Elemento* e1, Elemento* e2){
 }
 
 //Vestir/Colocar a mascara
-int Colocar(Elemento* e1, Elemento* e2){
-	if(Tbusca(personagem.conteudo, e1->nome)){ //Se a pessoa ja estiver vestindo o elemento
-		printf("Voce ja esta vestindo %s %s", e1->artigos[0], e1->nome);
-	}
-	else if(e1->visivel && e1->ativo)
-	{
-		printf("Voce coloca %s %s\n", e1->artigos[0], e1->nome); //"Voce coloca a mascara" ou alguma outra coisa que de pra vestir
-		Tinsere(personagem.conteudo, e1->nome, e1); //Coloca o elemento no jogador
-		Tretira(atual.conteudo, e1->nome); //Tira o elemento da sala
 
-		//Se vestir a mascara, as pessoas ficam ativas para interacao
-		if(stringsIguais(e1->nome, "mascara"))
-		{
-			pessoas.ativo = True;
-			puts("As pessoas que estavam se divertindo sem parecer notar sua presenca\n"
-				 "Comecam homogeneamente a virar os olhos em sua direcao..\n"
-				 "Alguns deles ate te convidam para interagir!\n"
-				 "Parece que agora voce e visto!");
-		}
-		return 1;
-	}
-	return 0;
-}
 
 int Tirar(Elemento* e1, Elemento* e2){
 	if(e2 == NULL) e2 = &personagem; //Por default vamos retirar do personagem se nao especificado
 	if(Tretira(e2->conteudo, e1->nome)){ //Se conseguiu retirar
-		Tinsere(sala3.conteudo, e1->nome, e1); //Insere na sala de volta
+		Tinsere(sala3.conteudo, e1); //Insere na sala de volta
 		printf("Voce retirou %s %s e agora esta de volta na sala de origem", e1->artigos[0], e1->nome);
 	}
 	//Se nao conseguiu retirar
@@ -53,19 +31,6 @@ int Tirar(Elemento* e1, Elemento* e2){
 }
 
 
-int Interagir(Elemento* e1, Elemento* e2){
-	if(e1->ativo)
-	{
-		puts("Voce entra no meio da multidao, parece uma festa\n"
-			 "Esta se sentindo aceito, uma sensacao bem acolhedora\n"
-			 "Voce poderia ficar ali para sempre... Mas...\n"
-			 "Quem e' voce mesmo?\n"); //So queria lembrar que na verdade e' a mascara que esta ali, nao sabia como, sintam-se livres para mudar :D
-		return 1;
-	}
-	puts("Voce tenta interagir com a multidao, mas e excluido e completamente ignorado\n"
-		 "Algo nao esta certo..\n");
-	return 0;
-}
 
 ////////////////////////////////////////////////////////
 
@@ -79,12 +44,6 @@ void sala12(){
 	personagem.visivel = True;
 	personagem.conhecido = False;
 	personagem.conteudo = Tcria(4);
-	personagem.acoes = malloc(sizeof(fptr));
-	/*personagem.acoes[0] = Gritar;
-	personagem.acoes[1] = Chorar;
-	personagem.acoes[2] = Sentar;
-	personagem.acoes[3] = Correr;
-	personagem.acoes[4] = Andar;*/
 
 	quadro.nome = "quadro";
 	//quadro.artigos
@@ -94,8 +53,7 @@ void sala12(){
 	quadro.visivel = True;
 	quadro.conhecido = False;
 	quadro.conteudo = Tcria(4); //o quadro não contém nada
-	quadro.acoes = malloc(sizeof(fptr));
-	quadro.acoes[0] = Examinar;
+
 
 	//Elemento sala1;
 	sala1.nome = "inicio";
@@ -112,7 +70,7 @@ void sala12(){
 	sala1.def.lugar.saidas[1] = &sala4;
 	sala1.def.lugar.saidas[2] = &sala2;
 	sala1.def.lugar.saidas[3] = &sala3;*/;
-	Tinsere((sala1.conteudo), "quadro", &quadro);
+	Tinsere((sala1.conteudo), &quadro);
 	sala1.acoes = malloc(sizeof(fptr));
 	sala1.acoes[0] = Examinar;
 	/*sala1.acoes1[1] = Sair;*/
@@ -125,13 +83,7 @@ void sala12(){
 	disco.visivel = False;
 	disco.conhecido = False;
 	disco.conteudo = Tcria(4);
-	disco.acoes = malloc(sizeof(fptr));
-	disco.acoes[0] = Examinar;
-	/*disco.acoes[1] = Pegar;
-	disco.acoes[2] = Soltar;
-	disco.acoes[3] = Quebrar;
-	disco.acoes[4] = Tocar; //colocar no gramofone
-	disco.acoes[5] = Arremessar;*/
+	
 
 	gramo.nome = "gramofone";
 	//quadro.artigos
@@ -142,13 +94,8 @@ void sala12(){
 	gramo.visivel = False;
 	gramo.conhecido = False;
 	gramo.conteudo = Tcria(4);
-	Tinsere((gramo.conteudo), "disco", &disco);
-	gramo.acoes = malloc(sizeof(fptr));
-	/*gramo.acoes[0] = Examinar;
-	gramo.acoes[1] = Pegar;
-	gramo.acoes[2] = Soltar;
-	gramo.acoes[3] = Desligar;
-	gramo.acoes[4] = Ligar;*/
+	Tinsere((gramo.conteudo), &disco);
+	
 
 	balao.nome = "balão";
 	//quadro.artigos
@@ -158,12 +105,6 @@ void sala12(){
 	balao.visivel = False;
 	balao.conhecido = False;
 	balao.conteudo = Tcria(4);
-	balao.acoes = malloc(sizeof(fptr));
-	/*balao.acoes[0] = Examinar;
-	balao.acoes[1] = Pegar;
-	balao.acoes[2] = Soltar;
-	balao.acoes[3] = Estourar;
-	balao.acoes[4] = Comer;*/
 
 	//Elemento sala2;
 	sala2.nome = "audição";
@@ -176,8 +117,8 @@ void sala12(){
 	sala2.visivel = False;
 	sala2.conhecido = False;
 	sala2.conteudo = Tcria(4);
-	Tinsere((sala2.conteudo), "gramofone", &gramo);
-	Tinsere((sala2.conteudo), "balao", &balao);
+	Tinsere((sala2.conteudo), &gramo);
+	Tinsere((sala2.conteudo), &balao);
 	/*sala2.def.lugar.saidas[0] = &sala5;
 	sala2.def.lugar.saidas[1] = &sala5;
 	sala2.def.lugar.saidas[2] = &sala3;
@@ -233,24 +174,9 @@ pessoas.ativo = False;
 pessoas.visivel = False;
 pessoas.conhecido = False;
 
-/*------------------------------------
-		ACOES DA SALA
---------------------------------------*/
-
-
-mascara.acoes = malloc(2*sizeof(fptr));
-mascara.acoes[0] = Colocar;
-mascara.acoes[1] = Tirar;
-
-
-pessoas.acoes = malloc(sizeof(fptr));
-pessoas.acoes[0] = Interagir;
-
 sala3.conteudo = Tcria(4);
-Tinsere((sala3.conteudo), "mascara", &mascara);
-
-printf("chegou \n");
-Tinsere((sala3.conteudo), "pessoas", &pessoas);
+Tinsere((sala3.conteudo), &mascara);
+Tinsere((sala3.conteudo), &pessoas);
 
 }
 
@@ -274,16 +200,17 @@ void sala56(){
 	sala5.def.lugar.saidas[3] = &sala4;*/
 	sala5.animacao = NULL;
 
+	arma.nome = "arma";
 	arma.longa = "Incrustada de sujeira, ainda parece funcionar. O cano é tão longo quanto o de um revólver. É possível ver uma leve reflaxão no metal enferrujado por baixo da poeira.\n";
 	arma.curta = "Uma arma velha, suja e enferrujada.\n";
 	arma.ativo = True;
 	arma.visivel = True;
 	arma.conhecido = False;
 	arma.conteudo = Tcria(4);
-	arma.acoes = NULL;
 	arma.def.objeto.lista = NULL;
 	arma.animacao = NULL;
 
+	espelho.nome = "espelho";
 	espelho.longa = "No meio da sujeira da sala, a limpeza desde espelho surpreende. Você consegue ver as reflexões do ambiente claramente, e de uma forma elas acabam parecendo bonitas, "
 	"apesar de toda a sujeira.\n"
 	"Ao se aproximar dele, você se vê. Mas algo está faltando, só não é capaz de dizer o quê.\n";
@@ -292,10 +219,10 @@ void sala56(){
 	espelho.visivel = True;
 	espelho.conhecido = False;
 	espelho.conteudo = Tcria(4);
-	espelho.acoes = NULL;
 	espelho.def.objeto.lista = NULL;
 	espelho.animacao = NULL;
 
+	homem.nome = "homem";
 	homem.longa = "É um homem, velho e fraco. As marcas do tempo são aparentes: as rugas, os ossos expostos, a dor. Não há brilho nos seus olhos nem força no seu corpo. Você duvida "
 	"se ele sabe da sua presença, mas você sente a dele dentro de si. Um sentimento de angústia e desespero. Uma nostalgia doente. Um questionamento.\n";
 	homem.curta = "Nada mais pode ser tirado observando-o.\n";
@@ -303,7 +230,6 @@ void sala56(){
 	homem.visivel = True;
 	homem.conhecido = False;
 	homem.conteudo = Tcria(4);
-	homem.acoes = NULL;
 	homem.def.objeto.lista = NULL;
 	homem.animacao = NULL;
 
@@ -323,10 +249,11 @@ void sala56(){
 	sala6.def.lugar.saidas[2] = &sala4;
 	sala6.def.lugar.saidas[3] = &sala5;*/
 	sala6.animacao = NULL;
-	Tinsere((sala5.conteudo), "homem", &homem);
-	Tinsere(sala5.conteudo, "espelho", &espelho);
-	Tinsere(sala5.conteudo, "arma", &arma);
+	Tinsere((sala5.conteudo), &homem);
+	Tinsere(sala5.conteudo, &espelho);
+	Tinsere(sala5.conteudo, &arma);
 
+	garrafa.nome = "garrafa";
 	garrafa.longa = "Sua mente não consegue achar palavras para descrever o sentimento evocado dor essa garrafa. Sua beleza é simples, quase angelical.\n O líquido interno está em constante mudança, "
 	"variando pelas mais diversas cores. Uma visão perturbadora e atraente.\n";
 	garrafa.curta = "Seu conteúdo é um mistério, mas sua beleza é indescritível.\n";
@@ -334,10 +261,10 @@ void sala56(){
 	garrafa.visivel = True;
 	garrafa.conhecido = False;
 	garrafa.conteudo = Tcria(4);
-	garrafa.acoes = NULL;
 	garrafa.def.objeto.lista = NULL;
 	garrafa.animacao = NULL;
 
+	cama.nome = "cama";
 	cama.longa = "Uma cama de linho, com dois travesseiros de penas de ganso. Um cobertor vermelho feito do mais macio dos veludos. Uma armação gloriosa, digna de um rei.\n"
 	"Algo que você nunca sonhou em ver.\n";
 	cama.curta = "Parece muito macia.\n";
@@ -345,10 +272,10 @@ void sala56(){
 	cama.visivel = True;
 	cama.conhecido = False;
 	cama.conteudo = Tcria(4);
-	cama.acoes = NULL;
 	cama.def.objeto.lista = NULL;
 	cama.animacao = NULL;
 
+	cogumelos.nome = "cogumelos";
 	cogumelos.longa = "Um jardim multicolor, multitamanho e multifragrância. Você nunca viu tanta diversidade em um só lugar. Cada cogumelo evoca uma emoção, uma sensação.\n"
 	"É como ver infinitos novos jeitos de viver.\n";
 	cogumelos.curta = "É impossível saber o que eles farão com você.\n";
@@ -356,29 +283,19 @@ void sala56(){
 	cogumelos.visivel = True;
 	cogumelos.conhecido = False;
 	cogumelos.conteudo = Tcria(4);
-	cogumelos.acoes = NULL;
 	cogumelos.def.objeto.lista = NULL;
 	cama.animacao = NULL;
-	Tinsere(sala6.conteudo, "cama", &cama);
-	Tinsere(sala6.conteudo, "cogumelos", &cogumelos);
-	Tinsere(sala6.conteudo, "garrafa", &garrafa);
-
-
-
-	puts("acabou\n");
+	Tinsere(sala6.conteudo, &cama);
+	Tinsere(sala6.conteudo, &cogumelos);
+	Tinsere(sala6.conteudo, &garrafa);
 }
 
 
-/*
 
+void sala_4(){
 //////////////////////////////////////////////
 //        SALA 4                            //
 //////////////////////////////////////////////
-
-Elemento personagem;
-//Sala 3
-Elemento sala3, sala4;
-Elemento sala1, sala2, sala5, sala6, atual, personagem;
 
 //Iniciando os atributos
 sala4.nome = "Remanescencia";
@@ -390,14 +307,15 @@ sala4.ativo = True;
 sala4.visivel = True;
 sala4.conhecido = False;
 
+/*
 //Definindo as saidas
 sala4.def.lugar.saidas[0] = &sala1;
 sala4.def.lugar.saidas[1] = &sala1;
 sala4.def.lugar.saidas[2] = &sala5;
 sala4.def.lugar.saidas[3] = &sala6;
+*/
 
 //Definindo os elementos
-Elemento foto;
 foto.nome = "fotografia";
 
 foto.artigos = malloc(2*sizeof(string));
@@ -413,9 +331,8 @@ foto.visivel = False;
 foto.conhecido = False;
 
 foto.def.objeto.lista = malloc(sizeof(atrib));
-foto.def.objeto.lista[0]->quali = "romantica";
+foto.def.objeto.lista[0].quali = "romantica";
 
-Elemento envelope;
 envelope.nome = "envelope";
 
 envelope.artigos = malloc(2*sizeof(string));
@@ -430,8 +347,7 @@ envelope.conhecido = False;
 
 //envelope.def.objeto.lista = malloc(sizeof(atrib));
 //envelope.def.objeto.lista[0]->quali = "?";
-
-Elemento carta;
+	
 carta.nome = "carta";
 
 carta.artigos = malloc(2*sizeof(string));
@@ -448,55 +364,15 @@ carta.ativo = False;
 carta.visivel = False;
 carta.conhecido = False;
 
-envelope.conteudo = criaLista();
-Tinsere(envelope.conteudo, carta); //Coloca a carta no envelope
+envelope.conteudo = Tcria(4);
+Tinsere(envelope.conteudo, &carta); //Coloca a carta no envelope
 
-int Abrir(Elemento* e1, Elemento* e2){
-	if(e1->ativo && e1->visivel){
-		//Deixa visivel e ativo tudo que tem dentro do elemento (envelope)
-		Elo percorre = e1->conteudo.cabec;
-		while(percorre != NULL){
-			percorre.val->ativo = True;
-			percorre.val->visivel = True;
-			printf("Dentro do envelope ha %s %s\n", percorre.val->artigos[1], percorre.val->nome);
-			percorre = percorre.prox;
-		}
-		return 1;
-	}
-	return 0;
+
+
+
+
+	
+sala4.conteudo = Tcria(4);
+Tinsere(sala4.conteudo, &envelope);
+Tinsere(sala4.conteudo, &foto);
 }
-
-//Da pra abrir o envelope e colocar e tirar coisas de dentro dele (acoes da sala 3)
-envelope.acoes = malloc(3*sizeof(fptr));
-envelope.acoes[0] = Abrir;
-envelope.acoes[1] = Colocar;
-envelope.acoes[2] = Tirar;
-
-int Ler(Elemento* e1, Elemento* e2){
-	if(e1 == carta) {
-		//Texto qualquer.. achei que combinava, mas whatever, a formatacao nao testei pra ver se fica bom, qqr coisa so tirar
-		puts("    Amo-te tanto, meu amor... não cante\n"
-			 "    O humano coração com mais verdade...\n"
-			 "     Amo-te como amigo e como amante\n"
-			 "      Numa sempre diversa realidade.\n\n"
-
-			 "  Amo-te afim, de um calmo amor prestante\n"
-			 "   E te amo além, presente na saudade.\n"
-			 "   Amo-te, enfim, com grande liberdade\n"
-			 "  Dentro da eternidade e a cada instante.\n\n"
-
-			 "    Amo-te como um bicho, simplesmente\n"
-			 "   De um amor sem mistério e sem virtude\n"
-			 "    Com um desejo maciço e permanente.\n\n"
-
-			 "     E de te amar assim, muito e amiúde\n"
-			 "    É que um dia em teu corpo de repente\n"
-			 "   Hei de morrer de amar mais do que pude.\n");
-		return 1;
-	}
-	return 0;
-}
-
-carta.acoes = malloc(sizeof(fptr));
-carta.acoes[0] = Ler;
-*/

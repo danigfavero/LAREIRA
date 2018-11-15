@@ -19,7 +19,7 @@ TabSim Tcria(int);
 void Tdestroi(TabSim);
 	//Percorre a tabela destruindo as listas dela
 
-int Tinsere(TabSim, char*, Elemento*);
+int Tinsere(TabSim, Elemento*);
 	//Calcula o hash do elemento, que é em qual lista ele será inserido
 
 Elemento* Tbusca(TabSim, char*);

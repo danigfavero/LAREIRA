@@ -107,44 +107,4 @@ cama.animacao = NULL;
 
 //AÇÕOOOOOOOOOOOOOOOOOOOOOOOOOOES
 
-ftpr atirar(Elemento* e1, Elemento* e2){
-	if(e1->nome != "arma") return jogar(e1, e2);
-	if(e2 == NULL){
-		e1->def.lista[atirou] = 0;
-		return 1;
-	}
-	if(e2->nome == "homem"){
-		printf("Um barulho ensurdecedor enche a sala. O homem cai no chão, sem vida. Seu coração é tão velho que não consegue jogar seu sangue para fora de seu corpo.\n");
-		e2->def.lista[vivo] = 0;
-	}
-	else if(e2->nome == "espelho"){
-		printf("A arma acerta o espelho, mas não causa dano algum.\n");
-
-	}
-	else if(e2->nome == "personagem"){
-		printf("Você aperta o gatilho. Depois disso, não há mais sentidos.\n");
-		//ACABA O JOGO
-		return 1;
-	}
-	return 1;
-}
-
-ftpr falar(Elemento* e1, Elemento* e2){
-	int* instance = &(e1->def.lista[conversas]);
-	if((*instance)%4 == 0){
-		printf("Há muito tempo eu estou aqui. Tanto que a própria palavra já perdeu o significado. O único que eu jeito que eu sei que ele passa é por que vejo as marcas em meu corpo.\n");
-		(*instance)++;
-		return 1;
-	}
-	else if (instance%4 = 1){
-		printf("Às vezes eu me questiono das escolhas que fiz. Nada parece ter sido suficiente.")
-		(*instance)++;
-	}
-	else if (instance%4 = 2){
-		(*instance)++;
-	}
-	else if (instance%4 = 3){
-		(*instance)++;
-	}
-}
 
