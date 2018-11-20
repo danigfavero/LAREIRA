@@ -36,7 +36,6 @@ void Ldestroi(Lista lista1){
 		aux->val = NULL;
 		free(aux);
 	}
-	printf("livrou uma lista inteira\n");
 	return;
 }
 
@@ -64,11 +63,8 @@ Elo* Linsere(Lista lista1, Elemento* val){
 
 Elemento* Lbusca(Lista lista1, char* n){
 	//Mesma estrutura do insere, percorre a lista até achar ou chegar no final
-	printf("aloo\n");
 	Elo* crawler = lista1.cabec;
-	printf("segf aquii\n");
 	Elemento* e = (Elemento*) crawler->val;
-	printf("estamos buscando o %s e a caveca da lista e %s\n", n, e->nome);
 	while(crawler != NULL){
 		e = (Elemento*) crawler->val;
 		if(crawler->val != NULL && stringsIguais(e->nome, n)){

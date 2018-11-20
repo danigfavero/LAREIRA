@@ -1,40 +1,10 @@
-//Pedaco de codigo avulso, tem que contextualizar cada parte (acoes e elementos)
-//ainda nao debbuguei direito, provavelmente vai ter que mudar varias coisas
 #include "hash.h"
 typedef int (*fptr)(Elemento*, Elemento*);
 
 Elemento sala1, sala2, sala3, sala4, sala5, sala6, atual, personagem, mascara, pessoas;
 Elemento quadro, gramo, disco, balao, arma, cogumelos, homem, garrafa, espelho, cama, envelope, carta, foto;
 
-//Examinar
-int Examinar(Elemento* e1, Elemento* e2){
-	if(e1->visivel) puts(e1->longa);
-	return e1->visivel;
-}
-
-//Vestir/Colocar a mascara
-
-
-int Tirar(Elemento* e1, Elemento* e2){
-	if(e2 == NULL) e2 = &personagem; //Por default vamos retirar do personagem se nao especificado
-	if(Tretira(e2->conteudo, e1->nome)){ //Se conseguiu retirar
-		Tinsere(sala3.conteudo, e1); //Insere na sala de volta
-		printf("Voce retirou %s %s e agora esta de volta na sala de origem", e1->artigos[0], e1->nome);
-	}
-	//Se nao conseguiu retirar
-	else printf("%s %s nao conteudo nenh%s %s", e1->artigos[0], e1->nome, e2->artigos[1], e2->nome);
-	if(/*stringsIguais(e1->nome,"mascara")*/ e1 == &mascara) {
-		pessoas.ativo = False; //Quando tira a mascara, as pessoas voltam a ficar inativas
-		if(stringsIguais(atual.nome, sala3.nome)) puts("O grupo de pessoas divertidas que pareciam te acolher subitamente se fecha\n"
-							    "E te isolam mais uma vez, parecendo nao notar sua presenca\n");
-	}
-}
-
-
-
-////////////////////////////////////////////////////////
-
-void sala12(){
+void salas(){
 	//Elemento personagem;
 	personagem.nome = "você";
 	//quadro.artigos
@@ -83,7 +53,7 @@ void sala12(){
 	disco.visivel = False;
 	disco.conhecido = False;
 	disco.conteudo = Tcria(4);
-	
+
 
 	gramo.nome = "gramofone";
 	//quadro.artigos
@@ -95,7 +65,7 @@ void sala12(){
 	gramo.conhecido = False;
 	gramo.conteudo = Tcria(4);
 	Tinsere((gramo.conteudo), &disco);
-	
+
 
 	balao.nome = "balão";
 	//quadro.artigos
@@ -125,62 +95,134 @@ void sala12(){
 	sala2.def.lugar.saidas[3] = &sala1;*/
 
 
-}
+	//Elemento personagem;
+	//Sala 3
 
-////////////////////////////////////////////////////
-
-void sala34(){
-
-//Elemento personagem;
-//Sala 3
-
-//Iniciando os atributos
-sala3.nome = "sociedade";
-sala3.longa = "Uma mascara chama bastante atencao no canto da sala,\n"
+	//Iniciando os atributos
+	sala3.nome = "sociedade";
+	sala3.longa = "Uma mascara chama bastante atencao no canto da sala,\n"
 	          "Do outro lado, um grupo de pessoas parece se divertir..\n";
-sala3.curta = "Sala sociedade.";
-sala3.ativo = True;
-sala3.visivel = True;
-sala3.conhecido = False;
+	sala3.curta = "Sala sociedade.";
+	sala3.ativo = True;
+	sala3.visivel = True;
+	sala3.conhecido = False;
 
-//Definindo as saidas
-//sala3.def.lugar.saidas = {&sala6, &sala6, &sala1, &sala2};
+	//Definindo as saidas
+	//sala3.def.lugar.saidas = {&sala6, &sala6, &sala1, &sala2};
 
-//Criando os elementos da sala;
-//Mascara
-mascara.nome = "mascara";
+	//Criando os elementos da sala;
+	//Mascara
+	mascara.nome = "mascara";
 
-mascara.artigos = malloc(2*sizeof(string));
-mascara.artigos[0] = "a";
-mascara.artigos[1] = "uma";
+	mascara.artigos = malloc(2*sizeof(string));
+	mascara.artigos[0] = "a";
+	mascara.artigos[1] = "uma";
 
-mascara.longa = "Uma mascara bem chamativa, nao parece muito com voce\n"
+	mascara.longa = "Uma mascara bem chamativa, nao parece muito com voce\n"
 				"Mas de alguma maneira voce parece gostar mais da mascara que de si proprio.";
-mascara.curta = "Uma mascara muito atraente";
-mascara.ativo = False;
-mascara.visivel = False;
-mascara.conhecido = False;
+	mascara.curta = "Uma mascara muito atraente";
+	mascara.ativo = False;
+	mascara.visivel = False;
+	mascara.conhecido = False;
 
-mascara.def.objeto.lista = malloc(3*sizeof(atrib));
-mascara.def.objeto.lista[0].quali = "social"; //mascara social
-mascara.def.objeto.lista[1].quali = "atraente";
-mascara.def.objeto.lista[2].quali = "chamativa";
+	mascara.def.objeto.lista = malloc(3*sizeof(atrib));
+	mascara.def.objeto.lista[0].quali = "social"; //mascara social
+	mascara.def.objeto.lista[1].quali = "atraente";
+	mascara.def.objeto.lista[2].quali = "chamativa";
 
-//Grupo de pessoas
-pessoas.nome = "grupo de pessoas";
-pessoas.longa = "Um grupo bem animado de pessoas, parecem estar se divertindo bastante\n";
-pessoas.curta = "Grupinho de pessoas";
-pessoas.ativo = False;
-pessoas.visivel = False;
-pessoas.conhecido = False;
+	//Grupo de pessoas
+	pessoas.nome = "grupo de pessoas";
+	pessoas.longa = "Um grupo bem animado de pessoas, parecem estar se divertindo bastante\n";
+	pessoas.curta = "Grupinho de pessoas";
+	pessoas.ativo = False;
+	pessoas.visivel = False;
+	pessoas.conhecido = False;
 
-sala3.conteudo = Tcria(4);
-Tinsere((sala3.conteudo), &mascara);
-Tinsere((sala3.conteudo), &pessoas);
+	sala3.conteudo = Tcria(4);
+	Tinsere((sala3.conteudo), &mascara);
+	Tinsere((sala3.conteudo), &pessoas);
 
-}
 
-void sala56(){
+	sala4.nome = "Remanescencia";
+	sala4.longa = "Uma mistura nostalgica de companheirismo e solidao\n"
+		          "Toma conta do seu coracao quando nessa sala\n"
+				  "Nela, voce encontra cartas e uma envelopegrafia.\n";
+	sala4.curta = "Sala remanescencia, com as cartas e a envelopegrafia.";
+	sala4.ativo = True;
+	sala4.visivel = True;
+	sala4.conhecido = False;
+
+	/*
+	//Definindo as saidas
+	sala4.def.lugar.saidas[0] = &sala1;
+	sala4.def.lugar.saidas[1] = &sala1;
+	sala4.def.lugar.saidas[2] = &sala5;
+	sala4.def.lugar.saidas[3] = &sala6;
+	*/
+
+	//Definindo os elementos
+	foto.nome = "fotografia";
+
+	foto.artigos = malloc(2*sizeof(string));
+	foto.artigos[0] = "a";
+	foto.artigos[1] = "uma";
+
+	foto.longa = "Uma linda foto de um casal em um parque,\n"
+				 "Estao assistindo a um por do sol, abracados\n"
+				 "Um registro de um momento perfeito, eterno..\n";
+	foto.curta = "Foto romantica de um casal";
+	foto.ativo = False;
+	foto.visivel = False;
+	foto.conhecido = False;
+
+	foto.def.objeto.lista = malloc(sizeof(atrib));
+	foto.def.objeto.lista[0].quali = "romantica";
+
+	envelope.nome = "envelope";
+
+	envelope.artigos = malloc(2*sizeof(string));
+	envelope.artigos[0] = "o";
+	envelope.artigos[1] = "um";
+
+	envelope.longa = "Um envelope sem destinatario, parece haver algo dentro.\n";
+	envelope.curta = "Envelope em braco";
+	envelope.ativo = False;
+	envelope.visivel = False;
+	envelope.conhecido = False;
+
+	//envelope.def.objeto.lista = malloc(sizeof(atrib));
+	//envelope.def.objeto.lista[0]->quali = "?";
+
+	carta.nome = "carta";
+
+	carta.artigos = malloc(2*sizeof(string));
+	carta.artigos[0] = "a";
+	carta.artigos[1] = "uma";
+
+	carta.longa = "Uma carta manuscrita com um poema romantico,\n"
+				  "Ao longo do papel, manchas de lagrimas ja secas\n"
+				  "Voce reconhece a caligrafia... mas nao consegue se lembrar da onde\n"
+				  "O texto lhe traz uma saudade incompreensivel, e ao mesmo tempo um acolhimento amoroso\n"
+				  "Quanto mais se le, mais dor, quanto mais dor, mais vontade de ficar na companhia daquelas palavras.\n";
+	carta.curta = "carta amorososa";
+	carta.ativo = False;
+	carta.visivel = False;
+	carta.conhecido = False;
+
+	envelope.conteudo = Tcria(4);
+	Tinsere(envelope.conteudo, &carta); //Coloca a carta no envelope
+
+
+
+
+
+
+	sala4.conteudo = Tcria(4);
+	Tinsere(sala4.conteudo, &envelope);
+	Tinsere(sala4.conteudo, &foto);
+
+
+	//SALA 5
 	sala5.nome = "Reflexão ";
 	//artigos?
 	sala5.longa = "Ao entrar, a poeira instantaneamente o cega. Após alguns segundos, você consegue distiguinr alguns objetos.\n"
@@ -288,91 +330,4 @@ void sala56(){
 	Tinsere(sala6.conteudo, &cama);
 	Tinsere(sala6.conteudo, &cogumelos);
 	Tinsere(sala6.conteudo, &garrafa);
-}
-
-
-
-void sala_4(){
-//////////////////////////////////////////////
-//        SALA 4                            //
-//////////////////////////////////////////////
-
-//Iniciando os atributos
-sala4.nome = "Remanescencia";
-sala4.longa = "Uma mistura nostalgica de companheirismo e solidao\n"
-	          "Toma conta do seu coracao quando nessa sala\n"
-			  "Nela, voce encontra cartas e uma envelopegrafia.\n";
-sala4.curta = "Sala remanescencia, com as cartas e a envelopegrafia.";
-sala4.ativo = True;
-sala4.visivel = True;
-sala4.conhecido = False;
-
-/*
-//Definindo as saidas
-sala4.def.lugar.saidas[0] = &sala1;
-sala4.def.lugar.saidas[1] = &sala1;
-sala4.def.lugar.saidas[2] = &sala5;
-sala4.def.lugar.saidas[3] = &sala6;
-*/
-
-//Definindo os elementos
-foto.nome = "fotografia";
-
-foto.artigos = malloc(2*sizeof(string));
-foto.artigos[0] = "a";
-foto.artigos[1] = "uma";
-
-foto.longa = "Uma linda foto de um casal em um parque,\n"
-			 "Estao assistindo a um por do sol, abracados\n"
-			 "Um registro de um momento perfeito, eterno..\n";
-foto.curta = "Foto romantica de um casal";
-foto.ativo = False;
-foto.visivel = False;
-foto.conhecido = False;
-
-foto.def.objeto.lista = malloc(sizeof(atrib));
-foto.def.objeto.lista[0].quali = "romantica";
-
-envelope.nome = "envelope";
-
-envelope.artigos = malloc(2*sizeof(string));
-envelope.artigos[0] = "o";
-envelope.artigos[1] = "um";
-
-envelope.longa = "Um envelope sem destinatario, parece haver algo dentro.\n";
-envelope.curta = "Envelope em braco";
-envelope.ativo = False;
-envelope.visivel = False;
-envelope.conhecido = False;
-
-//envelope.def.objeto.lista = malloc(sizeof(atrib));
-//envelope.def.objeto.lista[0]->quali = "?";
-	
-carta.nome = "carta";
-
-carta.artigos = malloc(2*sizeof(string));
-carta.artigos[0] = "a";
-carta.artigos[1] = "uma";
-
-carta.longa = "Uma carta manuscrita com um poema romantico,\n"
-			  "Ao longo do papel, manchas de lagrimas ja secas\n"
-			  "Voce reconhece a caligrafia... mas nao consegue se lembrar da onde\n"
-			  "O texto lhe traz uma saudade incompreensivel, e ao mesmo tempo um acolhimento amoroso\n"
-			  "Quanto mais se le, mais dor, quanto mais dor, mais vontade de ficar na companhia daquelas palavras.\n";
-carta.curta = "carta amorososa";
-carta.ativo = False;
-carta.visivel = False;
-carta.conhecido = False;
-
-envelope.conteudo = Tcria(4);
-Tinsere(envelope.conteudo, &carta); //Coloca a carta no envelope
-
-
-
-
-
-	
-sala4.conteudo = Tcria(4);
-Tinsere(sala4.conteudo, &envelope);
-Tinsere(sala4.conteudo, &foto);
 }

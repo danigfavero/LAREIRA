@@ -1,10 +1,9 @@
-#include "sala34.h"
+#include "salas.h"
 
 #define vivo 0
 #define atirou 1
 #define conversas 2
 #define deitado 3
- 
 
 void imprimeConteudo(Elemento compartimento, int tamanho_hash)
 {
@@ -16,29 +15,51 @@ void imprimeConteudo(Elemento compartimento, int tamanho_hash)
         	el = (Elemento*) andante->val;
             if(el != NULL) puts(el->nome);
             andante = andante->next;
-			
+
         }
-    }	
+    }
+}
+
+
+int Examinar(Elemento* e1, Elemento* e2){
+	if(e1->visivel) puts(e1->longa);
+	return e1->visivel;
+}
+
+
+int Tirar(Elemento* e1, Elemento* e2){
+	if(e2 == NULL) e2 = &personagem; //Por default vamos retirar do personagem se não especificado
+	if(Tretira(e2->conteudo, e1->nome)){ //Se conseguiu retirar
+		Tinsere(sala3.conteudo, e1); //Insere na sala de volta
+		printf("Você retirou %s %s e agora está de volta à sala de origem", e1->artigos[0], e1->nome);
+	}
+	//Se não conseguiu retirar
+	else printf("%s %s não conteúdo nenh%s %s", e1->artigos[0], e1->nome, e2->artigos[1], e2->nome);
+	if(/*stringsIguais(e1->nome,"mascara")*/ e1 == &mascara) {
+		pessoas.ativo = False; //Quando tira a mascara, as pessoas voltam a ficar inativas
+		if(stringsIguais(atual.nome, sala3.nome)) puts("O grupo de pessoas divertidas que pareciam te acolher subitamente se fecha\n"
+							    "E te isolam mais uma vez, parecendo não notar sua presenca\n");
+	}
 }
 
 int Colocar(Elemento* e1, Elemento* e2){
-	if(Tbusca(personagem.conteudo, e1->nome)){ //Se a pessoa ja estiver vestindo o elemento
-		printf("Voce ja esta vestindo %s %s", e1->artigos[0], e1->nome);
+	if(Tbusca(personagem.conteudo, e1->nome)){ //Se a pessoa já estiver vestindo o elemento
+		printf("Você já está vestindo %s %s", e1->artigos[0], e1->nome);
 	}
 	else if(e1->visivel && e1->ativo)
 	{
-		printf("Voce coloca %s %s\n", e1->artigos[0], e1->nome); //"Voce coloca a mascara" ou alguma outra coisa que de pra vestir
+		printf("Você coloca %s %s\n", e1->artigos[0], e1->nome); //"Você coloca a mascara" ou alguma outra coisa que dê pra vestir
 		Tinsere(personagem.conteudo, e1); //Coloca o elemento no jogador
 		Tretira(atual.conteudo, e1->nome); //Tira o elemento da sala
 
-		//Se vestir a mascara, as pessoas ficam ativas para interacao
+		//Se vestir a mascara, as pessoas ficam ativas para interação
 		if(stringsIguais(e1->nome, "mascara"))
 		{
 			pessoas.ativo = True;
-			puts("As pessoas que estavam se divertindo sem parecer notar sua presenca\n"
-				 "Comecam homogeneamente a virar os olhos em sua direcao..\n"
-				 "Alguns deles ate te convidam para interagir!\n"
-				 "Parece que agora voce e visto!");
+			puts("As pessoas que estavam se divertindo sem parecer notar sua presença\n"
+				 "Começam homogeneamente a virar os olhos em sua direcao..\n"
+				 "Alguns deles até te convidam para interagir!\n"
+				 "Parece que agora você é visto!\n");
 		}
 		return 1;
 	}
@@ -49,46 +70,58 @@ int Colocar(Elemento* e1, Elemento* e2){
 int Interagir(Elemento* e1, Elemento* e2){
 	if(e1->ativo)
 	{
-		puts("Voce entra no meio da multidao, parece uma festa\n"
-			 "Esta se sentindo aceito, uma sensacao bem acolhedora\n"
+		puts("Você entra no meio da multidão, parece uma festa\n"
+			 "Está se sentindo aceito, uma sensação bem acolhedora\n"
 			 "Voce poderia ficar ali para sempre... Mas...\n"
-			 "Quem e' voce mesmo?\n"); //So queria lembrar que na verdade e' a mascara que esta ali, nao sabia como, sintam-se livres para mudar :D
+			 "Quem é você mesmo?\n");
 		return 1;
 	}
-	puts("Voce tenta interagir com a multidao, mas e excluido e completamente ignorado\n"
-		 "Algo nao esta certo..\n");
+	puts("Você tenta interagir com a multidão, mas é excluído e completamente ignorado\n"
+		 "Algo não está certo..\n");
 	return 0;
 }
 
 int Abrir(Elemento* e1, Elemento* e2){
 	if(e1->ativo && e1->visivel){
 		//Deixa visivel e ativo tudo que tem dentro do elemento (envelope)
-		printf("Voce abre %s %s e dentro ha:\n", e1->artigos[0], e1->nome);
+		printf("Voce abre %s %s e dentro há:\n", e1->artigos[0], e1->nome);
 		imprimeConteudo((*e1), 4);
 		return 1;
 	}
 	return 0;
 }
 
-int Desligar(Elemento* e1, Elemento* e2){}
+int Desligar(Elemento* e1, Elemento* e2){
+	puts("Mesmo com o gramofone desligado, a música continua tocando.\n"
+		 "Isso não faz sentido nenhum...\n"
+	 	 "Não importa se o disco gira ou não, a música sempre toca.\n");
+	return 1;
+}
 
-int Jogar(Elemento* e1, Elemento* e2){}
+int Ligar(Elemento* e1, Elemento* e2){
+	puts("Como você quer ligar algo que nem sequer foi desligado?\n"
+		 "Pelo menos agora o disco gira...\n");
+	return 1;
+}
 
-int Ligar(Elemento* e1, Elemento* e2){}
+int Estourar(Elemento* e1, Elemento* e2){
+	if(e1->ativo)
+		e1->ativo = False;
+		printf("Ué, esquisito, o balão estourou mas não fez nenhum som.\n");
+		return 1;
+	printf("Não dá pra estourar um balão estourado!\n");
+	return 0;
+}
 
-int Estourar(Elemento* e1, Elemento* e2){}
-
-int Tocar(Elemento* e1, Elemento* e2){}
-
-int Soltar(Elemento* e1, Elemento* e2){}
-
-int Andar(Elemento* e1, Elemento* e2){}
-
-
+int Tocar(Elemento* e1, Elemento* e2){
+	if(TBusca(e1->conteudo,e2->nome)==e2)
+		printf("O disco já está no gramofone\n");
+		return 0;
+	return (Tinsere(e1->conteudo, e2->nome, e2));
+}
 
 int Ler(Elemento* e1, Elemento* e2){
 	if(stringsIguais(e1->nome,"carta")) {
-		//Texto qualquer.. achei que combinava, mas whatever, a formatacao nao testei pra ver se fica bom, qqr coisa so tirar
 		puts("    Amo-te tanto, meu amor... não cante\n"
 			 "    O humano coração com mais verdade...\n"
 			 "     Amo-te como amigo e como amante\n"
@@ -105,12 +138,13 @@ int Ler(Elemento* e1, Elemento* e2){
 
 			 "     E de te amar assim, muito e amiúde\n"
 			 "    É que um dia em teu corpo de repente\n"
-			 "   Hei de morrer de amar mais do que pude.\n");
+			 "   Hei de morrer de amar mais do que pude.\n\n\n");
+		puts("Essas palavras te lembram um sentimento, mas sem muito sentido\n
+			  É apenas a remanescência da sua pouca memória.\n");
 		return 1;
 	}
 	return 0;
 }
-
 
 int Atirar(Elemento* e1, Elemento* e2){
 	if(!stringsIguais(e1->nome,"arma")) return Jogar(e1, e2);
@@ -162,6 +196,14 @@ int Beber(Elemento* e1, Elemento* e2){
 	return 1;
 }
 
+int Comer(Elemento* e1, Elemento* e2){
+	if(e1->nome == "cogumelo"){
+		printf("Repentinamente, todas as cores das salas se misturam e espalham como uma grande explosão. Os padrões aumentam, e sua mente transcende o plano físico. Tudo se enche de energia."
+			"É a sensação mais bonita que você já teve.\n");
+		return 1;
+	}
+}
+
 int Deitar(Elemento* e1, Elemento* e2){
 	if(e1->nome == "cama" && e1->def.objeto.lista[deitado].val == 1){
 		printf("Você já está deitado.\n"); return 0;
@@ -186,85 +228,125 @@ int Levantar(Elemento* e1, Elemento* e2){
 }
 
 
-int Comer(Elemento* e1, Elemento* e2){
-	if(e1->nome == "cogumelo" /* && TEMCOGUMELO*/){
-		printf("Repentinamente, todas as cores das salas se misturam e espalham como uma grande explosão. Os padrões aumentam, e sua mente transcende o plano físico. Tudo se enche de energia."
-			"É a sensação mais bonita que você já teve.");
-		/*TEMCOGUMELO--*/;
-		return 1;
-	}
-}
-
 int Pegar(Elemento* e1, Elemento* e2){
-	if(e1->nome == "cogumelo"){
+	if(e1->nome == "cogumelo")
 		printf("Ao tocar no cogumelo, você sente todo seu corpo vibrar de animação, mesmo sem entender de onde vem o sentimento. Mas algo sobre suas cores o fazem sentir em outro mundo.\n");
-		/*TEMCOGUMELO++*/;
-		return 1;
-	}
+	else
+		printf("Agora você tem %s na sua mão.\n",e1->nome);
+	return(Tinsere(e2->conteudo, e1->nome, e1));
 }
 
-int Gritar(Elemento* e1, Elemento* e2){}
+int Soltar(Elemento* e1, Elemento* e2){
+	if(Tretira(e2->conteudo, e1->nome)
+		printf("%s não está mais na sua mão.\n",e1->nome);
+		return 1;
+	printf("Não dá pra soltar um objeto que nem está na sua mão...\n");
+	return 0;
+}
 
-int Chorar(Elemento* e1, Elemento* e2){}
+int Quebrar(Elemento* e1, Elemento* e2){
+	if(e1->ativo)
+		e1->ativo = False;
+		printf("%s quebrado com sucesso", e1->nome);
+		return 1;
+	printf("Não dá pra quebrar o que já está quebrado...");
+	return 0;
+}
 
-int Sentar(Elemento* e1, Elemento* e2){}
+int Gritar(Elemento* e1, Elemento* e2){
+	printf("AAAAA! Ninguém parece ouvir seus gritos desesperados.\n");
+	return 1;
+}
 
-int Quebrar(Elemento* e1, Elemento* e2){}
+int Chorar(Elemento* e1, Elemento* e2){
+	puts("Eu sei, isso é muito triste.\n
+		Mas suas lágrimas definitivamente não vão resolver o problema.\n");
+	return 1;
+}
 
-int Correr(Elemento* e1, Elemento* e2){}
+int Sentar(Elemento* e1, Elemento* e2){
+	puts("Agora você está sentado no chão. Vai chorar?");
+	return 1;
+}
+
+int Correr(Elemento* e1, Elemento* e2){
+	printf("Não tem para onde correr, nem se esconder.");
+	return 1;
+}
 
 void insereAcoes()
 {
-	personagem.acoes = malloc(sizeof(fptr));
+	personagem.acoes = malloc(5*sizeof(fptr));
 	personagem.acoes[0] = Gritar;
 	personagem.acoes[1] = Chorar;
 	personagem.acoes[2] = Sentar;
 	personagem.acoes[3] = Correr;
-	personagem.acoes[4] = Andar;
-	
+	personagem.acoes[4] = Examinar;
+
 	quadro.acoes = malloc(sizeof(fptr));
 	quadro.acoes[0] = Examinar;
-	
-	disco.acoes = malloc(5*sizeof(fptr));
+
+	disco.acoes = malloc(6*sizeof(fptr));
 	disco.acoes[0] = Pegar;
 	disco.acoes[1] = Soltar;
 	disco.acoes[2] = Quebrar;
 	disco.acoes[3] = Tocar; //colocar no gramofone
-	disco.acoes[4] = Jogar;
-	
-	gramo.acoes = malloc(4*sizeof(fptr));
-	gramo.acoes[0] = Pegar;
-	gramo.acoes[1] = Soltar;
-	gramo.acoes[2] = Desligar;
-	gramo.acoes[3] = Ligar;
-	
-	balao.acoes = malloc(sizeof(fptr));
+	disco.acoes[4] = Examinar;
+
+	gramo.acoes = malloc(3*sizeof(fptr));
+	gramo.acoes[0] = Desligar;
+	gramo.acoes[1] = Ligar;
+	gramo.acoes[2] = Examinar;
+
+	balao.acoes = malloc(5*sizeof(fptr));
 	balao.acoes[0] = Examinar;
-	balao.acoes[1] = Pegar;
-	balao.acoes[2] = Soltar;
-	balao.acoes[3] = Estourar;
-	balao.acoes[4] = Comer;
-	
-	envelope.acoes = malloc(3*sizeof(fptr));
+	balao.acoes[1] = Estourar;
+	balao.acoes[2] = Comer;
+	balao.acoes[3] = Pegar;
+	balao.acoes[4] = Soltar;
+
+	envelope.acoes = malloc(4*sizeof(fptr));
 	envelope.acoes[0] = Abrir;
 	envelope.acoes[1] = Colocar;
 	envelope.acoes[2] = Tirar;
-	
-	carta.acoes = malloc(sizeof(fptr));
+	envelope.acoes[3] = Examinar;
+
+	carta.acoes = malloc(2*sizeof(fptr));
 	carta.acoes[0] = Ler;
-	
-	mascara.acoes = malloc(2*sizeof(fptr));
+	carta.acoes[1] = Examinar;
+
+	mascara.acoes = malloc(3*sizeof(fptr));
 	mascara.acoes[0] = Colocar;
 	mascara.acoes[1] = Tirar;
+	mascara.acoes[2] = Examinar;
 
-	pessoas.acoes = malloc(sizeof(fptr));
+	pessoas.acoes = malloc(2*sizeof(fptr));
 	pessoas.acoes[0] = Interagir;
+	pessoas.acoes[1] = Examinar;
 
 	arma.acoes = malloc(2*sizeof(fptr));
+	arma.acoes[0] = Atirar;
+	arma.acoes[1] = Examinar;
+
 	espelho.acoes = malloc(sizeof(fptr));
-	homem.acoes = malloc(sizeof(fptr));
-	garrafa.acoes = malloc(sizeof(fptr));
-	cama.acoes = malloc(sizeof(fptr));
-	cogumelos.acoes = malloc(sizeof(fptr));
-	
+	espelho.acoes[0] = Examinar;
+
+	homem.acoes = malloc(2*sizeof(fptr));
+	homem.acoes[0] = Examinar;
+	homem.acoes[1] = Falar;
+
+	garrafa.acoes = malloc(2*sizeof(fptr));
+	garrafa.acoes[0] = Examinar;
+	garrafa.acoes[1] = Beber;
+	garrafa.acoes[2] = Quebrar;
+
+	cama.acoes = malloc(3*sizeof(fptr));
+	cama.acoes[0] = Examinar;
+	cama.acoes[1] = Deitar;
+	cama.acoes[2] = Levantar;
+
+	cogumelos.acoes = malloc(3*sizeof(fptr));
+	cogumelos.acoes[0] = Examinar;
+	cogumelos.acoes[1] = Comer;
+	cogumelos.acoes[2] = Pegar;
 }

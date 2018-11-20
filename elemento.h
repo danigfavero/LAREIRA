@@ -7,38 +7,46 @@ typedef enum{
 
 typedef char* string;
 
+//union de atributo que pode se referir a um valor ou uma qualidade do objeto
 typedef union{
 	int val;
 	string quali;
 } atrib;
 
+//lista de atributos do objeto
 typedef struct{
 	atrib* lista;
 } Objeto;
 
+//lista de salas adjacentes a uma sala
 typedef struct{
 	void* saidas;
 } Lugar;
 
+//union que determina se o elemento é objeto ou lugar
 typedef union{
 	Objeto objeto;
 	Lugar lugar;
 }detalhe;
 
+//elo a ser usado em listas ligadas
 typedef struct elo{
 	void* val;
 	struct elo* next;
 } Elo;
 
+//criação de uma lista ligada
 typedef struct {
 	Elo * cabec ;
 } Lista ;
 
+//criação de uma hash table
 typedef struct TabSim{
 	int size;
 	Lista* listas;
 } TabSim;
 
+//definindo nosso elemento
 typedef struct Elemento{
 	string nome;
 	string* artigos;

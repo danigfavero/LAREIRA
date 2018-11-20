@@ -1,22 +1,22 @@
-CC = gcc
-CFLAGS = -Wall
-objects = jogo.o hash.o lista.o elemento.o
+all: jogo
 
-edit: $(objects)
-	gcc -o edit $(objects)
+jogo: jogo.o acoes.o salas.o hash.o lista.o elemento.o
+	gcc -o jogo.o acoes.o salas.o hash.o lista.o elemento.o
 
-jogo.o : jogo.c	acoes.h
-	gcc -Wall -o jogo jogo.c acoes.h
-acoes.o: acoes.c hash.h
-	gcc -Wall -o acoes acoes.c hash.h
+jogo.o: jogo.c acoes.h
+	gcc -o jogo.o -c jogo.c -Wall
+
+acoes.o: acoes.c salas.h
+	gcc -o acoes.o -c acoes.c -Wall
+
+salas.o: salas.c hash.h
+	gcc -o salas.o -c salas.c -Wall
+
 hash.o: hash.c lista.h
-	gcc hash hash.c lista.h
-lista.o: lista.c elemento.h
-	gcc -Wall -o lista lista.c elemento.h
-elemento.o: elemento.c
-	gcc -Wall -o elemento elemento.c
+	gcc -o hash.o -c hash.c -Wall
 
-.PHONY: clean
+lista.o: lista.c elemento.h
+	gcc -o lista.o -c lista.c -Wall
 
 clean:
-	rm edit $(objects)
+	rm -rm *.o
