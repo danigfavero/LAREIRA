@@ -1,11 +1,14 @@
 #include "hash.h"
+//Pedaco de codigo avulso, tem que contextualizar cada parte (acoes e elementos)
+//ainda nao debbuguei direito, provavelmente vai ter que mudar varias coisas
+
 typedef int (*fptr)(Elemento*, Elemento*);
 
-Elemento* atual;
-Elemento sala1, sala2, sala3, sala4, sala5, sala6, personagem, mascara, pessoas;
+Elemento sala1, sala2, sala3, sala4, sala5, sala6, atual, personagem, mascara, pessoas;
 Elemento quadro, gramo, disco, balao, arma, cogumelos, homem, garrafa, espelho, cama, envelope, carta, foto;
 
-void salas(){
+void sala1_ini(){
+	//Elemento personagem;
 	personagem.nome = "você";
 	//quadro.artigos
 	personagem.longa = "Esse é você mesmo. Não tem muito que você se lembre sobre.";
@@ -16,9 +19,7 @@ void salas(){
 	personagem.conteudo = Tcria(4);
 
 	quadro.nome = "quadro";
-	quadro.artigos = malloc(2*sizeof(string));
-	quadro.artigos[0] = "o";
-	quadro.artigos[1] = "um";
+	//quadro.artigos
 	quadro.longa = "Um quadro escrito ALGUMA COISA ESCAPA AO NAUFRÁGIO DAS ILUSÕES\n";
 	quadro.curta = "um quadro";
 	quadro.ativo = True;
@@ -27,42 +28,41 @@ void salas(){
 	quadro.conteudo = Tcria(4); //o quadro não contém nada
 
 
-	sala1.nome = "sala inicio";
-	sala1.artigos = malloc(2*sizeof(string));
-	sala1.artigos[0] = "a";
-	sala1.artigos[1] = "uma";
-	sala1.longa = "É uma sala claustrofóbica e pouco iluminada.\n"
-	"Tudo o que existem são quatro portas ao seu redor, uma em cada parede.\n"
+	//Elemento sala1;
+	sala1.nome = "inicio";
+	//artigos?
+	sala1.longa = "É uma sala claustrofóbica e pouco iluminada."
+	"Tudo o que existem são quatro portas ao seu redor, uma em cada parede."
 	"Em uma das paredes há também um grande quadro com algo escrito.";
 	sala1.curta = "Esta é a sala inicial, aquela na qual você acordou.";
 	sala1.ativo = True;
 	sala1.visivel = False;
 	sala1.conhecido = False;
 	sala1.conteudo = Tcria(4);
-	sala1.def.lugar.saidas = malloc(4*sizeof(Elemento));
-	sala1.def.lugar.saidas = &sala4;
-	//sala1.def.lugar.saidas[1] = &sala4;
-	//sala1.def.lugar.saidas[2] = &sala2;
-	//sala1.def.lugar.saidas[3] = &sala3;
+	/*sala1.def.lugar.saidas[0] = &sala4;
+	sala1.def.lugar.saidas[1] = &sala4;
+	sala1.def.lugar.saidas[2] = &sala2;
+	sala1.def.lugar.saidas[3] = &sala3;*/;
 	Tinsere((sala1.conteudo), &quadro);
 
+	/*sala1.acoes1[1] = Sair;*/
+}
+
+void sala2_ini(){
+
 	disco.nome = "disco";
-	disco.artigos = malloc(2*sizeof(string));
-	disco.artigos[0] = "o";
-	disco.artigos[1] = "um";
+	//quadro.artigos
 	disco.longa = "Um disco de vinil sem informações, encontrado no gramofone e sem capa por perto.";
 	disco.curta = "O disco de vinil.";
 	disco.ativo = True;
 	disco.visivel = False;
 	disco.conhecido = False;
 	disco.conteudo = Tcria(4);
-
+	
 
 	gramo.nome = "gramofone";
-	gramo.artigos = malloc(2*sizeof(string));
-	gramo.artigos[0] = "o";
-	gramo.artigos[1] = "um";
-	gramo.longa = "Um gramofone autêntico, antigo mas muito bem conservado.\n"
+	//quadro.artigos
+	gramo.longa = "Um gramofone autêntico, antigo mas muito bem conservado."
 	"Sua caixa é feita de madeira envernizada e o amplificador é dourado, muito delicado.";
 	gramo.curta = "O autêntico gramofone.";
 	gramo.ativo = True;
@@ -70,12 +70,10 @@ void salas(){
 	gramo.conhecido = False;
 	gramo.conteudo = Tcria(4);
 	Tinsere((gramo.conteudo), &disco);
-
+	
 
 	balao.nome = "balão";
-	balao.artigos = malloc(2*sizeof(string));
-	balao.artigos[0] = "o";
-	balao.artigos[1] = "um";
+	//quadro.artigos
 	balao.longa = "Um balão vermelho, cheio de ar";
 	balao.curta = "O balão vermelho.";
 	balao.ativo = True;
@@ -84,12 +82,10 @@ void salas(){
 	balao.conteudo = Tcria(4);
 
 	//Elemento sala2;
-	sala2.nome = "sala audição";
-	sala2.artigos = malloc(2*sizeof(string));
-	sala2.artigos[0] = "a";
-	sala2.artigos[1] = "uma";
-	sala2.longa = "Nessa sala toca uma música melodiosa, muito agradável.\n"
-	"A melodia penetra seus ouvidos e eleva os humores, lhe causando uma sensação de pertencimento.\n"
+	sala2.nome = "audição";
+	//artigos?
+	sala2.longa = "Nessa sala toca uma música melodiosa, muito agradável."
+	"A melodia penetra seus ouvidos e eleva os humores, lhe causando uma sensação de pertencimento."
 	"Há aqui um gramofone (a música parece vir de lá) e um balão.";
 	sala2.curta = "Esta é a sala onde toca uma música.";
 	sala2.ativo = True;
@@ -102,18 +98,18 @@ void salas(){
 	sala2.def.lugar.saidas[1] = &sala5;
 	sala2.def.lugar.saidas[2] = &sala3;
 	sala2.def.lugar.saidas[3] = &sala1;*/
+}
 
+////////////////////////////////////////////////////
 
-	//Elemento personagem;
+void sala3_ini(){
+
 	//Sala 3
 
 	//Iniciando os atributos
 	sala3.nome = "sociedade";
-	sala3.artigos = malloc(2*sizeof(string));
-	sala3.artigos[0] = "a";
-	sala3.artigos[1] = "uma";
 	sala3.longa = "Uma mascara chama bastante atencao no canto da sala,\n"
-	          	  "Do outro lado, um grupo de pessoas parece se divertir..\n";
+		          "Do outro lado, um grupo de pessoas parece se divertir..\n";
 	sala3.curta = "Sala sociedade.";
 	sala3.ativo = True;
 	sala3.visivel = True;
@@ -131,7 +127,7 @@ void salas(){
 	mascara.artigos[1] = "uma";
 
 	mascara.longa = "Uma mascara bem chamativa, nao parece muito com voce\n"
-				"Mas de alguma maneira voce parece gostar mais da mascara que de si proprio.";
+					"Mas de alguma maneira voce parece gostar mais da mascara que de si proprio.";
 	mascara.curta = "Uma mascara muito atraente";
 	mascara.ativo = False;
 	mascara.visivel = False;
@@ -154,7 +150,12 @@ void salas(){
 	Tinsere((sala3.conteudo), &mascara);
 	Tinsere((sala3.conteudo), &pessoas);
 
+}
 
+
+void sala4_ini(){
+
+	//Iniciando os atributos
 	sala4.nome = "Remanescencia";
 	sala4.longa = "Uma mistura nostalgica de companheirismo e solidao\n"
 		          "Toma conta do seu coracao quando nessa sala\n"
@@ -204,7 +205,7 @@ void salas(){
 
 	//envelope.def.objeto.lista = malloc(sizeof(atrib));
 	//envelope.def.objeto.lista[0]->quali = "?";
-
+	
 	carta.nome = "carta";
 
 	carta.artigos = malloc(2*sizeof(string));
@@ -224,17 +225,13 @@ void salas(){
 	envelope.conteudo = Tcria(4);
 	Tinsere(envelope.conteudo, &carta); //Coloca a carta no envelope
 
-
-
-
-
-
 	sala4.conteudo = Tcria(4);
 	Tinsere(sala4.conteudo, &envelope);
 	Tinsere(sala4.conteudo, &foto);
+}
 
 
-	//SALA 5
+void sala5_ini(){
 	sala5.nome = "Reflexão ";
 	//artigos?
 	sala5.longa = "Ao entrar, a poeira instantaneamente o cega. Após alguns segundos, você consegue distiguinr alguns objetos.\n"
@@ -286,11 +283,14 @@ void salas(){
 	homem.conteudo = Tcria(4);
 	homem.def.objeto.lista = NULL;
 	homem.animacao = NULL;
+	
+}
 
+void sala6_ini(){
 	sala6.nome = "Hedonismo";
 	//artigos?
 	sala6.longa = "Cores vivas fazem as paredes brilharem aos seus olhos, padrões que se misturam o fazem sentir em um oceano de luz.\n"
-	"Um jardim dos mais diversos cogumelos cobre o chão da sala. Tamanhos, odores e cores. Nada parece fora do campo de possibilidades.\n"
+	"Um jardim dos mais diversos cogumelos cobre o chão da sala. Tamanhos, odores e cores. Nada parece fora do campo de possibilidades.\n";
 	"Uma garrafa simples mas atraente senta ao lado de uma cama grande, que exala leveza. Tudo cheira a natureza.\n";
 	//puts(sala6.longa);
 	sala6.curta = "Uma imersão em natureza e sensações. Há muito para experimentar.\n";
@@ -343,3 +343,5 @@ void salas(){
 	Tinsere(sala6.conteudo, &cogumelos);
 	Tinsere(sala6.conteudo, &garrafa);
 }
+
+

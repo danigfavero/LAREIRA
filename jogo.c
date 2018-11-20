@@ -20,18 +20,9 @@ int main(){
     //Criar elementos
     salas();
     int online = 1;
-/*	typedef struct sala{
-		Elemento sala;
-		struct sala * saidas;
-	} Sala;
 
-*/
     //Inicializa e inclui a tabela de símbolos
     //Inicializa variáveis
-<<<<<<< HEAD
-=======
-    //Elemento atual = sala1;
->>>>>>> 8fd2e18aff955f27728a09b320275c554e8b58bf
     //Conectar salas
     //Colocar objetos em suas posições de início (inclusive o aventureiro?)
 
@@ -58,7 +49,6 @@ int main(){
 		
 		//puts(atual.longa);
 
-<<<<<<< HEAD
 		puts("\n--------------------------- SALA 2 - AUDICAO ---------------------------\n");
 		
 		atual = &sala2;
@@ -112,22 +102,6 @@ int main(){
 		
 		//puts()
 		online = 0;
-=======
-        puts("\nConteudo sala2:");
-        imprimeConteudo(sala2, 4);
-
-        puts("\nConteudo sala3:");
-        imprimeConteudo(sala3, 4);
-
-        puts("\nConteudo sala4:");
-        imprimeConteudo(sala4, 4);
-
-        puts("\nConteudo sala5:");
-        imprimeConteudo(sala5, 4);
-
-        puts("\nConteudo sala6:");
-        imprimeConteudo(sala6, 4);
->>>>>>> 8fd2e18aff955f27728a09b320275c554e8b58bf
     }
 
 }
