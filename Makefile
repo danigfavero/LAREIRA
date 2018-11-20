@@ -1,7 +1,7 @@
 all: jogo
 
 jogo: jogo.o acoes.o salas.o hash.o lista.o elemento.o
-	gcc -o jogo.o acoes.o salas.o hash.o lista.o elemento.o
+	gcc -o jogo jogo.o acoes.o salas.o hash.o lista.o elemento.o
 
 jogo.o: jogo.c acoes.h
 	gcc -o jogo.o -c jogo.c -Wall
@@ -19,4 +19,4 @@ lista.o: lista.c elemento.h
 	gcc -o lista.o -c lista.c -Wall
 
 clean:
-	rm -rm *.o
+rm -rm *.o
