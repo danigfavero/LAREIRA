@@ -38,13 +38,19 @@ void Tdestroi(TabSim t){
 int Tinsere(TabSim t, Elemento* val){
 	//Calcula o hash do elemento, que é em qual lista ele será inserido
 	int hash_val = hash(val->nome, t.size);
+<<<<<<< HEAD
 	//printf("Hash do elemento %s: %d\n", val->nome, hash_val);
+=======
+>>>>>>> 8fd2e18aff955f27728a09b320275c554e8b58bf
 	return Linsere(t.listas[hash_val], val)==NULL?0:1;
 }
 
 Elemento* Tbusca(TabSim t, char *n){
 	int hash_val = hash(n, t.size);
+<<<<<<< HEAD
 	//printf("Estamos buscando o elemento %s que tem hash %d\n", n, hash_val);
+=======
+>>>>>>> 8fd2e18aff955f27728a09b320275c554e8b58bf
 	return Lbusca(t.listas[hash_val], n);
 }
 
@@ -54,6 +60,7 @@ int Tretira(TabSim t, char *n){
 	Elemento* ee;
 	while(crawler != NULL){
 		ee = (Elemento* ) crawler->val;
+<<<<<<< HEAD
 		//printf("Fazendo uma busca pelo %s para tentar elimina-lo\n", n);
 		if(crawler->val != NULL && stringsIguais(ee->nome, n)){
 			//printf("Achei o %s e to eliminando\n", n);
@@ -61,9 +68,12 @@ int Tretira(TabSim t, char *n){
 			//free(crawler->val);
 			//free(crawler);
 			//puts("eliminei\n");
+=======
+		if(crawler->val != NULL && stringsIguais(ee->nome, n)){
+			crawler->val = NULL;
+>>>>>>> 8fd2e18aff955f27728a09b320275c554e8b58bf
 			return 1;
 		}
-		//last = crawler;
 		crawler = crawler->next;
 	}
 	return 0;
