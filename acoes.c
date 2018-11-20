@@ -105,19 +105,20 @@ int Ligar(Elemento* e1, Elemento* e2){
 }
 
 int Estourar(Elemento* e1, Elemento* e2){
-	if(e1->ativo)
+	if(e1->ativo){
 		e1->ativo = False;
 		printf("Ué, esquisito, o balão estourou mas não fez nenhum som.\n");
 		return 1;
+	}
 	printf("Não dá pra estourar um balão estourado!\n");
 	return 0;
 }
 
 int Tocar(Elemento* e1, Elemento* e2){
-	if(TBusca(e1->conteudo,e2->nome)==e2)
+	if(Tbusca(e1->conteudo,e2->nome)==e2)
 		printf("O disco já está no gramofone\n");
 		return 0;
-	return (Tinsere(e1->conteudo, e2->nome, e2));
+	return (Tinsere(e1->conteudo, e2));
 }
 
 int Ler(Elemento* e1, Elemento* e2){
@@ -139,15 +140,16 @@ int Ler(Elemento* e1, Elemento* e2){
 			 "     E de te amar assim, muito e amiúde\n"
 			 "    É que um dia em teu corpo de repente\n"
 			 "   Hei de morrer de amar mais do que pude.\n\n\n");
-		puts("Essas palavras te lembram um sentimento, mas sem muito sentido\n
-			  É apenas a remanescência da sua pouca memória.\n");
+		puts("Essas palavras te lembram um sentimento, mas sem muito sentido\n"
+			  "É apenas a remanescência da sua pouca memória.\n");
 		return 1;
 	}
 	return 0;
 }
 
 int Atirar(Elemento* e1, Elemento* e2){
-	if(!stringsIguais(e1->nome,"arma")) return Jogar(e1, e2);
+	if(!stringsIguais(e1->nome,"arma"))
+		printf("Voce arremessa %s em %s, mas nada demais acontece..\n", e1->nome, e2->nome);
 	if(e2 == NULL){
 		e1->def.objeto.lista[atirou].val = 0;
 		return 1;
@@ -233,13 +235,14 @@ int Pegar(Elemento* e1, Elemento* e2){
 		printf("Ao tocar no cogumelo, você sente todo seu corpo vibrar de animação, mesmo sem entender de onde vem o sentimento. Mas algo sobre suas cores o fazem sentir em outro mundo.\n");
 	else
 		printf("Agora você tem %s na sua mão.\n",e1->nome);
-	return(Tinsere(e2->conteudo, e1->nome, e1));
+	return(Tinsere(e2->conteudo, e1));
 }
 
 int Soltar(Elemento* e1, Elemento* e2){
-	if(Tretira(e2->conteudo, e1->nome)
+	if(Tretira(e2->conteudo, e1->nome)){
 		printf("%s não está mais na sua mão.\n",e1->nome);
 		return 1;
+	}
 	printf("Não dá pra soltar um objeto que nem está na sua mão...\n");
 	return 0;
 }
@@ -259,8 +262,8 @@ int Gritar(Elemento* e1, Elemento* e2){
 }
 
 int Chorar(Elemento* e1, Elemento* e2){
-	puts("Eu sei, isso é muito triste.\n
-		Mas suas lágrimas definitivamente não vão resolver o problema.\n");
+	puts("Eu sei, isso é muito triste.\n1"
+		"Mas suas lágrimas definitivamente não vão resolver o problema.\n");
 	return 1;
 }
 
@@ -276,6 +279,9 @@ int Correr(Elemento* e1, Elemento* e2){
 
 void insereAcoes()
 {
+	sala1.acoes = malloc(sizeof(fptr));
+	sala1.acoes[0] = Examinar;
+	
 	personagem.acoes = malloc(5*sizeof(fptr));
 	personagem.acoes[0] = Gritar;
 	personagem.acoes[1] = Chorar;

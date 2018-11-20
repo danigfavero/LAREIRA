@@ -20,12 +20,7 @@ int main(){
     //Criar elementos
     salas();
     int online = 1;
-/*	typedef struct sala{
-		Elemento sala;
-		struct sala * saidas;
-	} Sala;
 
-*/
     //Inicializa e inclui a tabela de símbolos
     //Inicializa variáveis
     Elemento atual = sala1;
@@ -50,6 +45,7 @@ int main(){
 
         puts("\nConteudo sala6:");
         imprimeConteudo(sala6, 4);
+		online = 0;
     }
 
 }
