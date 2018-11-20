@@ -8,8 +8,10 @@
 void imprimeConteudo(Elemento compartimento, int tamanho_hash);
 //Imprime a compartimento->conteudo, uma TabSim da struct Elemento
 
+int Mover(Elemento, int);
+
 int Examinar(Elemento*, Elemento*);
-//Imprime a descrição longa do objeto examinado (e1)
+//Imprime a descrição longa do objeto examinado (e1), se ja for conhecido, imprime a descricao curta
 
 int Tirar(Elemento*, Elemento*);
 //Retira a máscara (e1) do personagem (e2)

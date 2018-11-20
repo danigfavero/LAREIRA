@@ -7,22 +7,45 @@
 
 void imprimeConteudo(Elemento compartimento, int tamanho_hash)
 {
+	int tem_algo = 0;
+	printf("N%s %s ha:\n", compartimento.artigos[0], compartimento.nome);
 	for(int i = 0; i < tamanho_hash; i++)
     {
     	Elo* andante = compartimento.conteudo.listas[i].cabec;
         Elemento * el;
         while(andante!=NULL){
         	el = (Elemento*) andante->val;
-            if(el != NULL) puts(el->nome);
+            if(el != NULL){
+				printf("%s %s\n",el->artigos[1], el->nome);
+				tem_algo=1;
+			}
+			
             andante = andante->next;
 
         }
     }
+	if(!tem_algo)printf("Nada\n");
 }
+/*
+int Mover(Elemento* e1, int direcao){
+	Elemento* novo = (Elemento*) e1->def.lugar.saidas;	
+	if(novo->ativo){
+		atual = *novo;
+		return 1;
+	}
+	puts("Voce nao consegue ir nessa direcao!");
+	return 0;
 
+}
+*/
 
 int Examinar(Elemento* e1, Elemento* e2){
-	if(e1->visivel) puts(e1->longa);
+	if(e1->visivel)
+		if(e1->conhecido) puts(e1->curta);
+		else{
+			puts(e1->longa);
+			e1->conhecido = True;
+		}
 	return e1->visivel;
 }
 
@@ -30,27 +53,29 @@ int Examinar(Elemento* e1, Elemento* e2){
 int Tirar(Elemento* e1, Elemento* e2){
 	if(e2 == NULL) e2 = &personagem; //Por default vamos retirar do personagem se não especificado
 	if(Tretira(e2->conteudo, e1->nome)){ //Se conseguiu retirar
-		Tinsere(sala3.conteudo, e1); //Insere na sala de volta
-		printf("Você retirou %s %s e agora está de volta à sala de origem", e1->artigos[0], e1->nome);
+		Tinsere(atual->conteudo, e1); //Insere na sala de volta
+		printf("Você retirou %s %s e agora está na sala de origem\n", e1->artigos[0], e1->nome);
+		e1->visivel = True;
+		e1->ativo = True;
 	}
 	//Se não conseguiu retirar
 	else printf("%s %s não conteúdo nenh%s %s", e1->artigos[0], e1->nome, e2->artigos[1], e2->nome);
 	if(/*stringsIguais(e1->nome,"mascara")*/ e1 == &mascara) {
 		pessoas.ativo = False; //Quando tira a mascara, as pessoas voltam a ficar inativas
-		if(stringsIguais(atual.nome, sala3.nome)) puts("O grupo de pessoas divertidas que pareciam te acolher subitamente se fecha\n"
+		if(stringsIguais(atual->nome, sala3.nome)) puts("O grupo de pessoas divertidas que pareciam te acolher subitamente se fecha\n"
 							    "E te isolam mais uma vez, parecendo não notar sua presenca\n");
 	}
 }
 
 int Colocar(Elemento* e1, Elemento* e2){
-	if(Tbusca(personagem.conteudo, e1->nome)){ //Se a pessoa já estiver vestindo o elemento
-		printf("Você já está vestindo %s %s", e1->artigos[0], e1->nome);
+	if(Tbusca(e2->conteudo, e1->nome)){ //Se o elemento ja estiver 
+		printf("%s já está em %s\n", e1->nome, e2->nome);
 	}
 	else if(e1->visivel && e1->ativo)
 	{
-		printf("Você coloca %s %s\n", e1->artigos[0], e1->nome); //"Você coloca a mascara" ou alguma outra coisa que dê pra vestir
-		Tinsere(personagem.conteudo, e1); //Coloca o elemento no jogador
-		Tretira(atual.conteudo, e1->nome); //Tira o elemento da sala
+		printf("Você coloca %s %s em %s\n", e1->artigos[0], e1->nome, e2->nome); //"Você coloca a mascara" ou alguma outra coisa que dê pra vestir
+		Tinsere(e2->conteudo, e1); //Coloca o elemento no jogador
+		Tretira(atual->conteudo, e1->nome); //Tira o elemento da sala
 
 		//Se vestir a mascara, as pessoas ficam ativas para interação
 		if(stringsIguais(e1->nome, "mascara"))
@@ -84,7 +109,7 @@ int Interagir(Elemento* e1, Elemento* e2){
 int Abrir(Elemento* e1, Elemento* e2){
 	if(e1->ativo && e1->visivel){
 		//Deixa visivel e ativo tudo que tem dentro do elemento (envelope)
-		printf("Voce abre %s %s e dentro há:\n", e1->artigos[0], e1->nome);
+		printf("Voce abre %s %s e\n", e1->artigos[0], e1->nome);
 		imprimeConteudo((*e1), 4);
 		return 1;
 	}
@@ -146,6 +171,7 @@ int Ler(Elemento* e1, Elemento* e2){
 	}
 	return 0;
 }
+
 
 int Atirar(Elemento* e1, Elemento* e2){
 	if(!stringsIguais(e1->nome,"arma"))

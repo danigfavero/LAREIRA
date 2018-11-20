@@ -1,7 +1,8 @@
 #include "hash.h"
 typedef int (*fptr)(Elemento*, Elemento*);
 
-Elemento sala1, sala2, sala3, sala4, sala5, sala6, atual, personagem, mascara, pessoas;
+Elemento* atual;
+Elemento sala1, sala2, sala3, sala4, sala5, sala6, personagem, mascara, pessoas;
 Elemento quadro, gramo, disco, balao, arma, cogumelos, homem, garrafa, espelho, cama, envelope, carta, foto;
 
 void salas(){
@@ -15,7 +16,9 @@ void salas(){
 	personagem.conteudo = Tcria(4);
 
 	quadro.nome = "quadro";
-	//quadro.artigos
+	quadro.artigos = malloc(2*sizeof(string));
+	quadro.artigos[0] = "o";
+	quadro.artigos[1] = "um";
 	quadro.longa = "Um quadro escrito ALGUMA COISA ESCAPA AO NAUFRÁGIO DAS ILUSÕES\n";
 	quadro.curta = "um quadro";
 	quadro.ativo = True;
@@ -24,25 +27,29 @@ void salas(){
 	quadro.conteudo = Tcria(4); //o quadro não contém nada
 
 
-	sala1.nome = "inicio";
-	//artigos?
-	sala1.longa = "É uma sala claustrofóbica e pouco iluminada."
-	"Tudo o que existem são quatro portas ao seu redor, uma em cada parede."
+	sala1.nome = "sala inicio";
+	sala1.artigos = malloc(2*sizeof(string));
+	sala1.artigos[0] = "a";
+	sala1.artigos[1] = "uma";
+	sala1.longa = "É uma sala claustrofóbica e pouco iluminada.\n"
+	"Tudo o que existem são quatro portas ao seu redor, uma em cada parede.\n"
 	"Em uma das paredes há também um grande quadro com algo escrito.";
 	sala1.curta = "Esta é a sala inicial, aquela na qual você acordou.";
 	sala1.ativo = True;
 	sala1.visivel = False;
 	sala1.conhecido = False;
 	sala1.conteudo = Tcria(4);
-	/*sala1.def.lugar.saidas[0] = &sala4;
-	sala1.def.lugar.saidas[1] = &sala4;
-	sala1.def.lugar.saidas[2] = &sala2;
-	sala1.def.lugar.saidas[3] = &sala3;*/;
+	sala1.def.lugar.saidas = malloc(4*sizeof(Elemento));
+	sala1.def.lugar.saidas = &sala4;
+	//sala1.def.lugar.saidas[1] = &sala4;
+	//sala1.def.lugar.saidas[2] = &sala2;
+	//sala1.def.lugar.saidas[3] = &sala3;
 	Tinsere((sala1.conteudo), &quadro);
-	/*sala1.acoes1[1] = Sair;*/
 
 	disco.nome = "disco";
-	//quadro.artigos
+	disco.artigos = malloc(2*sizeof(string));
+	disco.artigos[0] = "o";
+	disco.artigos[1] = "um";
 	disco.longa = "Um disco de vinil sem informações, encontrado no gramofone e sem capa por perto.";
 	disco.curta = "O disco de vinil.";
 	disco.ativo = True;
@@ -52,8 +59,10 @@ void salas(){
 
 
 	gramo.nome = "gramofone";
-	//quadro.artigos
-	gramo.longa = "Um gramofone autêntico, antigo mas muito bem conservado."
+	gramo.artigos = malloc(2*sizeof(string));
+	gramo.artigos[0] = "o";
+	gramo.artigos[1] = "um";
+	gramo.longa = "Um gramofone autêntico, antigo mas muito bem conservado.\n"
 	"Sua caixa é feita de madeira envernizada e o amplificador é dourado, muito delicado.";
 	gramo.curta = "O autêntico gramofone.";
 	gramo.ativo = True;
@@ -64,7 +73,9 @@ void salas(){
 
 
 	balao.nome = "balão";
-	//quadro.artigos
+	balao.artigos = malloc(2*sizeof(string));
+	balao.artigos[0] = "o";
+	balao.artigos[1] = "um";
 	balao.longa = "Um balão vermelho, cheio de ar";
 	balao.curta = "O balão vermelho.";
 	balao.ativo = True;
@@ -73,10 +84,12 @@ void salas(){
 	balao.conteudo = Tcria(4);
 
 	//Elemento sala2;
-	sala2.nome = "audição";
-	//artigos?
-	sala2.longa = "Nessa sala toca uma música melodiosa, muito agradável."
-	"A melodia penetra seus ouvidos e eleva os humores, lhe causando uma sensação de pertencimento."
+	sala2.nome = "sala audição";
+	sala2.artigos = malloc(2*sizeof(string));
+	sala2.artigos[0] = "a";
+	sala2.artigos[1] = "uma";
+	sala2.longa = "Nessa sala toca uma música melodiosa, muito agradável.\n"
+	"A melodia penetra seus ouvidos e eleva os humores, lhe causando uma sensação de pertencimento.\n"
 	"Há aqui um gramofone (a música parece vir de lá) e um balão.";
 	sala2.curta = "Esta é a sala onde toca uma música.";
 	sala2.ativo = True;
@@ -96,8 +109,11 @@ void salas(){
 
 	//Iniciando os atributos
 	sala3.nome = "sociedade";
+	sala3.artigos = malloc(2*sizeof(string));
+	sala3.artigos[0] = "a";
+	sala3.artigos[1] = "uma";
 	sala3.longa = "Uma mascara chama bastante atencao no canto da sala,\n"
-	          "Do outro lado, um grupo de pessoas parece se divertir..\n";
+	          	  "Do outro lado, um grupo de pessoas parece se divertir..\n";
 	sala3.curta = "Sala sociedade.";
 	sala3.ativo = True;
 	sala3.visivel = True;
