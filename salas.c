@@ -7,7 +7,6 @@ Elemento quadro, gramo, disco, balao, arma, cogumelos, homem, garrafa, espelho, 
 
 void salas(){
 	personagem.nome = "você";
-	//quadro.artigos
 	personagem.longa = "Esse é você mesmo. Não tem muito que você se lembre sobre.";
 	personagem.curta = "Você mesmo.";
 	personagem.ativo = True;
@@ -39,11 +38,11 @@ void salas(){
 	sala1.visivel = False;
 	sala1.conhecido = False;
 	sala1.conteudo = Tcria(4);
-	sala1.def.lugar.saidas = malloc(4*sizeof(Elemento));
-	sala1.def.lugar.saidas = &sala4;
-	//sala1.def.lugar.saidas[1] = &sala4;
-	//sala1.def.lugar.saidas[2] = &sala2;
-	//sala1.def.lugar.saidas[3] = &sala3;
+	//sala1.def.lugar.saidas = malloc(4*sizeof(Elemento*));
+	sala1.def.lugar.saidas[0] = &sala4;
+	sala1.def.lugar.saidas[1] = &sala4;
+	sala1.def.lugar.saidas[2] = &sala2;
+	sala1.def.lugar.saidas[3] = &sala3;
 	Tinsere((sala1.conteudo), &quadro);
 
 	disco.nome = "disco";
@@ -98,17 +97,17 @@ void salas(){
 	sala2.conteudo = Tcria(4);
 	Tinsere((sala2.conteudo), &gramo);
 	Tinsere((sala2.conteudo), &balao);
-	/*sala2.def.lugar.saidas[0] = &sala5;
+	sala2.def.lugar.saidas[0] = &sala5;
 	sala2.def.lugar.saidas[1] = &sala5;
 	sala2.def.lugar.saidas[2] = &sala3;
-	sala2.def.lugar.saidas[3] = &sala1;*/
+	sala2.def.lugar.saidas[3] = &sala1;
 
 
 	//Elemento personagem;
 	//Sala 3
 
 	//Iniciando os atributos
-	sala3.nome = "sociedade";
+	sala3.nome = "sala sociedade";
 	sala3.artigos = malloc(2*sizeof(string));
 	sala3.artigos[0] = "a";
 	sala3.artigos[1] = "uma";
@@ -118,9 +117,10 @@ void salas(){
 	sala3.ativo = True;
 	sala3.visivel = True;
 	sala3.conhecido = False;
-
-	//Definindo as saidas
-	//sala3.def.lugar.saidas = {&sala6, &sala6, &sala1, &sala2};
+	sala3.def.lugar.saidas[0] = &sala6;
+	sala3.def.lugar.saidas[1] = &sala6;
+	sala3.def.lugar.saidas[2] = &sala1;
+	sala3.def.lugar.saidas[3] = &sala2;
 
 	//Criando os elementos da sala;
 	//Mascara
@@ -131,7 +131,7 @@ void salas(){
 	mascara.artigos[1] = "uma";
 
 	mascara.longa = "Uma mascara bem chamativa, nao parece muito com voce\n"
-				"Mas de alguma maneira voce parece gostar mais da mascara que de si proprio.";
+					"Mas de alguma maneira voce parece gostar mais da mascara que de si proprio.";
 	mascara.curta = "Uma mascara muito atraente";
 	mascara.ativo = False;
 	mascara.visivel = False;
@@ -149,28 +149,34 @@ void salas(){
 	pessoas.ativo = False;
 	pessoas.visivel = False;
 	pessoas.conhecido = False;
-
+	pessoas.artigos = malloc(2*sizeof(string));
+	pessoas.artigos[0] = "o";
+	pessoas.artigos[1] = "um";
+	
 	sala3.conteudo = Tcria(4);
 	Tinsere((sala3.conteudo), &mascara);
 	Tinsere((sala3.conteudo), &pessoas);
 
 
 	sala4.nome = "Remanescencia";
+	sala4.artigos = malloc(2*sizeof(string));
+	sala4.artigos[0] = "a";
+	sala4.artigos[1] = "uma";
 	sala4.longa = "Uma mistura nostalgica de companheirismo e solidao\n"
 		          "Toma conta do seu coracao quando nessa sala\n"
 				  "Nela, voce encontra cartas e uma envelopegrafia.\n";
-	sala4.curta = "Sala remanescencia, com as cartas e a envelopegrafia.";
+	sala4.curta = "Sala remanescencia, com as cartas e um envelope.";
 	sala4.ativo = True;
 	sala4.visivel = True;
 	sala4.conhecido = False;
 
-	/*
+	
 	//Definindo as saidas
 	sala4.def.lugar.saidas[0] = &sala1;
 	sala4.def.lugar.saidas[1] = &sala1;
 	sala4.def.lugar.saidas[2] = &sala5;
 	sala4.def.lugar.saidas[3] = &sala6;
-	*/
+	
 
 	//Definindo os elementos
 	foto.nome = "fotografia";
@@ -224,37 +230,37 @@ void salas(){
 	envelope.conteudo = Tcria(4);
 	Tinsere(envelope.conteudo, &carta); //Coloca a carta no envelope
 
-
-
-
-
-
 	sala4.conteudo = Tcria(4);
 	Tinsere(sala4.conteudo, &envelope);
 	Tinsere(sala4.conteudo, &foto);
 
 
 	//SALA 5
-	sala5.nome = "Reflexão ";
-	//artigos?
+	sala5.nome = "sala reflexão ";
+	sala5.artigos = malloc(2*sizeof(string));
+	sala5.artigos[0] = "a";
+	sala5.artigos[1] = "uma";
 	sala5.longa = "Ao entrar, a poeira instantaneamente o cega. Após alguns segundos, você consegue distiguinr alguns objetos.\n"
 	"Em uma parede há um espelho. Sua limpeza destoa do resto da sala. Mesmo sem muito luz, você consegue enxergar sua reflexão perfeitamente.\n"
-	"No canto mais empoirado da sala, você vê uma arma. Sua forma já se mistura com o ambiente, mas você consegue perceber a silhueta suave. Ninguém há toca em uma eternidade, aparentemente\n"
+	"No canto mais empoirado da sala, você vê uma arma. Sua forma já se mistura com o ambiente, mas você consegue perceber a silhueta suave.\nNinguém a toca em uma eternidade, aparentemente\n"
 	"E, no outro extremo, uma figura raquítica e curva se senta ao chão, abraçando os joelhos e com os olhos baixos. A pele parece ter começado a se dissolver de tão velha, e os olhos não apresentam "
 	"mais brilho algum. A vida já saiu deste homem.\n";
-	//puts(sala5.longa);
+	
 	sala5.curta = "Um homem, uma arma e um espelho. Não há nada mais aqui";
 	sala5.ativo = True;
 	sala5.visivel = True;
 	sala5.conhecido = False;
 	sala5.conteudo = Tcria(4);
-	/*sala5.def.lugar.saidas[0] = &sala2;
+	sala5.def.lugar.saidas[0] = &sala2;
 	sala5.def.lugar.saidas[1] = &sala2;
 	sala5.def.lugar.saidas[2] = &sala6;
-	sala5.def.lugar.saidas[3] = &sala4;*/
+	sala5.def.lugar.saidas[3] = &sala4;
 	sala5.animacao = NULL;
 
 	arma.nome = "arma";
+	arma.artigos = malloc(2*sizeof(string));
+	arma.artigos[0] = "a";
+	arma.artigos[1] = "uma";
 	arma.longa = "Incrustada de sujeira, ainda parece funcionar. O cano é tão longo quanto o de um revólver. É possível ver uma leve reflaxão no metal enferrujado por baixo da poeira.\n";
 	arma.curta = "Uma arma velha, suja e enferrujada.\n";
 	arma.ativo = True;
@@ -265,6 +271,9 @@ void salas(){
 	arma.animacao = NULL;
 
 	espelho.nome = "espelho";
+	espelho.artigos = malloc(2*sizeof(string));
+	espelho.artigos[0] = "o";
+	espelho.artigos[1] = "um";
 	espelho.longa = "No meio da sujeira da sala, a limpeza desde espelho surpreende. Você consegue ver as reflexões do ambiente claramente, e de uma forma elas acabam parecendo bonitas, "
 	"apesar de toda a sujeira.\n"
 	"Ao se aproximar dele, você se vê. Mas algo está faltando, só não é capaz de dizer o quê.\n";
@@ -277,18 +286,25 @@ void salas(){
 	espelho.animacao = NULL;
 
 	homem.nome = "homem";
+	homem.artigos = malloc(2*sizeof(string));
+	homem.artigos[0] = "o";
+	homem.artigos[1] = "um";
 	homem.longa = "É um homem, velho e fraco. As marcas do tempo são aparentes: as rugas, os ossos expostos, a dor. Não há brilho nos seus olhos nem força no seu corpo. Você duvida "
 	"se ele sabe da sua presença, mas você sente a dele dentro de si. Um sentimento de angústia e desespero. Uma nostalgia doente. Um questionamento.\n";
 	homem.curta = "Nada mais pode ser tirado observando-o.\n";
+	
+	homem.def.objeto.lista = malloc(4*sizeof(atrib));
+	homem.def.objeto.lista[2].val = 0;
 	homem.ativo = True;
 	homem.visivel = True;
 	homem.conhecido = False;
 	homem.conteudo = Tcria(4);
-	homem.def.objeto.lista = NULL;
 	homem.animacao = NULL;
 
-	sala6.nome = "Hedonismo";
-	//artigos?
+	sala6.nome = "sala Hedonismo";
+	sala6.artigos = malloc(2*sizeof(string));
+	sala6.artigos[0] = "a";
+	sala6.artigos[1] = "uma";
 	sala6.longa = "Cores vivas fazem as paredes brilharem aos seus olhos, padrões que se misturam o fazem sentir em um oceano de luz.\n"
 	"Um jardim dos mais diversos cogumelos cobre o chão da sala. Tamanhos, odores e cores. Nada parece fora do campo de possibilidades.\n"
 	"Uma garrafa simples mas atraente senta ao lado de uma cama grande, que exala leveza. Tudo cheira a natureza.\n";
@@ -298,16 +314,19 @@ void salas(){
 	sala6.visivel = True;
 	sala6.conhecido = False;
 	sala6.conteudo = Tcria(4);
-	/*sala6.def.lugar.saidas[0] = &sala3;
+	sala6.def.lugar.saidas[0] = &sala3;
 	sala6.def.lugar.saidas[1] = &sala3;
 	sala6.def.lugar.saidas[2] = &sala4;
-	sala6.def.lugar.saidas[3] = &sala5;*/
+	sala6.def.lugar.saidas[3] = &sala5;
 	sala6.animacao = NULL;
 	Tinsere((sala5.conteudo), &homem);
 	Tinsere(sala5.conteudo, &espelho);
 	Tinsere(sala5.conteudo, &arma);
 
 	garrafa.nome = "garrafa";
+	garrafa.artigos = malloc(2*sizeof(string));
+	garrafa.artigos[0] = "a";
+	garrafa.artigos[1] = "uma";
 	garrafa.longa = "Sua mente não consegue achar palavras para descrever o sentimento evocado dor essa garrafa. Sua beleza é simples, quase angelical.\n O líquido interno está em constante mudança, "
 	"variando pelas mais diversas cores. Uma visão perturbadora e atraente.\n";
 	garrafa.curta = "Seu conteúdo é um mistério, mas sua beleza é indescritível.\n";
@@ -319,6 +338,9 @@ void salas(){
 	garrafa.animacao = NULL;
 
 	cama.nome = "cama";
+	cama.artigos = malloc(2*sizeof(string));
+	cama.artigos[0] = "a";
+	cama.artigos[1] = "uma";
 	cama.longa = "Uma cama de linho, com dois travesseiros de penas de ganso. Um cobertor vermelho feito do mais macio dos veludos. Uma armação gloriosa, digna de um rei.\n"
 	"Algo que você nunca sonhou em ver.\n";
 	cama.curta = "Parece muito macia.\n";
@@ -330,6 +352,9 @@ void salas(){
 	cama.animacao = NULL;
 
 	cogumelos.nome = "cogumelos";
+	cogumelos.artigos = malloc(2*sizeof(string));
+	cogumelos.artigos[0] = "os";
+	cogumelos.artigos[1] = "uns";
 	cogumelos.longa = "Um jardim multicolor, multitamanho e multifragrância. Você nunca viu tanta diversidade em um só lugar. Cada cogumelo evoca uma emoção, uma sensação.\n"
 	"É como ver infinitos novos jeitos de viver.\n";
 	cogumelos.curta = "É impossível saber o que eles farão com você.\n";

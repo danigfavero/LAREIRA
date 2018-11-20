@@ -26,18 +26,20 @@ void imprimeConteudo(Elemento compartimento, int tamanho_hash)
     }
 	if(!tem_algo)printf("Nada\n");
 }
-/*
+
 int Mover(Elemento* e1, int direcao){
-	Elemento* novo = (Elemento*) e1->def.lugar.saidas;	
+	
+	Elemento* novo = (Elemento*) e1->def.lugar.saidas[direcao];	
+	
 	if(novo->ativo){
-		atual = *novo;
+		atual = novo;
 		return 1;
 	}
 	puts("Voce nao consegue ir nessa direcao!");
 	return 0;
 
 }
-*/
+
 
 int Examinar(Elemento* e1, Elemento* e2){
 	if(e1->visivel)
@@ -57,14 +59,18 @@ int Tirar(Elemento* e1, Elemento* e2){
 		printf("Você retirou %s %s e agora está na sala de origem\n", e1->artigos[0], e1->nome);
 		e1->visivel = True;
 		e1->ativo = True;
+		if(/*stringsIguais(e1->nome,"mascara")*/ e1 == &mascara) {
+			pessoas.ativo = False; //Quando tira a mascara, as pessoas voltam a ficar inativas
+			if(stringsIguais(atual->nome, sala3.nome)) puts("O grupo de pessoas divertidas que pareciam te acolher subitamente se fecha\n"
+								    						"E te isolam mais uma vez, parecendo não notar sua presenca\n");
+		}
+		return 1;
 	}
 	//Se não conseguiu retirar
 	else printf("%s %s não conteúdo nenh%s %s", e1->artigos[0], e1->nome, e2->artigos[1], e2->nome);
-	if(/*stringsIguais(e1->nome,"mascara")*/ e1 == &mascara) {
-		pessoas.ativo = False; //Quando tira a mascara, as pessoas voltam a ficar inativas
-		if(stringsIguais(atual->nome, sala3.nome)) puts("O grupo de pessoas divertidas que pareciam te acolher subitamente se fecha\n"
-							    "E te isolam mais uma vez, parecendo não notar sua presenca\n");
-	}
+	
+	return 0;
+	
 }
 
 int Colocar(Elemento* e1, Elemento* e2){
@@ -148,7 +154,7 @@ int Tocar(Elemento* e1, Elemento* e2){
 
 int Ler(Elemento* e1, Elemento* e2){
 	if(stringsIguais(e1->nome,"carta")) {
-		puts("    Amo-te tanto, meu amor... não cante\n"
+		puts("\n    Amo-te tanto, meu amor... não cante\n"
 			 "    O humano coração com mais verdade...\n"
 			 "     Amo-te como amigo e como amante\n"
 			 "      Numa sempre diversa realidade.\n\n"
@@ -174,8 +180,10 @@ int Ler(Elemento* e1, Elemento* e2){
 
 
 int Atirar(Elemento* e1, Elemento* e2){
-	if(!stringsIguais(e1->nome,"arma"))
+	if(!stringsIguais(e1->nome,"arma")){
 		printf("Voce arremessa %s em %s, mas nada demais acontece..\n", e1->nome, e2->nome);
+		return 1;
+	}
 	if(e2 == NULL){
 		e1->def.objeto.lista[atirou].val = 0;
 		return 1;
@@ -188,7 +196,7 @@ int Atirar(Elemento* e1, Elemento* e2){
 		printf("A arma acerta o espelho, mas não causa dano algum.\n");
 
 	}
-	else if(stringsIguais(e2->nome,"personagem")){
+	else if(stringsIguais(e2->nome,"você")){
 		printf("Você aperta o gatilho. Depois disso, não há mais sentidos.\n");
 		//ACABA O JOGO
 		return 1;
@@ -198,11 +206,10 @@ int Atirar(Elemento* e1, Elemento* e2){
 
 
 int Falar(Elemento* e1, Elemento* e2){
-	int* instance = &(e1->def.objeto.lista[conversas].val); //ARRUMAR
+	int* instance = &(e1->def.objeto.lista[conversas].val);
 	if((*instance)%4 == 0){
 		printf("Há muito tempo eu estou aqui. Tanto que a própria palavra já perdeu o significado. O único jeito que eu sei que ele passa é por que vejo as marcas em meu corpo.\n");
 		(*instance)++;
-		return 1;
 	}
 	else if ((*instance)%4 == 1){
 		printf("Às vezes eu me questiono das escolhas que fiz. Nada parece ter sido suficiente.\n");
@@ -216,20 +223,24 @@ int Falar(Elemento* e1, Elemento* e2){
 		printf("Sozinho. Tanto tempo, sozinho. Me fez perceber as mentiras que sempre ouvi. Eu estou sozinho. Não há ninguém comigo.\n");
 		(*instance)++;
 	}
+	else printf("Ja disse tudo que tinha para falar...\n");
+	return 1;
+	
 }
 
 int Beber(Elemento* e1, Elemento* e2){
-	if(e1->nome != "garrafa") return 0;
+	if(!stringsIguais(e1->nome,"garrafa")) return 0;
 	printf("O líquido desce por você aquecendo todo seu corpo. Você se sente bem, confiante, feliz. 'Tô um BURRP pouco feliz', você diz. Não há uma coisa ruim em seu corpo neste momento.\n");
 	return 1;
 }
 
 int Comer(Elemento* e1, Elemento* e2){
-	if(e1->nome == "cogumelo"){
+	if(stringsIguais(e1->nome,"cogumelos")){
 		printf("Repentinamente, todas as cores das salas se misturam e espalham como uma grande explosão. Os padrões aumentam, e sua mente transcende o plano físico. Tudo se enche de energia."
 			"É a sensação mais bonita que você já teve.\n");
 		return 1;
 	}
+	return 0;
 }
 
 int Deitar(Elemento* e1, Elemento* e2){
@@ -241,6 +252,7 @@ int Deitar(Elemento* e1, Elemento* e2){
 		e1->def.objeto.lista[deitado].val = 1;
 		return 1;
 	}
+	return 0;
 }
 
 int Levantar(Elemento* e1, Elemento* e2){
@@ -253,11 +265,13 @@ int Levantar(Elemento* e1, Elemento* e2){
 		printf("Você já está levantado.\n");
 		return 0;
 	}
+	return 0;
 }
 
 
 int Pegar(Elemento* e1, Elemento* e2){
-	if(e1->nome == "cogumelo")
+	if(e2 == NULL) e2 = &personagem;
+	if(stringsIguais(e1->nome,"cogumelos"))
 		printf("Ao tocar no cogumelo, você sente todo seu corpo vibrar de animação, mesmo sem entender de onde vem o sentimento. Mas algo sobre suas cores o fazem sentir em outro mundo.\n");
 	else
 		printf("Agora você tem %s na sua mão.\n",e1->nome);
@@ -288,7 +302,7 @@ int Gritar(Elemento* e1, Elemento* e2){
 }
 
 int Chorar(Elemento* e1, Elemento* e2){
-	puts("Eu sei, isso é muito triste.\n1"
+	puts("Eu sei, isso é muito triste.\n"
 		"Mas suas lágrimas definitivamente não vão resolver o problema.\n");
 	return 1;
 }

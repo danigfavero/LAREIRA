@@ -20,7 +20,7 @@ typedef struct{
 
 //lista de salas adjacentes a uma sala
 typedef struct{
-	void* saidas;
+	void* saidas[4];
 } Lugar;
 
 //union que determina se o elemento é objeto ou lugar
