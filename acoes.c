@@ -30,7 +30,7 @@ int Examinar(Elemento* e1, Elemento* e2){
 int Tirar(Elemento* e1, Elemento* e2){
 	if(e2 == NULL) e2 = &personagem; //Por default vamos retirar do personagem se não especificado
 	if(Tretira(e2->conteudo, e1->nome)){ //Se conseguiu retirar
-		Tinsere(sala3.conteudo, e1); //Insere na sala de volta
+		Tinsere(sala3.conteudo, e1->nome, e1); //Insere na sala de volta
 		printf("Você retirou %s %s e agora está de volta à sala de origem", e1->artigos[0], e1->nome);
 	}
 	//Se não conseguiu retirar
@@ -40,6 +40,7 @@ int Tirar(Elemento* e1, Elemento* e2){
 		if(stringsIguais(atual.nome, sala3.nome)) puts("O grupo de pessoas divertidas que pareciam te acolher subitamente se fecha\n"
 							    "E te isolam mais uma vez, parecendo não notar sua presenca\n");
 	}
+	return 1;
 }
 
 int Colocar(Elemento* e1, Elemento* e2){
@@ -49,7 +50,7 @@ int Colocar(Elemento* e1, Elemento* e2){
 	else if(e1->visivel && e1->ativo)
 	{
 		printf("Você coloca %s %s\n", e1->artigos[0], e1->nome); //"Você coloca a mascara" ou alguma outra coisa que dê pra vestir
-		Tinsere(personagem.conteudo, e1); //Coloca o elemento no jogador
+		Tinsere(personagem.conteudo, e1->nome, e1); //Coloca o elemento no jogador
 		Tretira(atual.conteudo, e1->nome); //Tira o elemento da sala
 
 		//Se vestir a mascara, as pessoas ficam ativas para interação
@@ -105,18 +106,20 @@ int Ligar(Elemento* e1, Elemento* e2){
 }
 
 int Estourar(Elemento* e1, Elemento* e2){
-	if(e1->ativo)
+	if(e1->ativo){
 		e1->ativo = False;
 		printf("Ué, esquisito, o balão estourou mas não fez nenhum som.\n");
 		return 1;
+	}
 	printf("Não dá pra estourar um balão estourado!\n");
 	return 0;
 }
 
 int Tocar(Elemento* e1, Elemento* e2){
-	if(TBusca(e1->conteudo,e2->nome)==e2)
+	if(Tbusca(e1->conteudo,e2->nome)==e2){
 		printf("O disco já está no gramofone\n");
 		return 0;
+	}
 	return (Tinsere(e1->conteudo, e2->nome, e2));
 }
 
@@ -139,15 +142,15 @@ int Ler(Elemento* e1, Elemento* e2){
 			 "     E de te amar assim, muito e amiúde\n"
 			 "    É que um dia em teu corpo de repente\n"
 			 "   Hei de morrer de amar mais do que pude.\n\n\n");
-		puts("Essas palavras te lembram um sentimento, mas sem muito sentido\n
-			  É apenas a remanescência da sua pouca memória.\n");
+		puts("Essas palavras te lembram um sentimento, mas sem muito sentido\n"
+			 "É apenas a remanescência da sua pouca memória.\n");
 		return 1;
 	}
 	return 0;
 }
 
 int Atirar(Elemento* e1, Elemento* e2){
-	if(!stringsIguais(e1->nome,"arma")) return Jogar(e1, e2);
+	if(!stringsIguais(e1->nome,"arma")) return 0;
 	if(e2 == NULL){
 		e1->def.objeto.lista[atirou].val = 0;
 		return 1;
@@ -188,48 +191,53 @@ int Falar(Elemento* e1, Elemento* e2){
 		printf("Sozinho. Tanto tempo, sozinho. Me fez perceber as mentiras que sempre ouvi. Eu estou sozinho. Não há ninguém comigo.\n");
 		(*instance)++;
 	}
+	return 1;
 }
 
 int Beber(Elemento* e1, Elemento* e2){
-	if(e1->nome != "garrafa") return 0;
+	if(stringsIguais(e1->nome,"garrafa")) return 0;
 	printf("O líquido desce por você aquecendo todo seu corpo. Você se sente bem, confiante, feliz. 'Tô um BURRP pouco feliz', você diz. Não há uma coisa ruim em seu corpo neste momento.\n");
 	return 1;
 }
 
 int Comer(Elemento* e1, Elemento* e2){
-	if(e1->nome == "cogumelo"){
+	if(stringsIguais(e1->nome, "cogumelo")){
 		printf("Repentinamente, todas as cores das salas se misturam e espalham como uma grande explosão. Os padrões aumentam, e sua mente transcende o plano físico. Tudo se enche de energia."
 			"É a sensação mais bonita que você já teve.\n");
 		return 1;
 	}
+	return 0;
 }
 
 int Deitar(Elemento* e1, Elemento* e2){
-	if(e1->nome == "cama" && e1->def.objeto.lista[deitado].val == 1){
-		printf("Você já está deitado.\n"); return 0;
+	if(stringsIguais(e1->nome, "cama") && e1->def.objeto.lista[deitado].val == 1){
+		printf("Você já está deitado.\n");
+		return 0;
 	}
-	else if(e1->nome == "cama"){
+	else if(stringsIguais(e1->nome, "cama")){
 		printf("Você se deita na cama e sente como se seu corpo tivesse sido transportado aos céus. Todos seus músculos relaxam, e sua mente fica leve. 'Poderia ficar aqui para sempre', pensa.\n");
 		e1->def.objeto.lista[deitado].val = 1;
 		return 1;
 	}
+	return 0;
 }
 
 int Levantar(Elemento* e1, Elemento* e2){
-	if(e1->nome == "cama" && e1->def.objeto.lista[deitado].val == 1){
+	if(stringsIguais(e1->nome, "cama") && e1->def.objeto.lista[deitado].val == 1){
 		printf("Com muito esforço, você cria a determinação para levantar da cama. Seu corpo se sente pesado.\n");
 		e1->def.objeto.lista[deitado].val = 0;
 		return 1;
 	}
-	else if(e1->nome == "cama" && e1->def.objeto.lista[deitado].val == 0){
+	else if(stringsIguais(e1->nome, "cama") && e1->def.objeto.lista[deitado].val == 0){
 		printf("Você já está levantado.\n");
 		return 0;
 	}
+	return 0;
 }
 
 
 int Pegar(Elemento* e1, Elemento* e2){
-	if(e1->nome == "cogumelo")
+	if(stringsIguais(e1->nome, "cogumelo"))
 		printf("Ao tocar no cogumelo, você sente todo seu corpo vibrar de animação, mesmo sem entender de onde vem o sentimento. Mas algo sobre suas cores o fazem sentir em outro mundo.\n");
 	else
 		printf("Agora você tem %s na sua mão.\n",e1->nome);
@@ -237,19 +245,21 @@ int Pegar(Elemento* e1, Elemento* e2){
 }
 
 int Soltar(Elemento* e1, Elemento* e2){
-	if(Tretira(e2->conteudo, e1->nome)
+	if(Tretira(e2->conteudo, e1->nome)){
 		printf("%s não está mais na sua mão.\n",e1->nome);
 		return 1;
+	}
 	printf("Não dá pra soltar um objeto que nem está na sua mão...\n");
 	return 0;
 }
 
 int Quebrar(Elemento* e1, Elemento* e2){
-	if(e1->ativo)
+	if(e1->ativo){
 		e1->ativo = False;
-		printf("%s quebrado com sucesso", e1->nome);
+		printf("%s quebrado com sucesso\n", e1->nome);
 		return 1;
-	printf("Não dá pra quebrar o que já está quebrado...");
+	}
+	printf("Não dá pra quebrar o que já está quebrado...\n");
 	return 0;
 }
 
@@ -259,8 +269,8 @@ int Gritar(Elemento* e1, Elemento* e2){
 }
 
 int Chorar(Elemento* e1, Elemento* e2){
-	puts("Eu sei, isso é muito triste.\n
-		Mas suas lágrimas definitivamente não vão resolver o problema.\n");
+	puts("Eu sei, isso é muito triste.\n"
+		"Mas suas lágrimas definitivamente não vão resolver o problema.\n");
 	return 1;
 }
 

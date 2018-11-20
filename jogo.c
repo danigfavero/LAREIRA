@@ -28,7 +28,7 @@ int main(){
 */
     //Inicializa e inclui a tabela de símbolos
     //Inicializa variáveis
-    Elemento atual = sala1;
+    //Elemento atual = sala1;
     //Conectar salas
     //Colocar objetos em suas posições de início (inclusive o aventureiro?)
 

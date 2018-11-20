@@ -5,6 +5,7 @@ Elemento sala1, sala2, sala3, sala4, sala5, sala6, atual, personagem, mascara, p
 Elemento quadro, gramo, disco, balao, arma, cogumelos, homem, garrafa, espelho, cama, envelope, carta, foto;
 
 void salas(){
+	//Elemento personagem;
 	personagem.nome = "você";
 	//quadro.artigos
 	personagem.longa = "Esse é você mesmo. Não tem muito que você se lembre sobre.";
@@ -24,6 +25,7 @@ void salas(){
 	quadro.conteudo = Tcria(4); //o quadro não contém nada
 
 
+	//Elemento sala1;
 	sala1.nome = "inicio";
 	//artigos?
 	sala1.longa = "É uma sala claustrofóbica e pouco iluminada."
@@ -38,10 +40,7 @@ void salas(){
 	sala1.def.lugar.saidas[1] = &sala4;
 	sala1.def.lugar.saidas[2] = &sala2;
 	sala1.def.lugar.saidas[3] = &sala3;*/;
-	Tinsere((sala1.conteudo), &quadro);
-	sala1.acoes = malloc(sizeof(fptr));
-	sala1.acoes[0] = Examinar;
-	/*sala1.acoes1[1] = Sair;*/
+	Tinsere((sala1.conteudo), "quadro", &quadro);
 
 	disco.nome = "disco";
 	//quadro.artigos
@@ -62,7 +61,7 @@ void salas(){
 	gramo.visivel = False;
 	gramo.conhecido = False;
 	gramo.conteudo = Tcria(4);
-	Tinsere((gramo.conteudo), &disco);
+	Tinsere((gramo.conteudo),"disco", &disco);
 
 
 	balao.nome = "balão";
@@ -85,8 +84,8 @@ void salas(){
 	sala2.visivel = False;
 	sala2.conhecido = False;
 	sala2.conteudo = Tcria(4);
-	Tinsere((sala2.conteudo), &gramo);
-	Tinsere((sala2.conteudo), &balao);
+	Tinsere((sala2.conteudo), "gramofone", &gramo);
+	Tinsere((sala2.conteudo), "balão", &balao);
 	/*sala2.def.lugar.saidas[0] = &sala5;
 	sala2.def.lugar.saidas[1] = &sala5;
 	sala2.def.lugar.saidas[2] = &sala3;
@@ -137,8 +136,8 @@ void salas(){
 	pessoas.conhecido = False;
 
 	sala3.conteudo = Tcria(4);
-	Tinsere((sala3.conteudo), &mascara);
-	Tinsere((sala3.conteudo), &pessoas);
+	Tinsere((sala3.conteudo),"máscara", &mascara);
+	Tinsere((sala3.conteudo), "pessoas", &pessoas);
 
 
 	sala4.nome = "Remanescencia";
@@ -208,7 +207,7 @@ void salas(){
 	carta.conhecido = False;
 
 	envelope.conteudo = Tcria(4);
-	Tinsere(envelope.conteudo, &carta); //Coloca a carta no envelope
+	Tinsere(envelope.conteudo, "carta", &carta); //Coloca a carta no envelope
 
 
 
@@ -216,8 +215,8 @@ void salas(){
 
 
 	sala4.conteudo = Tcria(4);
-	Tinsere(sala4.conteudo, &envelope);
-	Tinsere(sala4.conteudo, &foto);
+	Tinsere(sala4.conteudo, "envelope", &envelope);
+	Tinsere(sala4.conteudo, "foto", &foto);
 
 
 	//SALA 5
@@ -276,7 +275,7 @@ void salas(){
 	sala6.nome = "Hedonismo";
 	//artigos?
 	sala6.longa = "Cores vivas fazem as paredes brilharem aos seus olhos, padrões que se misturam o fazem sentir em um oceano de luz.\n"
-	"Um jardim dos mais diversos cogumelos cobre o chão da sala. Tamanhos, odores e cores. Nada parece fora do campo de possibilidades.\n";
+	"Um jardim dos mais diversos cogumelos cobre o chão da sala. Tamanhos, odores e cores. Nada parece fora do campo de possibilidades.\n"
 	"Uma garrafa simples mas atraente senta ao lado de uma cama grande, que exala leveza. Tudo cheira a natureza.\n";
 	//puts(sala6.longa);
 	sala6.curta = "Uma imersão em natureza e sensações. Há muito para experimentar.\n";
@@ -289,9 +288,9 @@ void salas(){
 	sala6.def.lugar.saidas[2] = &sala4;
 	sala6.def.lugar.saidas[3] = &sala5;*/
 	sala6.animacao = NULL;
-	Tinsere((sala5.conteudo), &homem);
-	Tinsere(sala5.conteudo, &espelho);
-	Tinsere(sala5.conteudo, &arma);
+	Tinsere((sala5.conteudo), "homem", &homem);
+	Tinsere(sala5.conteudo, "espelho", &espelho);
+	Tinsere(sala5.conteudo, "arma", &arma);
 
 	garrafa.nome = "garrafa";
 	garrafa.longa = "Sua mente não consegue achar palavras para descrever o sentimento evocado dor essa garrafa. Sua beleza é simples, quase angelical.\n O líquido interno está em constante mudança, "
@@ -325,7 +324,7 @@ void salas(){
 	cogumelos.conteudo = Tcria(4);
 	cogumelos.def.objeto.lista = NULL;
 	cama.animacao = NULL;
-	Tinsere(sala6.conteudo, &cama);
-	Tinsere(sala6.conteudo, &cogumelos);
-	Tinsere(sala6.conteudo, &garrafa);
+	Tinsere(sala6.conteudo, "cama", &cama);
+	Tinsere(sala6.conteudo, "cogumelos", &cogumelos);
+	Tinsere(sala6.conteudo, "garrafa", &garrafa);
 }
