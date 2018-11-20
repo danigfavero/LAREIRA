@@ -18,5 +18,8 @@ hash.o: hash.c lista.h
 lista.o: lista.c elemento.h
 	gcc -o lista.o -c lista.c -Wall
 
+elemento.o: elemento.c
+	gcc -o elemento.o -c elemento.c -Wall
+
 clean:
-rm -rm *.o
+	rm -rm *.o
