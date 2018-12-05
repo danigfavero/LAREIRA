@@ -1,10 +1,24 @@
+LOADLIBES= -lfl -lreadline
+CFLAGS=-Wall -g
+
 all: jogo
 
-jogo: jogo.o acoes.o salas.o hash.o lista.o elemento.o
-	gcc -o jogo jogo.o acoes.o salas.o hash.o lista.o elemento.o
+%.c: %.y
+	bison $<
+	mv $*.tab.c $*.c
 
-jogo.o: jogo.c acoes.h
+jogo: jogo.o avent.o aventl.o traduzindo.o acoes.o salas.o hash.o lista.o elemento.o
+	gcc -o jogo jogo.o avent.o aventl.o traduzindo.o acoes.o salas.o hash.o lista.o elemento.o
+
+jogo.o: jogo.c traduzindo.h
 	gcc -o jogo.o -c jogo.c -Wall
+
+avent.c : avent.y
+
+aventl.o: aventl.l avent.c
+
+traduzindo.o: traduzindo.c acoes.h
+	gcc -o traduzindo.o -c traduzindo.c -Wall
 
 acoes.o: acoes.c salas.h
 	gcc -o acoes.o -c acoes.c -Wall

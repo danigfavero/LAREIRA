@@ -5,6 +5,7 @@ typedef struct TabSim{
 	Lista* listas;
 }TabSim;
 */
+
 int hash(char* s, int mod){
 	//Definindo como será o hash das palavras
 	long long int out = 0;
@@ -33,6 +34,12 @@ void Tdestroi(TabSim t){
 	}
 	free(t.listas);
 	return;
+}
+
+int Tvazia(TabSim t){
+	Elo* crawler = t.listas[hash_val].cabec;
+	if(crawler == NULL) return 1;
+	return 0;
 }
 
 int Tinsere(TabSim t, Elemento* val){

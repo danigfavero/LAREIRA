@@ -15,6 +15,8 @@ int hash(char*, int);
 TabSim Tcria(int);
 	//Criando uma tabela com tam listas
 
+int Tvazia(TabSim);
+    //Verifica se a tabela está vazia (retorna 1) ou não (retorna 0)
 
 void Tdestroi(TabSim);
 	//Percorre a tabela destruindo as listas dela

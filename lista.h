@@ -1,10 +1,14 @@
 #include "elemento.h"
 
+extern Lista *sym_table;
+
 void socorro(void);
 
 Lista Lcria(void);
 	//Instanciando uma lista e alocando o primeiro endereço (cabec)
 
+
+Lista* LinsereGlobal(Lista*, char *, int, void *);
 
 int stringsIguais(char* s1, char* s2);
 	//Função que verifica se duas strings são iguais, será usada na função de busca

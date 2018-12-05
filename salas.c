@@ -152,7 +152,7 @@ void salas(){
 	pessoas.artigos = malloc(2*sizeof(string));
 	pessoas.artigos[0] = "o";
 	pessoas.artigos[1] = "um";
-	
+
 	sala3.conteudo = Tcria(4);
 	Tinsere((sala3.conteudo), &mascara);
 	Tinsere((sala3.conteudo), &pessoas);
@@ -170,13 +170,13 @@ void salas(){
 	sala4.visivel = True;
 	sala4.conhecido = False;
 
-	
+
 	//Definindo as saidas
 	sala4.def.lugar.saidas[0] = &sala1;
 	sala4.def.lugar.saidas[1] = &sala1;
 	sala4.def.lugar.saidas[2] = &sala5;
 	sala4.def.lugar.saidas[3] = &sala6;
-	
+
 
 	//Definindo os elementos
 	foto.nome = "fotografia";
@@ -245,7 +245,7 @@ void salas(){
 	"No canto mais empoirado da sala, você vê uma arma. Sua forma já se mistura com o ambiente, mas você consegue perceber a silhueta suave.\nNinguém a toca em uma eternidade, aparentemente\n"
 	"E, no outro extremo, uma figura raquítica e curva se senta ao chão, abraçando os joelhos e com os olhos baixos. A pele parece ter começado a se dissolver de tão velha, e os olhos não apresentam "
 	"mais brilho algum. A vida já saiu deste homem.\n";
-	
+
 	sala5.curta = "Um homem, uma arma e um espelho. Não há nada mais aqui";
 	sala5.ativo = True;
 	sala5.visivel = True;
@@ -292,7 +292,7 @@ void salas(){
 	homem.longa = "É um homem, velho e fraco. As marcas do tempo são aparentes: as rugas, os ossos expostos, a dor. Não há brilho nos seus olhos nem força no seu corpo. Você duvida "
 	"se ele sabe da sua presença, mas você sente a dele dentro de si. Um sentimento de angústia e desespero. Uma nostalgia doente. Um questionamento.\n";
 	homem.curta = "Nada mais pode ser tirado observando-o.\n";
-	
+
 	homem.def.objeto.lista = malloc(4*sizeof(atrib));
 	homem.def.objeto.lista[2].val = 0;
 	homem.ativo = True;

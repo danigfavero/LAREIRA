@@ -1,9 +1,11 @@
+#ifndef ELEMENTO_H
+#define ELEMENTO_H
 #include <stdio.h>
 #include <stdlib.h>
 
 typedef enum{
 	False, True
-}bool;
+} bool;
 
 typedef char* string;
 
@@ -32,6 +34,8 @@ typedef union{
 //elo a ser usado em listas ligadas
 typedef struct elo{
 	void* val;
+	int tipo;
+	void* value;
 	struct elo* next;
 } Elo;
 
@@ -60,3 +64,5 @@ typedef struct Elemento{
 	void* animacao;
 	detalhe def;
 }Elemento;
+
+#endif

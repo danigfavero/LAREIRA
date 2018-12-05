@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "elemento.h"
 //int main(){printf("Lista funcionando \n");}
 Lista Lcria(void){
@@ -13,6 +14,19 @@ Lista Lcria(void){
 }
 
 
+Lista *LinsereGlobal (Lista *sym_table, char *sym_name, int sym_type, void *val)
+{
+  Lista *ptr;
+  ptr = (Lista *) malloc (sizeof (TabSim));
+  Elemento* eaux = (Elemento*) ptr->cabec->val;
+  eaux->nome = (char *) malloc (strlen (sym_name) + 1);
+  strcpy (eaux->nome,sym_name);
+  ptr->cabec->tipo = sym_type;
+  ptr->cabec->value = val;
+  ptr->cabec->next = (struct elo *)sym_table;
+  sym_table = ptr;
+  return ptr;
+}
 
 int stringsIguais(char* s1, char* s2)
 {
