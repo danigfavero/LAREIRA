@@ -8,7 +8,7 @@ int yylex();
 int yyerror(char *);
 
 /* Macro para simplificar a escrita das chamadas de função */
-#define F(x) (*(fptr)(x->nome))
+#define F(x) (*(fptr)(x->cabec->value))
 
 /* Identifica qual a versão correta do verbo chamado */
 Lista * AcertaF(Lista *f, Lista *o1) {
@@ -16,7 +16,7 @@ Lista * AcertaF(Lista *f, Lista *o1) {
 
   /* Verifica se existe uma versão especial no local atual (atual) */
 
-  if ((s = &(Tbusca(atual->conteudo, f->nome))))
+  if ((s = Tbusca(atual->conteudo, f->cabec->fname)))
 	return s;
   return f;
 }
@@ -78,7 +78,7 @@ input: EOL		{ printf("Zzzz...\n"); }
 
 		 } eol
 	| FIM  { return 0;}
-	| DESC { puts("Não tem registro, Will Robinson.");}
+	| DESC { puts("Nada do que você diz está fazendo sentido.");}
 	| error eol;
 ;
 
@@ -88,11 +88,11 @@ cmd: VERBO {
 		   } eol
    | VERBO obj {
 			   /* Transitivo direto */
-			   F(AcertaF($1,$2))($2->nome,NULL);
+			   F(AcertaF($1,$2))($2->cabec->value,NULL);
 			 } eol
    | VERBO obj obj {
                  /* Bitransitivo */
-			     F(AcertaF($1,$2))($2->nome,$3->nome);
+			     F(AcertaF($1,$2))($2->cabec->value,$3->cabec->value);
 			   } eol
    | VERBO DESC {
 			     printf("%s??\n", $2);

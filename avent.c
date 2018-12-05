@@ -73,7 +73,7 @@ int yylex();
 int yyerror(char *);
 
 /* Macro para simplificar a escrita das chamadas de função */
-#define F(x) (*(fptr)(x->nome))
+#define F(x) (*(fptr)(x->cabec->value))
 
 /* Identifica qual a versão correta do verbo chamado */
 Lista * AcertaF(Lista *f, Lista *o1) {
@@ -81,7 +81,7 @@ Lista * AcertaF(Lista *f, Lista *o1) {
 
   /* Verifica se existe uma versão especial no local atual (atual) */
 
-  if ((s = &(Tbusca(atual->conteudo, f->nome))))
+  if ((s = Tbusca(atual->conteudo, f->cabec->fname)))
 	return s;
   return f;
 }
@@ -1326,7 +1326,7 @@ yyreduce:
 
   case 12:
 #line 81 "avent.y" /* yacc.c:1646  */
-    { puts("Não tem registro, Will Robinson.");}
+    { puts("Nada do que você diz está fazendo sentido.");}
 #line 1331 "avent.tab.c" /* yacc.c:1646  */
     break;
 
@@ -1343,7 +1343,7 @@ yyreduce:
 #line 89 "avent.y" /* yacc.c:1646  */
     {
 			   /* Transitivo direto */
-			   F(AcertaF((yyvsp[-1].tptr),(yyvsp[0].tptr)))((yyvsp[0].tptr)->nome,NULL);
+			   F(AcertaF((yyvsp[-1].tptr),(yyvsp[0].tptr)))((yyvsp[0].tptr)->cabec->value,NULL);
 			 }
 #line 1349 "avent.tab.c" /* yacc.c:1646  */
     break;
@@ -1352,7 +1352,7 @@ yyreduce:
 #line 93 "avent.y" /* yacc.c:1646  */
     {
                  /* Bitransitivo */
-			     F(AcertaF((yyvsp[-2].tptr),(yyvsp[-1].tptr)))((yyvsp[-1].tptr)->nome,(yyvsp[0].tptr)->nome);
+			     F(AcertaF((yyvsp[-2].tptr),(yyvsp[-1].tptr)))((yyvsp[-1].tptr)->cabec->value,(yyvsp[0].tptr)->cabec->value);
 			   }
 #line 1358 "avent.tab.c" /* yacc.c:1646  */
     break;
