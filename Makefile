@@ -18,4 +18,4 @@ jogol.o: jogol.l jogo.c
 	gcc -o $@ -c $< -Wall
 
 clean:
-	rm -rm *tab* *.o
+	rm -f jogo *tab* *.o *~ jogo.c
