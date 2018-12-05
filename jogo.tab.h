@@ -30,8 +30,8 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-#ifndef YY_YY_AVENT_TAB_H_INCLUDED
-# define YY_YY_AVENT_TAB_H_INCLUDED
+#ifndef YY_YY_JOGO_TAB_H_INCLUDED
+# define YY_YY_JOGO_TAB_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -53,12 +53,10 @@ extern int yydebug;
     SUL = 263,
     LESTE = 264,
     OESTE = 265,
-    CIMA = 266,
-    BAIXO = 267,
-    VAPARA = 268,
-    EOL = 269,
-    FIM = 270,
-    INVENT = 271
+    VAPARA = 266,
+    EOL = 267,
+    FIM = 268,
+    INVENT = 269
   };
 #endif
 
@@ -67,13 +65,13 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 26 "avent.y" /* yacc.c:1909  */
+#line 15 "jogo.y" /* yacc.c:1909  */
 
-  Lista *tptr;
+  void *tptr;
   char *str;
   int  direc;
 
-#line 77 "avent.tab.h" /* yacc.c:1909  */
+#line 75 "jogo.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -86,4 +84,4 @@ extern YYSTYPE yylval;
 
 int yyparse (void);
 
-#endif /* !YY_YY_AVENT_TAB_H_INCLUDED  */
+#endif /* !YY_YY_JOGO_TAB_H_INCLUDED  */

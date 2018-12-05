@@ -1,18 +1,21 @@
 LOADLIBES= -lfl -lreadline
 CFLAGS=-Wall -g
 
+all: jogo
+
 %.c: %.y
 	bison $<
 	mv $*.tab.c $*.c
 
 jogo: main.o jogo.o jogol.o traduzindo.o acoes.o salas.o hash.o lista.o elemento.o
+	gcc -o $@ $^ -Wall
 
-jogo.c : jogoy.y
+jogo.c : jogo.y
 
 jogol.o: jogol.l jogo.c
 
-clean:
-	rm -f avent *tab* *.o *~ jogo.c jogo.tgz
+%.o : %.c
+	gcc -o $@ -c $< -Wall
 
-dist:
-	tar czf jogo.tgz jogol.l jogoy.y traduzindo.c traduzindo.h main.c acoes.c acoes.h salas.c salas.h hash.c hash.h lista.c lista.h elemento.c elemento.h Makefile
+clean:
+	rm -rm *tab* *.o
