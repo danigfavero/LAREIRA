@@ -1,4 +1,5 @@
-#include "avent.tab.h"
+#include "acoes.h"
+#include "jogo.tab.h"
 
 struct inifunc {
   char *fname;

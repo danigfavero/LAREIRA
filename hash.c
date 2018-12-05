@@ -36,10 +36,12 @@ void Tdestroi(TabSim t){
 	return;
 }
 
-int Tvazia(TabSim t){
-	Elo* crawler = t.listas[hash_val].cabec;
-	if(crawler == NULL) return 1;
-	return 0;
+int Tvazia(TabSim t, int tamanho){
+	for(int i = 0; i < tamanho; i++){
+		Elo* crawler = t.listas[i].cabec;
+		if(crawler != NULL) return 0;
+	}
+	return 1;
 }
 
 int Tinsere(TabSim t, Elemento* val){

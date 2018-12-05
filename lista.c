@@ -3,6 +3,15 @@
 #include <string.h>
 #include "elemento.h"
 //int main(){printf("Lista funcionando \n");}
+
+int stringsIguais(char* s1, char* s2)
+{
+	int i;
+	for(i = 0; s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i]; i++);
+	if(s1[i] == '\0' && s2[i] == '\0') return 1;
+	return 0;
+}
+
 Lista Lcria(void){
 	//Instanciando uma lista e alocando o primeiro endereço (cabec)
 	Lista s;
@@ -13,6 +22,33 @@ Lista Lcria(void){
 	return s;
 }
 
+int LBuscaTipoGlobal(Lista* sym_table, char * procurado){
+	Elo* crawler = sym_table->cabec;
+	Elemento* e = (Elemento*) crawler->val;
+	while(crawler != NULL){
+		e = (Elemento*) crawler->val;
+		if(crawler->value != NULL && stringsIguais(e->nome, procurado)){
+			return crawler->tipo;
+		}
+		crawler = crawler->next;
+	}
+	return -1;
+	
+}
+
+void *LBuscaGlobal(Lista* sym_table, char * procurado){
+	Elo* crawler = sym_table->cabec;
+	Elemento* e = (Elemento*) crawler->val;
+	while(crawler != NULL){
+		e = (Elemento*) crawler->val;
+		if(crawler->value != NULL && stringsIguais(e->nome, procurado)){
+			return crawler->value;
+		}
+		crawler = crawler->next;
+	}
+	return NULL;
+	
+}
 
 Lista *LinsereGlobal (Lista *sym_table, char *sym_name, int sym_type, void *val)
 {
@@ -28,13 +64,6 @@ Lista *LinsereGlobal (Lista *sym_table, char *sym_name, int sym_type, void *val)
   return ptr;
 }
 
-int stringsIguais(char* s1, char* s2)
-{
-	int i;
-	for(i = 0; s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i]; i++);
-	if(s1[i] == '\0' && s2[i] == '\0') return 1;
-	return 0;
-}
 
 void Ldestroi(Lista lista1){
 	//Endereço de elo que percorrerá a lista

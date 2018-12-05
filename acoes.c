@@ -42,12 +42,13 @@ int Mover(Elemento* e1, int direcao){
 
 
 int Examinar(Elemento* e1, Elemento* e2){
-	if(e1->visivel)
+	if(e1->visivel){
 		if(e1->conhecido) puts(e1->curta);
 		else{
 			puts(e1->longa);
 			e1->conhecido = True;
 		}
+	}
 	return e1->visivel;
 }
 
@@ -146,9 +147,10 @@ int Estourar(Elemento* e1, Elemento* e2){
 }
 
 int Tocar(Elemento* e1, Elemento* e2){
-	if(Tbusca(e1->conteudo,e2->nome)==e2)
+	if(Tbusca(e1->conteudo,e2->nome)==e2){
 		printf("O disco já está no gramofone\n");
 		return 0;
+	}
 	return (Tinsere(e1->conteudo, e2));
 }
 
@@ -244,10 +246,10 @@ int Comer(Elemento* e1, Elemento* e2){
 }
 
 int Deitar(Elemento* e1, Elemento* e2){
-	if(e1->nome == "cama" && e1->def.objeto.lista[deitado].val == 1){
+	if(stringsIguais(e1->nome, "cama") && e1->def.objeto.lista[deitado].val == 1){
 		printf("Você já está deitado.\n"); return 0;
 	}
-	else if(e1->nome == "cama"){
+	else if(stringsIguais(e1->nome, "cama")){
 		printf("Você se deita na cama e sente como se seu corpo tivesse sido transportado aos céus. Todos seus músculos relaxam, e sua mente fica leve. 'Poderia ficar aqui para sempre', pensa.\n");
 		e1->def.objeto.lista[deitado].val = 1;
 		return 1;
@@ -256,12 +258,12 @@ int Deitar(Elemento* e1, Elemento* e2){
 }
 
 int Levantar(Elemento* e1, Elemento* e2){
-	if(e1->nome == "cama" && e1->def.objeto.lista[deitado].val == 1){
+	if(stringsIguais(e1->nome, "cama") && e1->def.objeto.lista[deitado].val == 1){
 		printf("Com muito esforço, você cria a determinação para levantar da cama. Seu corpo se sente pesado.\n");
 		e1->def.objeto.lista[deitado].val = 0;
 		return 1;
 	}
-	else if(e1->nome == "cama" && e1->def.objeto.lista[deitado].val == 0){
+	else if(stringsIguais(e1->nome, "cama") && e1->def.objeto.lista[deitado].val == 0){
 		printf("Você já está levantado.\n");
 		return 0;
 	}
@@ -288,10 +290,11 @@ int Soltar(Elemento* e1, Elemento* e2){
 }
 
 int Quebrar(Elemento* e1, Elemento* e2){
-	if(e1->ativo)
+	if(e1->ativo){
 		e1->ativo = False;
 		printf("%s quebrado com sucesso", e1->nome);
 		return 1;
+	}
 	printf("Não dá pra quebrar o que já está quebrado...");
 	return 0;
 }

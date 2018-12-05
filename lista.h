@@ -9,6 +9,8 @@ Lista Lcria(void);
 
 
 Lista* LinsereGlobal(Lista*, char *, int, void *);
+void* LBuscaGlobal(Lista*, char*);
+int LBuscaTipoGlobal(Lista*, char*);
 
 int stringsIguais(char* s1, char* s2);
 	//Função que verifica se duas strings são iguais, será usada na função de busca

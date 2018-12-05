@@ -1,39 +1,18 @@
 LOADLIBES= -lfl -lreadline
 CFLAGS=-Wall -g
 
-all: jogo
-
 %.c: %.y
 	bison $<
 	mv $*.tab.c $*.c
 
-jogo: jogo.o avent.o aventl.o traduzindo.o acoes.o salas.o hash.o lista.o elemento.o
-	gcc -o jogo jogo.o avent.o aventl.o traduzindo.o acoes.o salas.o hash.o lista.o elemento.o
+jogo: main.o jogo.o jogol.o traduzindo.o acoes.o salas.o hash.o lista.o elemento.o
 
-jogo.o: jogo.c traduzindo.h
-	gcc -o jogo.o -c jogo.c -Wall
+jogo.c : jogoy.y
 
-avent.c : avent.y
-
-aventl.o: aventl.l avent.c
-
-traduzindo.o: traduzindo.c acoes.h
-	gcc -o traduzindo.o -c traduzindo.c -Wall
-
-acoes.o: acoes.c salas.h
-	gcc -o acoes.o -c acoes.c -Wall
-
-salas.o: salas.c hash.h
-	gcc -o salas.o -c salas.c -Wall
-
-hash.o: hash.c lista.h
-	gcc -o hash.o -c hash.c -Wall
-
-lista.o: lista.c elemento.h
-	gcc -o lista.o -c lista.c -Wall
-
-elemento.o: elemento.c
-	gcc -o elemento.o -c elemento.c -Wall
+jogol.o: jogol.l jogo.c
 
 clean:
-	rm -rm *.o
+	rm -f avent *tab* *.o *~ jogo.c jogo.tgz
+
+dist:
+	tar czf jogo.tgz jogol.l jogoy.y traduzindo.c traduzindo.h main.c acoes.c acoes.h salas.c salas.h hash.c hash.h lista.c lista.h elemento.c elemento.h Makefile
