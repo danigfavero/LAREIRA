@@ -24,10 +24,8 @@ Lista Lcria(void){
 
 int LBuscaTipoGlobal(Lista* sym_table, char * procurado){
 	Elo* crawler = sym_table->cabec;
-	Elemento* e = (Elemento*) crawler->val;
 	while(crawler != NULL){
-		e = (Elemento*) crawler->val;
-		if(crawler->value != NULL && stringsIguais(e->nome, procurado)){
+		if(stringsIguais(crawler->nome, procurado)){
 			return crawler->tipo;
 		}
 		crawler = crawler->next;
@@ -38,10 +36,8 @@ int LBuscaTipoGlobal(Lista* sym_table, char * procurado){
 
 void *LBuscaGlobal(Lista* sym_table, char * procurado){
 	Elo* crawler = sym_table->cabec;
-	Elemento* e = (Elemento*) crawler->val;
 	while(crawler != NULL){
-		e = (Elemento*) crawler->val;
-		if(crawler->value != NULL && stringsIguais(e->nome, procurado)){
+		if(stringsIguais(crawler->nome, procurado)){
 			return crawler->value;
 		}
 		crawler = crawler->next;
@@ -52,18 +48,33 @@ void *LBuscaGlobal(Lista* sym_table, char * procurado){
 
 Lista *LinsereGlobal (Lista *sym_table, char *sym_name, int sym_type, void *val)
 {
-  Lista *ptr;
-  ptr = (Lista *) malloc (sizeof (Lista));
-  ptr->cabec = malloc(sizeof(Elo));
-  ptr->cabec->val = (Elemento*) malloc(sizeof(Elemento));
-  Elemento* eaux = (Elemento*) ptr->cabec->val;
-  eaux->nome = (char *) malloc (strlen (sym_name) + 1);
-  strcpy (eaux->nome,sym_name);
-  ptr->cabec->tipo = sym_type;
-  ptr->cabec->value = val;
-  ptr->cabec->next = (struct elo *)sym_table;
-  sym_table = ptr;
-  return ptr;
+	
+  Elo* novo =  malloc(sizeof(Elo));
+	
+  novo->nome = (char *) malloc (strlen (sym_name) + 1);
+  strcpy(novo->nome,sym_name);
+  
+  novo->tipo = sym_type;
+  novo->value = val;
+	if(sym_table != NULL) novo->next = sym_table->cabec;
+	else novo->next == NULL;
+	/*
+  Elo* crawler = novo;
+  int i = 0;
+	while(crawler != NULL){
+		crawler = crawler->next;
+		printf("%s - ", crawler->nome);
+		i++;
+	}
+	*/
+	Lista* nova = malloc(sizeof(Lista));
+	nova->cabec = novo;
+	Elo* crawler = novo;
+	/*while(crawler != NULL){
+		printf("%s -  ",crawler->nome);
+		crawler = crawler->next;
+	}*/
+  return nova;
 }
 
 

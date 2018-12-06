@@ -25,6 +25,7 @@ int main(){
     salas();
     insereAcoes();
 	sym_table = init_table(sym_table);
+
     while (yyparse());
     return 0;
     /*

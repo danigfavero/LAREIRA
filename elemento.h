@@ -34,6 +34,7 @@ typedef union{
 //elo a ser usado em listas ligadas
 typedef struct elo{
 	void* val;
+	char* nome;
 	int tipo;
 	void* value;
 	struct elo* next;

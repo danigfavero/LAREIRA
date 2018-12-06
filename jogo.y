@@ -72,16 +72,21 @@ input: EOL		{ printf("Zzzz...\n"); }
 ;
 
 cmd: VERBO {
+          puts("reconheci");
 			    /* Intransitivo */
           //Busca o verbo na lista e realiza a acao;
   	 	    fptr acao = (fptr) LBuscaGlobal(sym_table, $1);
+          puts("encontrei");
           acao(NULL, NULL);
 		   } eol
    | VERBO obj {
 			   /* Transitivo direto */
          //Busca o verbo e o objeto
+         puts("verbo obj");
 			     fptr acao = (fptr) LBuscaGlobal(sym_table, $1);
+           puts("reconheci acao");
            Elemento *e = (Elemento*) LBuscaGlobal(sym_table, $2);
+           printf("peguei o %s\n", e->nome);
            acao(e, NULL);
 			 } eol
    | VERBO obj obj {
