@@ -450,8 +450,8 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    36,    36,    37,    38,    42,    38,    49,    49,    59,
-      59,    69,    70,    71,    74,    74,    82,    82,    92,    92,
+       0,    36,    36,    37,    38,    42,    38,    49,    49,    58,
+      58,    68,    69,    70,    73,    73,    81,    81,    92,    92,
      100,   100,   103,   103,   106,   106,   113,   114,   116,   117,
      118,   119,   120,   123
 };
@@ -1279,17 +1279,16 @@ yyreduce:
     {
 			 /* movimentação  */
              if ((yyvsp[0].direc) >= 0 && atual->def.lugar.saidas[(yyvsp[0].direc)]) {
-			   atual = atual->def.lugar.saidas[(yyvsp[0].direc)];
 			   printf("Você foi para %s\n", atual->nome);
 			   Examinar(atual,NULL);
 			 }
 			 else puts("Não há passagem....");
 											}
-#line 1289 "jogo.tab.c" /* yacc.c:1646  */
+#line 1288 "jogo.tab.c" /* yacc.c:1646  */
     break;
 
   case 9:
-#line 59 "jogo.y" /* yacc.c:1646  */
+#line 58 "jogo.y" /* yacc.c:1646  */
     {
 			 /* listagem do inventário */
 			 if (Tvazia(personagem.conteudo))
@@ -1300,44 +1299,45 @@ yyreduce:
              }
 
 		 }
-#line 1304 "jogo.tab.c" /* yacc.c:1646  */
+#line 1303 "jogo.tab.c" /* yacc.c:1646  */
     break;
 
   case 11:
-#line 69 "jogo.y" /* yacc.c:1646  */
+#line 68 "jogo.y" /* yacc.c:1646  */
     { return 0;}
-#line 1310 "jogo.tab.c" /* yacc.c:1646  */
+#line 1309 "jogo.tab.c" /* yacc.c:1646  */
     break;
 
   case 12:
-#line 70 "jogo.y" /* yacc.c:1646  */
+#line 69 "jogo.y" /* yacc.c:1646  */
     { puts("Nada do que você diz está fazendo sentido.");}
-#line 1316 "jogo.tab.c" /* yacc.c:1646  */
+#line 1315 "jogo.tab.c" /* yacc.c:1646  */
     break;
 
   case 14:
-#line 74 "jogo.y" /* yacc.c:1646  */
+#line 73 "jogo.y" /* yacc.c:1646  */
     {
-          puts("reconheci");
+          //puts("reconheci");
 			    /* Intransitivo */
           //Busca o verbo na lista e realiza a acao;
-  	 	    fptr acao = (fptr) LBuscaGlobal(sym_table, (yyvsp[0].tptr));
-          puts("encontrei");
+  	 	    fptr acao = (fptr) LBuscaGlobal(sym_table, (yyvsp[0].tptr), 'P');
+          //puts("encontrei");
           acao(NULL, NULL);
 		   }
-#line 1329 "jogo.tab.c" /* yacc.c:1646  */
+#line 1328 "jogo.tab.c" /* yacc.c:1646  */
     break;
 
   case 16:
-#line 82 "jogo.y" /* yacc.c:1646  */
+#line 81 "jogo.y" /* yacc.c:1646  */
     {
 			   /* Transitivo direto */
          //Busca o verbo e o objeto
-         puts("verbo obj");
-			     fptr acao = (fptr) LBuscaGlobal(sym_table, (yyvsp[-1].tptr));
-           puts("reconheci acao");
-           Elemento *e = (Elemento*) LBuscaGlobal(sym_table, (yyvsp[0].tptr));
-           printf("peguei o %s\n", e->nome);
+         //puts("verbo obj");
+         //printf("%s\n", (char*)$1);
+			     fptr acao = (fptr) LBuscaGlobal(sym_table, (yyvsp[-1].tptr), 'P');
+           //puts("reconheci acao");
+           Elemento *e = (Elemento*) LBuscaGlobal(sym_table, (yyvsp[0].tptr), 'P');
+           //printf("peguei o %s\n", e->nome);
            acao(e, NULL);
 			 }
 #line 1344 "jogo.tab.c" /* yacc.c:1646  */
@@ -1348,9 +1348,9 @@ yyreduce:
     {
           /* Bitransitivo */
           //Busca o verbo e os dois objetos
-			    fptr acao = (fptr) LBuscaGlobal(sym_table, (yyvsp[-2].tptr));
-          Elemento *e = (Elemento*) LBuscaGlobal(sym_table, (yyvsp[-1].tptr));
-          Elemento *e2 = (Elemento*) LBuscaGlobal(sym_table, (yyvsp[0].tptr));
+			    fptr acao = (fptr) LBuscaGlobal(sym_table, (yyvsp[-2].tptr), 'P');
+          Elemento *e = (Elemento*) LBuscaGlobal(sym_table, (yyvsp[-1].tptr), 'P');
+          Elemento *e2 = (Elemento*) LBuscaGlobal(sym_table, (yyvsp[0].tptr), 'P');
           acao(e, e2);
 			   }
 #line 1357 "jogo.tab.c" /* yacc.c:1646  */
@@ -1396,25 +1396,25 @@ yyreduce:
 
   case 28:
 #line 116 "jogo.y" /* yacc.c:1646  */
-    { puts("norte"); (yyval.direc)=0;}
+    { Mover(atual, 0); }
 #line 1401 "jogo.tab.c" /* yacc.c:1646  */
     break;
 
   case 29:
 #line 117 "jogo.y" /* yacc.c:1646  */
-    { puts("sul");   (yyval.direc)=1;}
+    { Mover(atual, 1); }
 #line 1407 "jogo.tab.c" /* yacc.c:1646  */
     break;
 
   case 30:
 #line 118 "jogo.y" /* yacc.c:1646  */
-    { puts("leste"); (yyval.direc)=2;}
+    { Mover(atual, 2); }
 #line 1413 "jogo.tab.c" /* yacc.c:1646  */
     break;
 
   case 31:
 #line 119 "jogo.y" /* yacc.c:1646  */
-    { puts("oeste"); (yyval.direc)=3;}
+    { Mover(atual, 3); }
 #line 1419 "jogo.tab.c" /* yacc.c:1646  */
     break;
 

@@ -11,7 +11,7 @@ Lista Lcria(void);
 
 
 Lista* LinsereGlobal(Lista*, char *, int, void *);
-void* LBuscaGlobal(Lista*, char*);
+void* LBuscaGlobal(Lista*, char*, char);
 int LBuscaTipoGlobal(Lista*, char*);
 
 int stringsIguais(char* s1, char* s2);

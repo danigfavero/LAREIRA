@@ -72,6 +72,9 @@ struct initobj lobjs[] = {
   {"carta", &carta},
   {"foto", &foto},
   {"fotografia", &foto},
+  {"você", &personagem},
+  {"personagem", &personagem},
+  {"eu", &personagem},
   { 0, 0}
 };
 
@@ -101,7 +104,7 @@ Lista*  init_table(Lista *sym_table) {
 	/* insere */
     ptr = LinsereGlobal(ptr, lfunc[i].fname, VERBO, lfunc[i].fnct);
 	/* completa os dados */
-    ptr->cabec->value = lfunc[i].fnct;
+    ptr->cabec->val = lfunc[i].fnct;
   }
   /* Lista de objetos */
   for (i = 0; lobjs[i].name != 0; i++) {

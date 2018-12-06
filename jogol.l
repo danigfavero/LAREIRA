@@ -69,8 +69,8 @@ d[aoe]|em|n[ao]
 			   /* identificador */
          	   int tipo;
 			   if ((tipo = LBuscaTipoGlobal(sym_table, yytext)) != -1) {
-           	   yylval.tptr = LBuscaGlobal(sym_table, yytext);
-					printf("estou retornando %d\n", tipo);
+           	   yylval.tptr = LBuscaGlobal(sym_table, yytext, 'N');
+					//printf("estou retornando %d\n", tipo);
 				   return tipo;
 			   }
 			   else {

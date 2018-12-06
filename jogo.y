@@ -49,7 +49,6 @@ input: EOL		{ printf("Zzzz...\n"); }
 	 | dir {
 			 /* movimentação  */
              if ($1 >= 0 && atual->def.lugar.saidas[$1]) {
-			   atual = atual->def.lugar.saidas[$1];
 			   printf("Você foi para %s\n", atual->nome);
 			   Examinar(atual,NULL);
 			 }
@@ -72,29 +71,30 @@ input: EOL		{ printf("Zzzz...\n"); }
 ;
 
 cmd: VERBO {
-          puts("reconheci");
+          //puts("reconheci");
 			    /* Intransitivo */
           //Busca o verbo na lista e realiza a acao;
-  	 	    fptr acao = (fptr) LBuscaGlobal(sym_table, $1);
-          puts("encontrei");
+  	 	    fptr acao = (fptr) LBuscaGlobal(sym_table, $1, 'P');
+          //puts("encontrei");
           acao(NULL, NULL);
 		   } eol
    | VERBO obj {
 			   /* Transitivo direto */
          //Busca o verbo e o objeto
-         puts("verbo obj");
-			     fptr acao = (fptr) LBuscaGlobal(sym_table, $1);
-           puts("reconheci acao");
-           Elemento *e = (Elemento*) LBuscaGlobal(sym_table, $2);
-           printf("peguei o %s\n", e->nome);
+         //puts("verbo obj");
+         //printf("%s\n", (char*)$1);
+			     fptr acao = (fptr) LBuscaGlobal(sym_table, $1, 'P');
+           //puts("reconheci acao");
+           Elemento *e = (Elemento*) LBuscaGlobal(sym_table, $2, 'P');
+           //printf("peguei o %s\n", e->nome);
            acao(e, NULL);
 			 } eol
    | VERBO obj obj {
           /* Bitransitivo */
           //Busca o verbo e os dois objetos
-			    fptr acao = (fptr) LBuscaGlobal(sym_table, $1);
-          Elemento *e = (Elemento*) LBuscaGlobal(sym_table, $2);
-          Elemento *e2 = (Elemento*) LBuscaGlobal(sym_table, $3);
+			    fptr acao = (fptr) LBuscaGlobal(sym_table, $1, 'P');
+          Elemento *e = (Elemento*) LBuscaGlobal(sym_table, $2, 'P');
+          Elemento *e2 = (Elemento*) LBuscaGlobal(sym_table, $3, 'P');
           acao(e, e2);
 			   } eol
    | VERBO DESC {
@@ -113,10 +113,10 @@ cmd: VERBO {
 obj: OBJ    { $$ = $1;}
    | LUGAR  { $$ = $1;}
 
-dir: NORTE	  { puts("norte"); $$=0;}
-	 | SUL	  { puts("sul");   $$=1;}
-	 | LESTE  { puts("leste"); $$=2;}
-	 | OESTE  { puts("oeste"); $$=3;}
+dir: NORTE	  { Mover(atual, 0); }
+	 | SUL	  { Mover(atual, 1); }
+	 | LESTE  { Mover(atual, 2); }
+	 | OESTE  { Mover(atual, 3); }
 	 | DESC   { puts("... (onde é isso?)"); $$=-1;}
 ;
 

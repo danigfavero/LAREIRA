@@ -24,21 +24,22 @@ Lista Lcria(void){
 
 int LBuscaTipoGlobal(Lista* sym_table, char * procurado){
 	Elo* crawler = sym_table->cabec;
-	while(crawler != NULL){
+	while(crawler != NULL && crawler->val != NULL){
 		if(stringsIguais(crawler->nome, procurado)){
 			return crawler->tipo;
 		}
 		crawler = crawler->next;
 	}
 	return -1;
-
 }
 
-void *LBuscaGlobal(Lista* sym_table, char * procurado){
+void *LBuscaGlobal(Lista* sym_table, char * procurado, char GRR){
 	Elo* crawler = sym_table->cabec;
-	while(crawler != NULL){
+	while(crawler != NULL & crawler->val != NULL){
+		//printf("procurado %s e atual %s\n", procurado, crawler->nome);
 		if(stringsIguais(crawler->nome, procurado)){
-			return crawler->value;
+			if(GRR == 'P') return crawler->val;
+			else return crawler->nome;
 		}
 		crawler = crawler->next;
 	}
@@ -48,14 +49,14 @@ void *LBuscaGlobal(Lista* sym_table, char * procurado){
 
 Lista *LinsereGlobal (Lista *sym_table, char *sym_name, int sym_type, void *val)
 {
-	
+
   Elo* novo =  malloc(sizeof(Elo));
-	
-  novo->nome = (char *) malloc (strlen (sym_name) + 1);
-  strcpy(novo->nome,sym_name);
-  
-  novo->tipo = sym_type;
-  novo->value = val;
+
+	novo->nome = (char *) malloc (strlen (sym_name) + 1);
+	strcpy(novo->nome,sym_name);
+
+	novo->tipo = sym_type;
+	novo->val = val;
 	if(sym_table != NULL) novo->next = sym_table->cabec;
 	else novo->next == NULL;
 	/*
@@ -69,7 +70,7 @@ Lista *LinsereGlobal (Lista *sym_table, char *sym_name, int sym_type, void *val)
 	*/
 	Lista* nova = malloc(sizeof(Lista));
 	nova->cabec = novo;
-	Elo* crawler = novo;
+	//Elo* crawler = novo;
 	/*while(crawler != NULL){
 		printf("%s -  ",crawler->nome);
 		crawler = crawler->next;

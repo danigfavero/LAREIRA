@@ -5,6 +5,8 @@
 #define conversas 2
 #define deitado 3
 
+int visited = 1;
+
 void imprimeConteudo(Elemento compartimento, int tamanho_hash)
 {
 	int tem_algo = 0;
@@ -19,7 +21,7 @@ void imprimeConteudo(Elemento compartimento, int tamanho_hash)
 				printf("%s %s\n",el->artigos[1], el->nome);
 				tem_algo=1;
 			}
-			
+
             andante = andante->next;
 
         }
@@ -28,16 +30,17 @@ void imprimeConteudo(Elemento compartimento, int tamanho_hash)
 }
 
 int Mover(Elemento* e1, int direcao){
-	
-	Elemento* novo = (Elemento*) e1->def.lugar.saidas[direcao];	
-	
-	if(novo->ativo){
-		atual = novo;
-		return 1;
-	}
-	puts("Voce nao consegue ir nessa direcao!");
-	return 0;
 
+	Elemento* novo = e1->def.lugar.saidas[direcao];
+	//printf("de %s para %s e %d\n", sala6.nome, novo->nome, visited);
+	if(stringsIguais(novo->nome, sala5.nome) && visited < 5){
+		puts("Voce nao consegue ir nessa direcao!");
+		return 0;
+	}
+	if(novo->ativo != True) visited++;
+	novo->ativo = True;
+	atual = novo;
+	return 1;
 }
 
 
@@ -49,6 +52,8 @@ int Examinar(Elemento* e1, Elemento* e2){
 			e1->conhecido = True;
 		}
 	}
+	imprimeConteudo(*e1, 4);
+
 	return e1->visivel;
 }
 
@@ -69,13 +74,13 @@ int Tirar(Elemento* e1, Elemento* e2){
 	}
 	//Se não conseguiu retirar
 	else printf("%s %s não conteúdo nenh%s %s", e1->artigos[0], e1->nome, e2->artigos[1], e2->nome);
-	
+
 	return 0;
-	
+
 }
 
 int Colocar(Elemento* e1, Elemento* e2){
-	if(Tbusca(e2->conteudo, e1->nome)){ //Se o elemento ja estiver 
+	if(Tbusca(e2->conteudo, e1->nome)){ //Se o elemento ja estiver
 		printf("%s já está em %s\n", e1->nome, e2->nome);
 	}
 	else if(e1->visivel && e1->ativo)
@@ -183,24 +188,31 @@ int Ler(Elemento* e1, Elemento* e2){
 
 int Atirar(Elemento* e1, Elemento* e2){
 	if(!stringsIguais(e1->nome,"arma")){
-		printf("Voce arremessa %s em %s, mas nada demais acontece..\n", e1->nome, e2->nome);
+		Tirar(&personagem, e1);
+		return 1;
+	}
+	if(!(e1->ativo)){
+		printf("A arma não tem mais balas.\n");
 		return 1;
 	}
 	if(e2 == NULL){
-		e1->def.objeto.lista[atirou].val = 0;
+		e1->ativo = False;
+		printf("Você ouve um som forte. Nada acontece.\n");
 		return 1;
 	}
 	if(stringsIguais(e2->nome,"homem")){
 		printf("Um barulho ensurdecedor enche a sala. O homem cai no chão, sem vida. Seu coração é tão velho que não consegue jogar seu sangue para fora de seu corpo.\n");
 		e2->def.objeto.lista[vivo].val = 0;
+		e1->ativo = False;
 	}
 	else if(stringsIguais(e2->nome,"espelho")){
 		printf("A arma acerta o espelho, mas não causa dano algum.\n");
-
+		e1->ativo = False;
 	}
 	else if(stringsIguais(e2->nome,"você")){
 		printf("Você aperta o gatilho. Depois disso, não há mais sentidos.\n");
-		//ACABA O JOGO
+		e2->ativo = False;
+		e1->ativo = False;
 		return 1;
 	}
 	return 1;
@@ -209,6 +221,10 @@ int Atirar(Elemento* e1, Elemento* e2){
 
 int Falar(Elemento* e1, Elemento* e2){
 	int* instance = &(e1->def.objeto.lista[conversas].val);
+	if (e1->def.objeto.lista[0].val == 0){
+		printf("O homem não parece ser capaz de responde-lo\n");
+		return 0;
+	}
 	if((*instance)%4 == 0){
 		printf("Há muito tempo eu estou aqui. Tanto que a própria palavra já perdeu o significado. O único jeito que eu sei que ele passa é por que vejo as marcas em meu corpo.\n");
 		(*instance)++;
@@ -227,7 +243,7 @@ int Falar(Elemento* e1, Elemento* e2){
 	}
 	else printf("Ja disse tudo que tinha para falar...\n");
 	return 1;
-	
+
 }
 
 int Beber(Elemento* e1, Elemento* e2){
@@ -324,7 +340,7 @@ void insereAcoes()
 {
 	sala1.acoes = malloc(sizeof(fptr));
 	sala1.acoes[0] = Examinar;
-	
+
 	personagem.acoes = malloc(5*sizeof(fptr));
 	personagem.acoes[0] = Gritar;
 	personagem.acoes[1] = Chorar;

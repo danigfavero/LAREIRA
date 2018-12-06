@@ -26,7 +26,7 @@ int main(){
     insereAcoes();
 	sym_table = init_table(sym_table);
 
-    while (yyparse());
+    while (yyparse() && personagem.ativo);
     return 0;
     /*
 	printf("%s\n",foto.def.objeto.lista[0].quali);

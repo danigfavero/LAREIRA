@@ -35,7 +35,7 @@ void salas(){
 	"Em uma das paredes há também um grande quadro com algo escrito.";
 	sala1.curta = "Esta é a sala inicial, aquela na qual você acordou.";
 	sala1.ativo = True;
-	sala1.visivel = False;
+	sala1.visivel = True;
 	sala1.conhecido = False;
 	sala1.conteudo = Tcria(4);
 	//sala1.def.lugar.saidas = malloc(4*sizeof(Elemento*));
@@ -44,6 +44,8 @@ void salas(){
 	sala1.def.lugar.saidas[2] = &sala2;
 	sala1.def.lugar.saidas[3] = &sala3;
 	Tinsere((sala1.conteudo), &quadro);
+
+	atual = &sala1;
 
 	disco.nome = "disco";
 	disco.artigos = malloc(2*sizeof(string));
@@ -83,15 +85,15 @@ void salas(){
 	balao.conteudo = Tcria(4);
 
 	//Elemento sala2;
-	sala2.nome = "sala audição";
+	sala2.nome = "audicao";
 	sala2.artigos = malloc(2*sizeof(string));
 	sala2.artigos[0] = "a";
 	sala2.artigos[1] = "uma";
 	sala2.longa = "Nessa sala toca uma música melodiosa, muito agradável.\n"
 	"A melodia penetra seus ouvidos e eleva os humores, lhe causando uma sensação de pertencimento.\n"
-	"Há aqui um gramofone (a música parece vir de lá) e um balão.";
-	sala2.curta = "Esta é a sala onde toca uma música.";
-	sala2.ativo = True;
+	"Há aqui um gramofone (a música parece vir de lá) e um balão.\n";
+	sala2.curta = "Esta é a sala onde toca uma música.\n";
+	sala2.ativo = False;
 	sala2.visivel = False;
 	sala2.conhecido = False;
 	sala2.conteudo = Tcria(4);
@@ -114,7 +116,7 @@ void salas(){
 	sala3.longa = "Uma mascara chama bastante atencao no canto da sala,\n"
 	          	  "Do outro lado, um grupo de pessoas parece se divertir..\n";
 	sala3.curta = "Sala sociedade.";
-	sala3.ativo = True;
+	sala3.ativo = False;
 	sala3.visivel = True;
 	sala3.conhecido = False;
 	sala3.def.lugar.saidas[0] = &sala6;
@@ -133,7 +135,7 @@ void salas(){
 	mascara.longa = "Uma mascara bem chamativa, nao parece muito com voce\n"
 					"Mas de alguma maneira voce parece gostar mais da mascara que de si proprio.";
 	mascara.curta = "Uma mascara muito atraente";
-	mascara.ativo = False;
+	mascara.ativo = True;
 	mascara.visivel = False;
 	mascara.conhecido = False;
 
@@ -146,7 +148,7 @@ void salas(){
 	pessoas.nome = "grupo de pessoas";
 	pessoas.longa = "Um grupo bem animado de pessoas, parecem estar se divertindo bastante\n";
 	pessoas.curta = "Grupinho de pessoas";
-	pessoas.ativo = False;
+	pessoas.ativo = True;
 	pessoas.visivel = False;
 	pessoas.conhecido = False;
 	pessoas.artigos = malloc(2*sizeof(string));
@@ -166,7 +168,7 @@ void salas(){
 		          "Toma conta do seu coracao quando nessa sala\n"
 				  "Nela, voce encontra cartas e uma envelopegrafia.\n";
 	sala4.curta = "Sala remanescencia, com as cartas e um envelope.";
-	sala4.ativo = True;
+	sala4.ativo = False;
 	sala4.visivel = True;
 	sala4.conhecido = False;
 
@@ -189,7 +191,7 @@ void salas(){
 				 "Estao assistindo a um por do sol, abracados\n"
 				 "Um registro de um momento perfeito, eterno..\n";
 	foto.curta = "Foto romantica de um casal";
-	foto.ativo = False;
+	foto.ativo = True;
 	foto.visivel = False;
 	foto.conhecido = False;
 
@@ -204,7 +206,7 @@ void salas(){
 
 	envelope.longa = "Um envelope sem destinatario, parece haver algo dentro.\n";
 	envelope.curta = "Envelope em branco";
-	envelope.ativo = False;
+	envelope.ativo = True;
 	envelope.visivel = False;
 	envelope.conhecido = False;
 
@@ -223,7 +225,7 @@ void salas(){
 				  "O texto lhe traz uma saudade incompreensivel, e ao mesmo tempo um acolhimento amoroso\n"
 				  "Quanto mais se le, mais dor, quanto mais dor, mais vontade de ficar na companhia daquelas palavras.\n";
 	carta.curta = "carta amorososa";
-	carta.ativo = False;
+	carta.ativo = True;
 	carta.visivel = False;
 	carta.conhecido = False;
 
@@ -247,7 +249,7 @@ void salas(){
 	"mais brilho algum. A vida já saiu deste homem.\n";
 
 	sala5.curta = "Um homem, uma arma e um espelho. Não há nada mais aqui";
-	sala5.ativo = True;
+	sala5.ativo = False;
 	sala5.visivel = True;
 	sala5.conhecido = False;
 	sala5.conteudo = Tcria(4);
@@ -294,7 +296,8 @@ void salas(){
 	homem.curta = "Nada mais pode ser tirado observando-o.\n";
 
 	homem.def.objeto.lista = malloc(4*sizeof(atrib));
-	homem.def.objeto.lista[2].val = 0;
+	homem.def.objeto.lista[0].val = 1;
+	homem.def.objeto.lista[2].val = 1;
 	homem.ativo = True;
 	homem.visivel = True;
 	homem.conhecido = False;
@@ -310,7 +313,7 @@ void salas(){
 	"Uma garrafa simples mas atraente senta ao lado de uma cama grande, que exala leveza. Tudo cheira a natureza.\n";
 	//puts(sala6.longa);
 	sala6.curta = "Uma imersão em natureza e sensações. Há muito para experimentar.\n";
-	sala6.ativo = True;
+	sala6.ativo = False;
 	sala6.visivel = True;
 	sala6.conhecido = False;
 	sala6.conteudo = Tcria(4);

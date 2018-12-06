@@ -36,7 +36,6 @@ typedef struct elo{
 	void* val;
 	char* nome;
 	int tipo;
-	void* value;
 	struct elo* next;
 } Elo;
 
