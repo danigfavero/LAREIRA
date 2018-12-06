@@ -203,7 +203,7 @@ void salas(){
 	envelope.artigos[1] = "um";
 
 	envelope.longa = "Um envelope sem destinatario, parece haver algo dentro.\n";
-	envelope.curta = "Envelope em braco";
+	envelope.curta = "Envelope em branco";
 	envelope.ativo = False;
 	envelope.visivel = False;
 	envelope.conhecido = False;

@@ -33,7 +33,7 @@ int LBuscaTipoGlobal(Lista* sym_table, char * procurado){
 		crawler = crawler->next;
 	}
 	return -1;
-	
+
 }
 
 void *LBuscaGlobal(Lista* sym_table, char * procurado){
@@ -47,13 +47,16 @@ void *LBuscaGlobal(Lista* sym_table, char * procurado){
 		crawler = crawler->next;
 	}
 	return NULL;
-	
+
 }
 
 Lista *LinsereGlobal (Lista *sym_table, char *sym_name, int sym_type, void *val)
 {
   Lista *ptr;
-  ptr = (Lista *) malloc (sizeof (TabSim));
+  ptr = (Lista *) malloc (sizeof (Lista));
+  puts("malocou");
+  ptr->cabec->val = (Elemento*) malloc(sizeof(Elemento));
+  printf("%p", ptr->cabec->val);
   Elemento* eaux = (Elemento*) ptr->cabec->val;
   eaux->nome = (char *) malloc (strlen (sym_name) + 1);
   strcpy (eaux->nome,sym_name);

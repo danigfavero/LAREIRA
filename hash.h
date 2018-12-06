@@ -1,3 +1,5 @@
+#ifndef HASH_H
+#define HASH_H
 #include "lista.h"
 
 
@@ -29,3 +31,4 @@ Elemento* Tbusca(TabSim, char*);
 
 int Tretira(TabSim, char*);
 	//Busca um elemento na tabela para retirá-lo
+#endif

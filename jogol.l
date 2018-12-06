@@ -3,7 +3,7 @@
 #include "jogo.tab.h"
 
 /* Para readline */
-#include <readline/readline.h>	
+#include <readline/readline.h>
 #include <readline/history.h>
 
 /* Redefinição da entrada do Flex para usar o readline */
@@ -70,7 +70,7 @@ d[aoe]|em|n[ao]
          	   int tipo;
 			   if ((tipo = LBuscaTipoGlobal(sym_table, yytext)) != -1) {
            	   yylval.tptr = LBuscaGlobal(sym_table, yytext);
-         
+
 				   return tipo;
 			   }
 			   else {

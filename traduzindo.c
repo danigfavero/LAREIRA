@@ -93,8 +93,7 @@ struct initlug llugs[] = {
 };
 
 /* Inicializa a tabela de símbolos passada como argumento */
-Lista*  init_table(Lista *sym_table)
-{
+Lista*  init_table(Lista *sym_table) {
   int i;
   Lista *ptr = sym_table;		/* cabeça da lista */
   /* Lista de verbos */
@@ -116,7 +115,6 @@ Lista*  init_table(Lista *sym_table)
   for (i = 0; llugs[i].name != 0; i++)
 	/* insere */
     ptr = LinsereGlobal(ptr, llugs[i].name, LUGAR,llugs[i].lug);
-
   return ptr;
 
 }

@@ -1,3 +1,5 @@
+#ifndef LISTA_H
+#define LISTA_H
 #include "elemento.h"
 
 extern Lista *sym_table;
@@ -31,3 +33,4 @@ Elemento* Lbusca(Lista lista1, char* n);
 
 Elemento* Lretira(Lista lista1, Elemento* val);
 	//Percorre a lista até encontrar o elemento para retirá-lo
+#endif

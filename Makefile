@@ -7,15 +7,15 @@ all: jogo
 	bison $<
 	mv $*.tab.c $*.c
 
-jogo: main.o jogo.o jogol.o traduzindo.o acoes.o salas.o hash.o lista.o elemento.o
-	gcc -o $@ $^ -Wall
+jogo: jogo.o jogol.o main.o traduzindo.o acoes.o salas.o hash.o lista.o elemento.o
+	gcc -o $@ $^ $(LOADLIBES) -Wall
 
 jogo.c : jogo.y
 
 jogol.o: jogol.l jogo.c
 
 %.o : %.c
-	gcc -o $@ -c $< -Wall
+	gcc -o $@ -c $< $(LOADLIBES)
 
 clean:
 	rm -f jogo *tab* *.o *~ jogo.c

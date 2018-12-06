@@ -1,4 +1,5 @@
-//#include "jogo.tab.h"
+#ifndef TRADUZINDO_H
+#define TRADUZINDO_H
 #include "acoes.h"
 struct inifunc {
   char *fname;
@@ -20,3 +21,4 @@ struct initlug {
 
 /* Inicializa a tabela de símbolos passada como argumento */
 Lista*  init_table(Lista *sym_table);
+#endif
