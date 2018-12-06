@@ -54,9 +54,8 @@ Lista *LinsereGlobal (Lista *sym_table, char *sym_name, int sym_type, void *val)
 {
   Lista *ptr;
   ptr = (Lista *) malloc (sizeof (Lista));
-  puts("malocou");
+  ptr->cabec = malloc(sizeof(Elo));
   ptr->cabec->val = (Elemento*) malloc(sizeof(Elemento));
-  printf("%p", ptr->cabec->val);
   Elemento* eaux = (Elemento*) ptr->cabec->val;
   eaux->nome = (char *) malloc (strlen (sym_name) + 1);
   strcpy (eaux->nome,sym_name);
