@@ -7,8 +7,8 @@ Elemento quadro, gramo, disco, balao, arma, cogumelos, homem, garrafa, espelho, 
 
 void salas(){
 	personagem.nome = "você";
-	personagem.longa = "Esse é você mesmo. Não tem muito que você se lembre sobre.";
-	personagem.curta = "Você mesmo.";
+	personagem.longa = "Esse é você mesmo. Não tem muito que você se lembre sobre.\n";
+	personagem.curta = "Você mesmo.\n";
 	personagem.ativo = True;
 	personagem.visivel = True;
 	personagem.conhecido = False;
@@ -19,7 +19,7 @@ void salas(){
 	quadro.artigos[0] = "o";
 	quadro.artigos[1] = "um";
 	quadro.longa = "Um quadro escrito ALGUMA COISA ESCAPA AO NAUFRÁGIO DAS ILUSÕES\n";
-	quadro.curta = "um quadro";
+	quadro.curta = "um quadro\n";
 	quadro.ativo = True;
 	quadro.visivel = True;
 	quadro.conhecido = False;
@@ -30,10 +30,11 @@ void salas(){
 	sala1.artigos = malloc(2*sizeof(string));
 	sala1.artigos[0] = "a";
 	sala1.artigos[1] = "uma";
-	sala1.longa = "É uma sala claustrofóbica e pouco iluminada.\n"
+	sala1.longa = "BEM-VINDO AO INICIO.\n"
+	"É uma sala claustrofóbica e pouco iluminada.\n"
 	"Tudo o que existem são quatro portas ao seu redor, uma em cada parede.\n"
-	"Em uma das paredes há também um grande quadro com algo escrito.";
-	sala1.curta = "Esta é a sala inicial, aquela na qual você acordou.";
+	"Em uma das paredes há também um grande quadro com algo escrito.\n";
+	sala1.curta = "Esta é a sala inicial, aquela na qual você acordou.\n";
 	sala1.ativo = True;
 	sala1.visivel = True;
 	sala1.conhecido = False;
@@ -51,10 +52,10 @@ void salas(){
 	disco.artigos = malloc(2*sizeof(string));
 	disco.artigos[0] = "o";
 	disco.artigos[1] = "um";
-	disco.longa = "Um disco de vinil sem informações, encontrado no gramofone e sem capa por perto.";
-	disco.curta = "O disco de vinil.";
+	disco.longa = "Um disco de vinil sem informações, encontrado no gramofone e sem capa por perto.\n";
+	disco.curta = "O disco de vinil.\n";
 	disco.ativo = True;
-	disco.visivel = False;
+	disco.visivel = True;
 	disco.conhecido = False;
 	disco.conteudo = Tcria(4);
 
@@ -64,10 +65,11 @@ void salas(){
 	gramo.artigos[0] = "o";
 	gramo.artigos[1] = "um";
 	gramo.longa = "Um gramofone autêntico, antigo mas muito bem conservado.\n"
-	"Sua caixa é feita de madeira envernizada e o amplificador é dourado, muito delicado.";
-	gramo.curta = "O autêntico gramofone.";
+	"Sua caixa é feita de madeira envernizada e o amplificador é dourado, muito delicado.\n"
+	"Nele há um disco de vinil\n";
+	gramo.curta = "O autêntico gramofone.\n";
 	gramo.ativo = True;
-	gramo.visivel = False;
+	gramo.visivel = True;
 	gramo.conhecido = False;
 	gramo.conteudo = Tcria(4);
 	Tinsere((gramo.conteudo), &disco);
@@ -77,10 +79,10 @@ void salas(){
 	balao.artigos = malloc(2*sizeof(string));
 	balao.artigos[0] = "o";
 	balao.artigos[1] = "um";
-	balao.longa = "Um balão vermelho, cheio de ar";
-	balao.curta = "O balão vermelho.";
+	balao.longa = "Um balão vermelho, cheio de ar\n";
+	balao.curta = "O balão vermelho.\n";
 	balao.ativo = True;
-	balao.visivel = False;
+	balao.visivel = True;
 	balao.conhecido = False;
 	balao.conteudo = Tcria(4);
 
@@ -89,12 +91,13 @@ void salas(){
 	sala2.artigos = malloc(2*sizeof(string));
 	sala2.artigos[0] = "a";
 	sala2.artigos[1] = "uma";
-	sala2.longa = "Nessa sala toca uma música melodiosa, muito agradável.\n"
+	sala2.longa = "BEM-VINDO À AUDIÇÃO.\n"
+	"Nessa sala toca uma música melodiosa, muito agradável.\n"
 	"A melodia penetra seus ouvidos e eleva os humores, lhe causando uma sensação de pertencimento.\n"
 	"Há aqui um gramofone (a música parece vir de lá) e um balão.\n";
 	sala2.curta = "Esta é a sala onde toca uma música.\n";
-	sala2.ativo = False;
-	sala2.visivel = False;
+	sala2.ativo = True;
+	sala2.visivel = True;
 	sala2.conhecido = False;
 	sala2.conteudo = Tcria(4);
 	Tinsere((sala2.conteudo), &gramo);
@@ -113,9 +116,10 @@ void salas(){
 	sala3.artigos = malloc(2*sizeof(string));
 	sala3.artigos[0] = "a";
 	sala3.artigos[1] = "uma";
-	sala3.longa = "Uma mascara chama bastante atencao no canto da sala,\n"
-	          	  "Do outro lado, um grupo de pessoas parece se divertir..\n";
-	sala3.curta = "Sala sociedade.";
+	sala3.longa = "BEM-VINDO À SOCIEDADE.\n"
+	"Uma mascara chama bastante atencao no canto da sala,\n"
+	"Do outro lado, um grupo de pessoas parece se divertir..\n";
+	sala3.curta = "Sala sociedade.\n";
 	sala3.ativo = False;
 	sala3.visivel = True;
 	sala3.conhecido = False;
@@ -133,8 +137,8 @@ void salas(){
 	mascara.artigos[1] = "uma";
 
 	mascara.longa = "Uma mascara bem chamativa, nao parece muito com voce\n"
-					"Mas de alguma maneira voce parece gostar mais da mascara que de si proprio.";
-	mascara.curta = "Uma mascara muito atraente";
+					"Mas de alguma maneira voce parece gostar mais da mascara que de si proprio.\n";
+	mascara.curta = "Uma mascara muito atraente\n";
 	mascara.ativo = True;
 	mascara.visivel = False;
 	mascara.conhecido = False;
@@ -147,8 +151,8 @@ void salas(){
 	//Grupo de pessoas
 	pessoas.nome = "grupo de pessoas";
 	pessoas.longa = "Um grupo bem animado de pessoas, parecem estar se divertindo bastante\n";
-	pessoas.curta = "Grupinho de pessoas";
-	pessoas.ativo = True;
+	pessoas.curta = "Grupinho de pessoas\n";
+	pessoas.ativo = False;
 	pessoas.visivel = False;
 	pessoas.conhecido = False;
 	pessoas.artigos = malloc(2*sizeof(string));
@@ -164,10 +168,11 @@ void salas(){
 	sala4.artigos = malloc(2*sizeof(string));
 	sala4.artigos[0] = "a";
 	sala4.artigos[1] = "uma";
-	sala4.longa = "Uma mistura nostalgica de companheirismo e solidao\n"
+	sala4.longa = "BEM-VINDO À REMANESCÊNCIA.\n"
+				  "Uma mistura nostalgica de companheirismo e solidao\n"
 		          "Toma conta do seu coracao quando nessa sala\n"
 				  "Nela, voce encontra cartas e uma envelopegrafia.\n";
-	sala4.curta = "Sala remanescencia, com as cartas e um envelope.";
+	sala4.curta = "Sala remanescencia, com as cartas e um envelope.\n";
 	sala4.ativo = False;
 	sala4.visivel = True;
 	sala4.conhecido = False;
@@ -190,9 +195,9 @@ void salas(){
 	foto.longa = "Uma linda foto de um casal em um parque,\n"
 				 "Estao assistindo a um por do sol, abracados\n"
 				 "Um registro de um momento perfeito, eterno..\n";
-	foto.curta = "Foto romantica de um casal";
+	foto.curta = "Foto romantica de um casal\n";
 	foto.ativo = True;
-	foto.visivel = False;
+	foto.visivel = True;
 	foto.conhecido = False;
 
 	foto.def.objeto.lista = malloc(sizeof(atrib));
@@ -204,10 +209,10 @@ void salas(){
 	envelope.artigos[0] = "o";
 	envelope.artigos[1] = "um";
 
-	envelope.longa = "Um envelope sem destinatario, parece haver algo dentro.\n";
-	envelope.curta = "Envelope em branco";
+	envelope.longa = "Um envelope sem destinatario, parece haver uma carta dentro dentro.\n";
+	envelope.curta = "Envelope em branco\n";
 	envelope.ativo = True;
-	envelope.visivel = False;
+	envelope.visivel = True;
 	envelope.conhecido = False;
 
 	//envelope.def.objeto.lista = malloc(sizeof(atrib));
@@ -224,9 +229,9 @@ void salas(){
 				  "Voce reconhece a caligrafia... mas nao consegue se lembrar da onde\n"
 				  "O texto lhe traz uma saudade incompreensivel, e ao mesmo tempo um acolhimento amoroso\n"
 				  "Quanto mais se le, mais dor, quanto mais dor, mais vontade de ficar na companhia daquelas palavras.\n";
-	carta.curta = "carta amorososa";
+	carta.curta = "carta amorososa\n";
 	carta.ativo = True;
-	carta.visivel = False;
+	carta.visivel = True;
 	carta.conhecido = False;
 
 	envelope.conteudo = Tcria(4);
@@ -242,13 +247,14 @@ void salas(){
 	sala5.artigos = malloc(2*sizeof(string));
 	sala5.artigos[0] = "a";
 	sala5.artigos[1] = "uma";
-	sala5.longa = "Ao entrar, a poeira instantaneamente o cega. Após alguns segundos, você consegue distiguinr alguns objetos.\n"
+	sala5.longa = "BEM-VINDO À REFLEXÃO .\n"
+	"Ao entrar, a poeira instantaneamente o cega. Após alguns segundos, você consegue distiguinr alguns objetos.\n"
 	"Em uma parede há um espelho. Sua limpeza destoa do resto da sala. Mesmo sem muito luz, você consegue enxergar sua reflexão perfeitamente.\n"
-	"No canto mais empoirado da sala, você vê uma arma. Sua forma já se mistura com o ambiente, mas você consegue perceber a silhueta suave.\nNinguém a toca em uma eternidade, aparentemente\n"
+	"No canto mais empoirado da sala, você vê uma arma. Sua forma já se mistura com o ambiente, mas você consegue perceber a silhueta suave.\n Ninguém a toca em uma eternidade, aparentemente\n"
 	"E, no outro extremo, uma figura raquítica e curva se senta ao chão, abraçando os joelhos e com os olhos baixos. A pele parece ter começado a se dissolver de tão velha, e os olhos não apresentam "
 	"mais brilho algum. A vida já saiu deste homem.\n";
 
-	sala5.curta = "Um homem, uma arma e um espelho. Não há nada mais aqui";
+	sala5.curta = "Um homem, uma arma e um espelho. Não há nada mais aqui\n";
 	sala5.ativo = False;
 	sala5.visivel = True;
 	sala5.conhecido = False;
@@ -308,7 +314,8 @@ void salas(){
 	sala6.artigos = malloc(2*sizeof(string));
 	sala6.artigos[0] = "a";
 	sala6.artigos[1] = "uma";
-	sala6.longa = "Cores vivas fazem as paredes brilharem aos seus olhos, padrões que se misturam o fazem sentir em um oceano de luz.\n"
+	sala6.longa = "BEM-VINDO AO HEDONISMO.\n"
+	"Cores vivas fazem as paredes brilharem aos seus olhos, padrões que se misturam o fazem sentir em um oceano de luz.\n"
 	"Um jardim dos mais diversos cogumelos cobre o chão da sala. Tamanhos, odores e cores. Nada parece fora do campo de possibilidades.\n"
 	"Uma garrafa simples mas atraente senta ao lado de uma cama grande, que exala leveza. Tudo cheira a natureza.\n";
 	//puts(sala6.longa);

@@ -1,0 +1,63 @@
+PROJETO MAC216 - PARTE 3
+Bento Pereira,     Daniela Favero     e     Pedro Gigeck
+
+Nesta parte do projeto, os arquivos
+DA PARTE 1: elemento.c (struct do elemento), lista.c (lista ligada) e hash.c (hash table);
+DA PARTE 2: salas.c (contém todos os elementos), acoes.c (contém as funções para ações) e o Makefile (devidamente atualizado);
+continuam estruturalmente iguais, com alguns ajustes para a parte 3. Criamos novos módulos:
+    -traduzindo.c, o elo entre a parte 1, 2, o flex e o bison. Há a definição dos sinônimos que o flex lê. Também há uma função auxiliar para ajustar a inserção dos elementos e funções em uma lista ligada só, de modo a facilitar o bison.
+    -jogol.l, arquivo flex, poucas adaptações do que o professor enviou
+    -jogo.y, arquivo bison, poucas adaptações do que o professor enviou
+
+Para jogar, dê make e ./jogo
+Infelizmente nós não conseguimos melhorar a leitura de gramática, então para que o jogo funcione direito, siga os comandos abaixo nesta ordem (para explorar todos os elementos do jogo):
+
+>examine inicio
+>examine quadro
+>grite
+>sente
+>chore
+>corra
+>examine pesonagem
+(Os últimos 5 comandos podem ser executados em qualquer sala)
+>leste
+>examine balao
+>estoure balao
+>examine gramofone
+>examine disco
+>desligue gramofone
+>ligue gramofone
+>leste
+>interaja pessoas
+>coloque mascara personagem
+>interaja pessoas
+>tire mascara personagem
+>sul
+>examine cogumelos
+>coma cogumelos
+>examine garrafa
+>beba garrafa
+>examine cama
+>deite cama
+>levante cama
+>leste
+>examine envelope
+>examine carta
+>leia carta
+>examine foto
+>leste
+>examine homem
+>fale homem
+>fale homem
+>fale homem
+>fale homem
+>fale homem
+(Perceba que ele tem 4 falas)
+>examine arma
+
+>atire arma homem
+(Aqui você acaba de perder o jogo, não tem como sair, você está preso nessas 6 salas pra sempre e fadado a se tornar o homem que você matou)
+Tente jogar de novo, mas agora vá até a sala Reflexão e, em vez de matar o homem, se mate.
+>atire arma personagem
+
+FIM DE JOGO! Você ganhou.

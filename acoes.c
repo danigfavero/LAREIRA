@@ -52,8 +52,6 @@ int Examinar(Elemento* e1, Elemento* e2){
 			e1->conhecido = True;
 		}
 	}
-	imprimeConteudo(*e1, 4);
-
 	return e1->visivel;
 }
 
@@ -80,27 +78,18 @@ int Tirar(Elemento* e1, Elemento* e2){
 }
 
 int Colocar(Elemento* e1, Elemento* e2){
-	if(Tbusca(e2->conteudo, e1->nome)){ //Se o elemento ja estiver
-		printf("%s já está em %s\n", e1->nome, e2->nome);
+	printf("Você coloca %s %s em %s\n", e1->artigos[0], e1->nome, e2->nome); //"Você coloca a mascara" ou alguma outra coisa que dê pra vestir
+	Tinsere(e2->conteudo, e1); //Coloca o elemento no jogador
+	Tretira(atual->conteudo, e1->nome); //Tira o elemento da sala
+	//Se vestir a mascara, as pessoas ficam ativas para interação
+	if(stringsIguais(e1->nome, "mascara")) {
+		pessoas.ativo = True;
+		puts("As pessoas que estavam se divertindo sem parecer notar sua presença\n"
+			 "Começam homogeneamente a virar os olhos em sua direcao..\n"
+			 "Alguns deles até te convidam para interagir!\n"
+			 "Parece que agora você é visto!\n");
 	}
-	else if(e1->visivel && e1->ativo)
-	{
-		printf("Você coloca %s %s em %s\n", e1->artigos[0], e1->nome, e2->nome); //"Você coloca a mascara" ou alguma outra coisa que dê pra vestir
-		Tinsere(e2->conteudo, e1); //Coloca o elemento no jogador
-		Tretira(atual->conteudo, e1->nome); //Tira o elemento da sala
-
-		//Se vestir a mascara, as pessoas ficam ativas para interação
-		if(stringsIguais(e1->nome, "mascara"))
-		{
-			pessoas.ativo = True;
-			puts("As pessoas que estavam se divertindo sem parecer notar sua presença\n"
-				 "Começam homogeneamente a virar os olhos em sua direcao..\n"
-				 "Alguns deles até te convidam para interagir!\n"
-				 "Parece que agora você é visto!\n");
-		}
-		return 1;
-	}
-	return 0;
+	return 1;
 }
 
 
@@ -262,28 +251,13 @@ int Comer(Elemento* e1, Elemento* e2){
 }
 
 int Deitar(Elemento* e1, Elemento* e2){
-	if(stringsIguais(e1->nome, "cama") && e1->def.objeto.lista[deitado].val == 1){
-		printf("Você já está deitado.\n"); return 0;
-	}
-	else if(stringsIguais(e1->nome, "cama")){
-		printf("Você se deita na cama e sente como se seu corpo tivesse sido transportado aos céus. Todos seus músculos relaxam, e sua mente fica leve. 'Poderia ficar aqui para sempre', pensa.\n");
-		e1->def.objeto.lista[deitado].val = 1;
+	printf("Você se deita na cama e sente como se seu corpo tivesse sido transportado aos céus. Todos seus músculos relaxam, e sua mente fica leve. 'Poderia ficar aqui para sempre', pensa.\n");
 		return 1;
-	}
-	return 0;
 }
 
 int Levantar(Elemento* e1, Elemento* e2){
-	if(stringsIguais(e1->nome, "cama") && e1->def.objeto.lista[deitado].val == 1){
-		printf("Com muito esforço, você cria a determinação para levantar da cama. Seu corpo se sente pesado.\n");
-		e1->def.objeto.lista[deitado].val = 0;
-		return 1;
-	}
-	else if(stringsIguais(e1->nome, "cama") && e1->def.objeto.lista[deitado].val == 0){
-		printf("Você já está levantado.\n");
-		return 0;
-	}
-	return 0;
+	printf("Com muito esforço, você cria a determinação para levantar da cama. Seu corpo se sente pesado.\n");
+	return 1;
 }
 
 
@@ -327,12 +301,12 @@ int Chorar(Elemento* e1, Elemento* e2){
 }
 
 int Sentar(Elemento* e1, Elemento* e2){
-	puts("Agora você está sentado no chão. Vai chorar?");
+	puts("Agora você está sentado no chão. Vai chorar?\n");
 	return 1;
 }
 
 int Correr(Elemento* e1, Elemento* e2){
-	printf("Não tem para onde correr, nem se esconder.");
+	printf("Não tem para onde correr, nem se esconder.\n");
 	return 1;
 }
 

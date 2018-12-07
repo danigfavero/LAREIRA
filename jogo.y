@@ -40,19 +40,12 @@ input: EOL		{ printf("Zzzz...\n"); }
 	  		   printf("Seguindo para ");
 	  		  }
 			  dir {
-					if ($3 >= 0 && atual->def.lugar.saidas[$3]) {
 					  atual = atual->def.lugar.saidas[$3];
 					  Examinar(NULL,NULL);
-					}
-					else puts("Não há passagem....");
 			      } eol
 	 | dir {
 			 /* movimentação  */
-             if ($1 >= 0 && atual->def.lugar.saidas[$1]) {
-			   printf("Você foi para %s\n", atual->nome);
 			   Examinar(atual,NULL);
-			 }
-			 else puts("Não há passagem....");
 											} eol
 
 	| INVENT {
